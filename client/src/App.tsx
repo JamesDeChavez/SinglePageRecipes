@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import NonAuthBranch from './branches/NonAuth';
 
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
@@ -7,7 +8,7 @@ function App() {
   return (
     <div className="App">
     {!userLoggedIn ?
-      <div>NonAuthBranch</div>
+      <NonAuthBranch/>
     :
       <div>AuthBranch</div>
     }

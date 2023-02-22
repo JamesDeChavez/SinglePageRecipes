@@ -1,0 +1,4 @@
+.Hero {
+    display: grid;
+    place-content: center;
+}

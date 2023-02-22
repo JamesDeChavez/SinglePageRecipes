@@ -1,0 +1,10 @@
+.Navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Navbar_buttonsContainer {
+    display: flex;
+    justify-content: end;
+    column-gap: 2rem;
+}

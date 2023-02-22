@@ -1,0 +1,6 @@
+.RegisterPage {
+    display: grid;
+    min-height: 100vh;
+    padding: .5rem;
+    grid-template-rows: auto auto 1fr;
+}
