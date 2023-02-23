@@ -1,9 +1,16 @@
 import { useState } from "react"
 import InstructionDetails from "./InstructionDetails"
 import InstructionItem from "./InstructionItem"
+import './styles.css'
 
 const InstructionsSection = () => {
     const [detailsActive, setDetailsActive] = useState(false)
+
+    const handleReturnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.preventDefault()
+        setDetailsActive(false)
+    }
+
     const className = 'InstructionsSection'
     return (
         <div className={className}>
@@ -17,14 +24,17 @@ const InstructionsSection = () => {
                     <InstructionItem setDetailsActive={setDetailsActive}/>
                     <InstructionItem setDetailsActive={setDetailsActive}/>
                     <InstructionItem setDetailsActive={setDetailsActive}/>
-                    <InstructionItem setDetailsActive={setDetailsActive}/>
-                    <InstructionItem setDetailsActive={setDetailsActive}/>
-                    <InstructionItem setDetailsActive={setDetailsActive}/>
                 </div>
             }
             <div className={`${className}_buttonsContainer`}>
-                <div className={`${className}_button`}>Prev</div>
-                <div className={`${className}_button`}>Next</div>
+                {!detailsActive ?
+                <>
+                    <div className={`${className}_button`}>Prev</div>
+                    <div className={`${className}_button`}>Next</div>
+                </>
+                :
+                    <div className={`${className}_button`} onClick={handleReturnClick}>Return to Table</div>
+                }
             </div>
         </div>
     )

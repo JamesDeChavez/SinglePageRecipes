@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
-import './App.css';
 import NonAuthBranch from './branches/NonAuth';
+import AuthBranch from './branches/Auth';
+import './App.css';
 
-function App() {
+export const UserLoggedInContext = React.createContext<[boolean, React.Dispatch<React.SetStateAction<boolean>>]>([false, () => {}])
+
+const App = () => {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
 
   return (
     <div className="App">
-    {!userLoggedIn ?
-      <NonAuthBranch/>
-    :
-      <div>AuthBranch</div>
-    }
+      <UserLoggedInContext.Provider value={[userLoggedIn, setUserLoggedIn]}>
+      {!userLoggedIn ?
+        <NonAuthBranch/>
+      :
+        <AuthBranch/>
+      }
+      </UserLoggedInContext.Provider>
     </div>
   );
 }

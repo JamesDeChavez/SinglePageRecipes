@@ -1,5 +1,7 @@
 .Footer {
     display: flex;
-    justify-content: end;
-    align-items: end;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 60px;
+    border-top: solid 1px #000000;
 }

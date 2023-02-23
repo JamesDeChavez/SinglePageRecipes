@@ -1,10 +1,33 @@
 .Navbar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    min-height: 60px;
+    border-bottom: solid 1px #000000;
+}
+
+.Navbar_logo {
+    border: solid 1px #000000;
+}
+
+.Navbar_logo:hover {
+    cursor: pointer;
+    background-color: blue;
+    color: white;
 }
 
 .Navbar_buttonsContainer {
     display: flex;
-    justify-content: end;
-    column-gap: 2rem;
+    justify-content: flex-end;
+    column-gap: 1rem;
+}
+
+.Navbar_button {
+    border: solid 1px #000000;
+}
+
+.Navbar_button:hover {
+    cursor: pointer;
+    background-color: blue;
+    color: white;
 }

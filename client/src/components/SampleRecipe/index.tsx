@@ -1,15 +1,22 @@
-import InstructionsSection from './InstructionsSection'
-import RecipeFooter from './RecipeFooter'
+import { useState } from 'react'
+import InstructionsSection from '../InstructionsSection'
+import RecipeFooter from '../RecipeFooter'
+import VideoSection from '../VideoSection'
+import IngredientsSection from '../IngredientsSection'
 import './styles.css'
-import VideoSection from './VideoSection'
 
 const SampleRecipe = () => {
+    const RENDERS = ['INSTRUCTIONS', 'INGREDIENTS']
+    const [sectionVisible, setSectionVisible] = useState(RENDERS[0])
     const className = 'SampleRecipe'
     return (
         <div className={className}>
             <VideoSection/>
-            <InstructionsSection/>
-            <RecipeFooter/>
+            {{
+                [RENDERS[0]]: <InstructionsSection/>,
+                [RENDERS[1]]: <IngredientsSection/>
+            }[sectionVisible]}
+            <RecipeFooter sectionVisible={setSectionVisible} />
         </div>
     )
 }

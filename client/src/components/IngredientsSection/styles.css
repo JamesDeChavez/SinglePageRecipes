@@ -1,0 +1,45 @@
+/* Ingredients Section Styling */
+
+.IngredientsSection {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    row-gap: .5rem;
+}
+
+.IngredientsSection_header {
+    font-size: 1rem;
+}
+
+.IngredientsSection_table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(7, 1fr);
+    gap: .5rem;
+}
+
+.IngredientsSection_buttonsContainer {
+    display: flex;
+    place-content: center;
+    align-items: center;
+    min-height: 40px;
+    border-top: solid 1px #000000;
+}
+
+.IngredientsSection_button {
+    border: solid 1px #000000;
+}
+
+.IngredientsSection_button:hover {
+    cursor: pointer;
+    background-color: blue;
+    color: #FFFFFF;
+}
+
+/* Ingredient Item Styling  */
+
+.IngredientItem {
+    display: flex;
+    justify-content: space-around;
+    border: solid 1px #000000;
+}

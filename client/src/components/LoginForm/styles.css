@@ -1,20 +1,32 @@
+.LoginForm {
+    padding: 1rem 2rem;
+}
+
 .LoginForm_form {
     display: grid;
     grid-template-columns: 1fr;
-    place-content: center;
+    row-gap: 1rem;
 }
 
 .LoginForm_header {
+    font-size: 2rem;
     text-align: center;
-    font-size: 1.5rem;
 }
 
-.LoginForm_inputContainer {
-    display: flex;
-    justify-content: space-between;  
+.LoginForm_input {
+    border: none;
+    border-bottom: solid 1px #000000;
+    width: 100%;
 }
 
-.LoginForm_buttonsContainer {
-    display: flex;
-    place-content: center;
+.LoginForm_button {
+    background-color: transparent;
+    border: solid 1px #000000;
+    width: 100%;
+}
+
+.LoginForm_button:hover {
+    cursor: pointer;
+    background-color: blue;
+    color: #FFFFFF;
 }

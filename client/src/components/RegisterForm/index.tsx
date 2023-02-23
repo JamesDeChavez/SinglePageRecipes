@@ -1,29 +1,34 @@
+import { useContext } from 'react'
+import { UserLoggedInContext } from '../../App'
 import './styles.css'
 
 const RegisterForm = () => {
+    const [_, setUserLoggedIn] = useContext(UserLoggedInContext)
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        setUserLoggedIn(true)
+    }
+
     const className = 'RegisterForm'
     return (
         <div className={className}>
-            <form className={`${className}_form`}>
+            <form className={`${className}_form`} onSubmit={handleSubmit}>
                 <h1 className={`${className}_header`}>Register</h1>
                 <div className={`${className}_inputContainer`}>
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" name="username" id="username" />
+                    <input className={`${className}_input`} type="text" name="username" id="username" placeholder='Username' />
                 </div>
                 <div className={`${className}_inputContainer`}>
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" name="email" id="email" />
+                    <input className={`${className}_input`} type="email" name="email" id="email" placeholder='Email' />
                 </div>
                 <div className={`${className}_inputContainer`}>
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" name="password" id="password" />
+                    <input className={`${className}_input`} type="password" name="password" id="password" placeholder='Password' />
                 </div>
                 <div className={`${className}_inputContainer`}>
-                    <label htmlFor="repeatpw">Repeat Password:</label>
-                    <input type="text" name="repeatpw" id="repeatpw" />
+                    <input className={`${className}_input`} type="text" name="repeatpw" id="repeatpw" placeholder='Repeat Password' />
                 </div>
                 <div className={`${className}_buttonsContainer`}>
-                    <input type="submit" value="Create Account" />
+                    <input className={`${className}_button`} type="submit" value="Create Account" />
                 </div>
             </form>
         </div>

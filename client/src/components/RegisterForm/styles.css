@@ -1,12 +1,22 @@
+.RegisterForm {
+    padding: 1rem 2rem;
+}
+
 .RegisterForm_form {
     display: grid;
     grid-template-columns: 1fr;
-    place-content: center;
+    row-gap: 1rem;
 }
 
 .RegisterForm_header {
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-align: center;
+}
+
+.RegisterForm_input {
+    border: none;
+    border-bottom: solid 1px #000000;
+    width: 100%;
 }
 
 .RegisterForm_inputContainer {
@@ -14,7 +24,14 @@
     justify-content: space-between;
 }
 
-.RegisterForm_buttonsContainer {
-    display: flex;
-    place-content: center;
+.RegisterForm_button {
+    background-color: transparent;
+    border: solid 1px #000000;
+    width: 100%;
+}
+
+.RegisterForm_button:hover {
+    cursor: pointer;
+    background-color: blue;
+    color: #FFFFFF;
 }

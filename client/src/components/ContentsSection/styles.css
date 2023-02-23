@@ -1,0 +1,32 @@
+.ContentsSection {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto repeat(3, 1fr);
+    place-items: center;
+}
+
+.ContentsSection_header {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.ContentsSection_optionContainer {
+    display: grid;
+    row-gap: 1rem;
+}
+
+.ContentsSection_image {
+    width: 100px;
+    height: auto;
+    margin: auto;
+}
+
+.ContentsSection_button {
+    border: solid 1px #000000;
+}
+
+.ContentsSection_button:hover {
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+}
