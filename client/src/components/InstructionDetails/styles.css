@@ -1,0 +1,65 @@
+.InstructionDetails {
+    display: grid;
+    grid-template-rows: auto 1fr 1fr;
+    row-gap: .5rem;
+    padding: 0 0.5rem;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.InstructionDetails_topRow {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.InstructionDetails_summaryContainer,
+.InstructionDetails_timeContainer {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.InstructionDetails_summaryContainer {
+    overflow: hidden;
+    width: 100%;
+}
+
+.InstructionDetails_descriptionContainer,
+.InstructionDetails_ingredientsContainer {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem;
+}
+
+.InstructionDetails_itemsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.InstructionDetails_description,
+.InstructionDetails_itemsContainer {
+    border: solid 1px #000000;
+    padding: 0.5rem;
+}
+
+.InstructionDetails_summary,
+.InstructionDetails_time,
+.InstructionDetails_description {
+    font-size: 0.8rem;
+}
+
+.InstructionDetails_summary {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.InstructionDetails_item {
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+}

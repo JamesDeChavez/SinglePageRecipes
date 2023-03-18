@@ -1,0 +1,32 @@
+.CreateRecipeInstructions {
+    display: grid;
+    grid-template-rows: auto 5fr 1fr auto;
+    gap: 0.5rem;
+}
+
+.CreateRecipeInstructions_header {
+    font-size: 1rem;
+}
+
+.CreateRecipeInstructions_instructionsTable {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    row-gap: .5rem;
+    padding: 0 0.5rem;
+}
+
+.CreateRecipeInstructions_addStepButton {
+    border: solid 1px black;
+    margin: 0 0.5rem;
+}
+
+.CreateRecipeInstructions_pageButtonsContainer {
+    display: flex;
+    gap: 1rem;
+    background-color: grey;
+    padding: 0.5rem;
+}
+
+.CreateRecipeInstructions_pageButton {
+    border: solid 1px black;
+}

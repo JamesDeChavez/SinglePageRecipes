@@ -1,0 +1,18 @@
+.AuthFooter {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: solid 1px black;
+    background-color: #FFFFFF;
+}
+
+.AuthFooter_button {
+    padding: 0.5rem 0;
+    border: solid 1px black;
+}
+
+.AuthFooter_active {
+    color: red
+}

@@ -1,0 +1,14 @@
+.CreateRecipeVideoSection {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.CreateRecipeVideoSection_titleInputContainer {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.CreateRecipeVideoSection_titleInput {
+    border: none;
+    border-bottom: solid 1px black;
+}

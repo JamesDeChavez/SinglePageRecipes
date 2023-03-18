@@ -16,7 +16,7 @@ const SampleRecipe = () => {
                 [RENDERS[0]]: <InstructionsSection/>,
                 [RENDERS[1]]: <IngredientsSection/>
             }[sectionVisible]}
-            <RecipeFooter sectionVisible={setSectionVisible} />
+            <RecipeFooter setSectionVisible={setSectionVisible} />
         </div>
     )
 }

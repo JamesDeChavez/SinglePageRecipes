@@ -27,7 +27,6 @@
 }
 
 .Navbar_button:hover {
-    cursor: pointer;
     background-color: blue;
     color: white;
 }

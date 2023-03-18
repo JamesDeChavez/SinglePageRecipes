@@ -31,7 +31,6 @@
 }
 
 .RegisterForm_button:hover {
-    cursor: pointer;
     background-color: blue;
     color: #FFFFFF;
 }

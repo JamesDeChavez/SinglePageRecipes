@@ -1,17 +1,17 @@
 .RecipeFooter {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
     align-items: center;
-    min-height: 60px;
     border-top: solid 1px #000000;
 }
 
 .RecipeFooter_button {
     border: solid 1px #000000;
+    padding: 1rem 0;
 }
 
 .RecipeFooter_button:hover {
-    cursor: pointer;
     background-color: blue;
     color: white
 }

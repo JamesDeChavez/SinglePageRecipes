@@ -1,0 +1,24 @@
+.RecipeOption {
+    position: relative;
+    border: solid 1px black;
+    padding-bottom: 10%;
+}
+
+.RecipeOption_textOverlay {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.2rem;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: grey;
+}
+
+.RecipeOption_text {
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

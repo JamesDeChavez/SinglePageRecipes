@@ -1,9 +1,10 @@
-/* Instructions Section Styling */
-
 .InstructionsSection {
     display: grid;
     grid-template-rows: auto 1fr auto;
     row-gap: .5rem;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
 }
 
 .InstructionsSection_header {
@@ -14,84 +15,32 @@
     display: grid;
     grid-template-rows: repeat(5, 1fr);
     row-gap: .5rem;
+    padding: 0 0.5rem;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
 }
 
 .InstructionsSection_buttonsContainer {
     display: flex;
-    column-gap: 1rem;
-    min-height: 40px;
+    gap: 0.5rem;
     align-items: center;
     border-top: solid 1px #000000;
+    padding: 0.5rem;
 }
 
 .InstructionsSection_button {
     border: solid 1px #000000;
+    padding: 0.1rem;
 }
 
 .InstructionsSection_button:hover {
-    cursor: pointer;
     background-color: blue;
     color: white;
 }
 
-/* Instruction Item Styling */
-
-.InstructionItem {
-    display: grid;
-    grid-template-columns: auto auto 1fr auto;
-    column-gap: 1rem;
-    text-align: center;
-    border: solid 1px #000000;
+.InstructionsSection_resultsTest {
+    font-size: 0.8rem;
 }
 
-.InstructionItem:hover {
-    cursor: pointer;
-    background-color: blue;
-    color: white;
-}
 
-/* Instruction Details Styling */
-
-.InstructionDetails {
-    display: grid;
-    grid-template-rows: auto 1fr 1fr;
-    row-gap: .5rem;
-}
-
-.InstructionDetails_buttonContainer {
-    display: flex;
-}
-
-.InstructionDetails_backButton {
-    font-style: italic;
-}
-
-.InstructionDetails_topRow {
-    display: flex;
-    justify-content: space-between;
-}
-
-.InstructionDetails_descriptionContainer {
-    display: grid;
-    grid-template-columns: auto 1fr;
-}
-
-.InstructionDetails_ingredientsContainer {
-    display: grid;
-    grid-template-columns: auto 1fr;
-}
-
-.InstructionDetails_itemsContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.InstructionDetails_item {
-    display: flex;
-    justify-content: space-between;
-}
-
-.InstructionDetails_description,
-.InstructionDetails_itemsContainer {
-    border: solid 1px #000000;
-}

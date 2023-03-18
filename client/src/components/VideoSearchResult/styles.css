@@ -1,0 +1,12 @@
+.VideoSearchResult_titleContainer {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+
+.VideoSearchResult_title {
+    font-size: 1rem;
+}
+
+.VideoSearchResult_button {
+    border: solid 1px #000000;
+}

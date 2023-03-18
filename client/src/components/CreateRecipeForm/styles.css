@@ -1,0 +1,12 @@
+.CreateRecipeForm {
+    height: 100vh;
+    height: 100svh;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-rows: auto 1fr auto;
+}
+
+.CreateRecipeForm_main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}

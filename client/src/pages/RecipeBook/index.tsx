@@ -1,5 +1,6 @@
-import Footer from "../../components/Footer"
+import AuthFooter from "../../components/AuthFooter"
 import Navbar from "../../components/Navbar"
+import RecipeList from "../../components/RecipeList"
 import './styles.css'
 
 const RecipeBookPage = () => {
@@ -7,8 +8,8 @@ const RecipeBookPage = () => {
     return (
         <div className={className}>
             <Navbar/>
-            <div>Main Section</div>
-            <Footer/>
+            <RecipeList/>
+            <AuthFooter/>
         </div>
     )
 }

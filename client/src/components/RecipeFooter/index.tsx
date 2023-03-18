@@ -2,17 +2,17 @@ import React from "react"
 import './styles.css'
 
 interface Props {
-    sectionVisible: React.Dispatch<React.SetStateAction<string>>
+    setSectionVisible: React.Dispatch<React.SetStateAction<string>>
 }
 
-const RecipeFooter: React.FC<Props> = ({sectionVisible}) => {
+const RecipeFooter: React.FC<Props> = ({setSectionVisible}) => {
     const className = 'RecipeFooter'
     return (
         <div className={className}>
-            <div className={`${className}_button`} 
-                onClick={() => sectionVisible('INSTRUCTIONS')} >Instructions</div>
-            <div className={`${className}_button`}
-                onClick={() => sectionVisible('INGREDIENTS')}>Ingredients</div>
+            <button className={`${className}_button`} 
+                onClick={() => setSectionVisible('INSTRUCTIONS')} >Instructions</button>
+            <button className={`${className}_button`}
+                onClick={() => setSectionVisible('INGREDIENTS')}>Ingredients</button>
         </div>
     )
 }
