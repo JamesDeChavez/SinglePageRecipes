@@ -1,29 +1,27 @@
 import { useContext } from "react"
 import { CreateRecipeRenderContext } from "../../branches/CreateRecipe"
+import { Video } from "../../utils/interfaces"
 import './styles.css'
 
-const VideoSearchResult = () => {
-    const [RENDERS, setRender] = useContext(CreateRecipeRenderContext)
+interface Props {
+    video: Video
+}
 
-    const selectVideo = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+const VideoSearchResult: React.FC<Props> = ({ video }) => {
+    const { setVideoSelected } = useContext(CreateRecipeRenderContext)
+
+    const handleVideoClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault()
-        setRender(RENDERS[1])
+        setVideoSelected(video)
     }
 
     const className = 'VideoSearchResult'
     return (
-        <div className={className}>
-            <iframe
-                title='recipeVideo' 
-                src="https://www.youtube.com/embed/ZrR0VbqNdW8?enablejsapi=1&version=3&playerapiid=ytplayer"
-                className={`${className}_iframe`}
-            />
-            <div className={`${className}_titleContainer`}>
-                <div className={`${className}_textContainer`}>
-                    <h2 className={`${className}_title`}>{`Babish Chicken Parm Recipe Video Title Name`}</h2>
-                    <p className={`${className}_channel`}>Babish Channel Name</p>
-                </div>
-                <button className={`${className}_button`} onClick={selectVideo}>Select</button>
+        <div className={className} onClick={handleVideoClick} >
+            <img src={video.thumbnail} alt="youtubeThumbnail" className={`${className}_thumbnail`}/>
+            <div className={`${className}_textOverlay`}>
+                <p className={`${className}_text`}>Video: Chicken Parmesan | Basics with Babish </p>
+                <p className={`${className}_text`}>Channel: Babish Culinary Universe</p>
             </div>
         </div>
     )

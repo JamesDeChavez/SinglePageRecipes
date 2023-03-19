@@ -4,14 +4,21 @@ import './styles.css'
 
 interface Props {
     setDetailsActive: React.Dispatch<React.SetStateAction<boolean>>,
-    selectedStep: Instruction | undefined
+    selectedStep: Instruction | undefined,
+    instructions: Instruction[]
 }
 
-const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep }) => {
+const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, instructions }) => {
+    
+    const handleReturnToTableClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        setDetailsActive(false)
+    }
 
     const className = 'InstructionDetails'
     return (
         <div className={className}>
+            <h2 className={`${className}_header`}>{`Step ${instructions.findIndex(step => step.description === selectedStep?.description) + 1} Details`}</h2>
             {selectedStep ?
             <>
                 <div className={`${className}_topRow`}>
@@ -45,6 +52,11 @@ const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep })
             :
                 <></>
             }
+            <div className={`${className}_pageButtonsContainer`}>
+                <button className={`${className}_pageButton`} onClick={handleReturnToTableClick}>
+                    {`< `}<span style={{textDecoration: 'underline'}}>Return to table</span>
+                </button>
+            </div>
         </div>
     )
 }

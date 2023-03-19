@@ -1,7 +1,7 @@
 .RecipeOption {
     position: relative;
     border: solid 1px black;
-    padding-bottom: 10%;
+    padding-bottom: 2rem;
 }
 
 .RecipeOption_textOverlay {

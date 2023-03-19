@@ -1,0 +1,70 @@
+.AddStepForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.AddStepForm_header {
+    font-size: 1rem;
+    height: 1rem;
+}
+
+.AddStepForm_summaryContainer {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.AddStepForm_text {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.AddStepForm_actionInput,
+.AddStepForm_itemInput,
+.AddStepForm_timeInput,
+.AddStepForm_descriptionInput,
+.AddStepForm_ingredientNameInput,
+.AddStepForm_ingredientAmountInput {
+    border: solid 1px black;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.2rem;
+}
+
+.AddStepForm_itemContainer {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 0.5rem;
+}
+
+.AddStepForm_addItemButton,
+.AddStepForm_addIngredientButton {
+    white-space: nowrap;
+    border: solid 1px black;
+    border-radius: 5px;
+    padding: 0 0.2rem;
+}
+
+.AddStepForm_descriptionInput {
+    height: 4rem;
+    resize: none;
+}
+
+.AddStepForm_ingredientInputContainer {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 5fr 3fr 2fr;
+}
+
+.AddStepForm_ingredientsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}

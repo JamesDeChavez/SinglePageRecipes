@@ -13,7 +13,7 @@ const Hero = () => {
     const className = 'Hero'
     return (
         <div className={className}>
-            <button onClick={handleButtonClick}>View Sample</button>
+            <button onClick={handleButtonClick} className={`${className}_button`}>View Sample</button>
         </div>
     )
 }

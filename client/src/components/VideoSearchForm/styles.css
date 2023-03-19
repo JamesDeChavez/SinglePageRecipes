@@ -1,0 +1,10 @@
+.VideoSearchForm {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.VideoSearchForm_input {
+    border: none;
+    border-bottom: solid 1px black;
+}

@@ -13,3 +13,17 @@ export interface Ingredient {
     amount: string,
     include?: boolean
 }
+
+export interface Video {
+    title: string,
+    thumbnail: string,
+    channel: string,
+    videoId: string
+}
+
+export interface Recipe {
+    title: string,
+    video: Video,
+    instructions: Instruction[],
+    ingredients: Ingredient[]
+}

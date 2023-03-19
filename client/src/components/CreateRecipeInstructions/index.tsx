@@ -1,39 +1,32 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { Instruction } from '../../utils/interfaces'
+import AddStepForm from '../AddStepForm'
+import { CreateRecipeFormContext } from '../CreateRecipeForm'
 import InstructionDetails from '../InstructionDetails'
-import InstructionItem from '../InstructionItem'
+import InstructionsTable from '../InstructionsTable'
 import './styles.css'
 
 const CreateRecipeInstructions = () => {
+    const { instructions, addStepActive, setAddStepActive } = useContext(CreateRecipeFormContext)
     const [detailsActive, setDetailsActive] = useState(false)
+    const [selectedStep, setSelectedStep] = useState<Instruction>()
 
-    const handleReturnToTableClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleAddStepClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        setDetailsActive(false)
+        setAddStepActive(true)
     }
 
     const className = 'CreateRecipeInstructions'
     return (
         <div className={className}>
-            <h2 className={`${className}_header`}>Instructions (Click step for more details)</h2>
-
-            {detailsActive ?
-                <></>
-            :    
-                <div className={`${className}_instructionsTable`}>
-                </div>
-            }
-
-            <button className={`${className}_addStepButton`}>Add Step</button>
-            <div className={`${className}_pageButtonsContainer`}>
-                {detailsActive ?
-                    <button className={`${className}_pageButton`} onClick={handleReturnToTableClick}>Return to table</button>
+            {addStepActive ?
+                <AddStepForm/>
+            :
+                detailsActive ?
+                    <InstructionDetails setDetailsActive={setDetailsActive} selectedStep={selectedStep} instructions={instructions} />
                 :
-                <>    
-                    <button className={`${className}_pageButton`}>Prev</button>
-                    <button className={`${className}_pageButton`}>Next</button>
-                </>
-                }
-            </div>
+                    <InstructionsTable detailsActive={detailsActive} setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} handleAddStepClick={handleAddStepClick}  />
+            }
         </div>
     )
 }

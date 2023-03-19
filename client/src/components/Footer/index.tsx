@@ -4,7 +4,7 @@ const Footer = () => {
     const className = 'Footer'
     return (
         <div className={className}>
-            <span>Developed by James Dechavez</span>
+            <p className={`${className}_text`}>Developed by James Dechavez</p>
         </div>
     )
 }

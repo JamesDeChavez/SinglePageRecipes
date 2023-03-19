@@ -1,0 +1,34 @@
+.InstructionsTable {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.InstructionsTable_header {
+    font-size: 1rem;
+}
+
+.InstructionsTable_table {
+    display: grid;
+    row-gap: .5rem;
+    padding: 0 0.5rem;
+}
+
+.InstructionsTable_addStepButton {
+    border: solid 1px black;
+    margin: 0 0.5rem;
+}
+
+.InstructionsTable_pageButtonsContainer {
+    display: flex;
+    gap: 1rem;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.InstructionsTable_pageButton {
+    border: solid 1px black;
+    padding: 0 0.2rem;
+}
+
+.InstructionsTable_resultsText {
+    font-size: 0.8rem;
+}

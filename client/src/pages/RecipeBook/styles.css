@@ -1,6 +1,14 @@
 .RecipeBookPage {
     display: grid;
     min-height: 100vh;
-    grid-template-columns: 1fr;
+}
+
+.RecipeBookPage_recipeContainer {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.RecipeBookPage_recipeListContainer {
+    display: grid;
     grid-template-rows: auto 1fr auto;
 }

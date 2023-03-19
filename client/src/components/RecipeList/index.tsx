@@ -10,14 +10,9 @@ const RecipeList = () => {
         <div className={className}>
             <div className={`${className}_searchContainer`}>
                 <p>Recipe Search</p>
-                <input type="text" name="search" id="search" value={search} onChange={(e) => setSearch(e.target.value)} />
+                <input type="text" name="search" id="search" value={search} autoComplete='off' onChange={(e) => setSearch(e.target.value)} />
             </div>
             <div className={`${className}_recipesContainer`}>
-                <RecipeOption/>
-                <RecipeOption/>
-                <RecipeOption/>
-                <RecipeOption/>
-                <RecipeOption/>
                 <RecipeOption/>
             </div>
         </div>

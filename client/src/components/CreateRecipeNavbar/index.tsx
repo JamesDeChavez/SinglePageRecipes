@@ -2,18 +2,23 @@ import { useContext } from 'react'
 import { CreateRecipeRenderContext } from '../../branches/CreateRecipe'
 import './styles.css'
 
-const CreateRecipeNavbar = () => {
-    const [RENDERS, setRender] = useContext(CreateRecipeRenderContext)
+interface Props {
+    handleCreateRecipe: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+}
 
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, n: number) => {
+const CreateRecipeNavbar: React.FC<Props> = ({ handleCreateRecipe }) => {
+    const {setVideoSelected} = useContext(CreateRecipeRenderContext)
+
+    const handleReturnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, n: number) => {
         e.preventDefault()
-        setRender(RENDERS[n])
+        setVideoSelected(undefined)
     } 
 
     const className = 'CreateRecipeNavbar'
     return (
         <div className={className}>
-            <button className={`${className}_button`} onClick={(e) => handleClick(e, 0)}>Return to Video Search</button>
+            <button className={`${className}_returnButton`} onClick={(e) => handleReturnClick(e, 0)}>{`< Return to Video Search`}</button>
+            <button className={`${className}_createButton`} onClick={handleCreateRecipe}>Create Recipe</button>
         </div>
     )
 }

@@ -1,19 +1,26 @@
 import React, { useState } from "react"
 import CreateRecipeForm from "../../components/CreateRecipeForm"
 import VideoSearch from "../../components/VideoSearch"
+import { Video } from "../../utils/interfaces"
 
-export const CreateRecipeRenderContext = React.createContext<[string[], React.Dispatch<React.SetStateAction<string>>]>([[], () => {}])
+export const CreateRecipeRenderContext = React.createContext<{
+    videoSelected: Video | undefined
+    setVideoSelected: React.Dispatch<React.SetStateAction<Video | undefined>>
+}>({
+    videoSelected: undefined,
+    setVideoSelected: () => {}
+})
 
 const CreateRecipeBranch = () => {
-    const RENDERS = ['VideoSearch', 'CreateRecipeForm']
-    const [render, setRender] = useState(RENDERS[0])
+    const [videoSelected, setVideoSelected] = useState<Video | undefined>()
 
     return (
-    <CreateRecipeRenderContext.Provider value={[RENDERS, setRender]}>
-        {{
-            [RENDERS[0]]: <VideoSearch/>,
-            [RENDERS[1]]: <CreateRecipeForm/>
-        }[render]}   
+    <CreateRecipeRenderContext.Provider value={{ videoSelected, setVideoSelected }}>
+        {videoSelected ?
+            <CreateRecipeForm />
+        :
+            <VideoSearch/>
+        }   
     </CreateRecipeRenderContext.Provider>
     )
 }

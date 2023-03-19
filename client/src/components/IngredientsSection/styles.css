@@ -15,7 +15,7 @@
 .IngredientsSection_table {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     gap: .5rem;
     padding: 0 0.5rem;
     height: 100%;

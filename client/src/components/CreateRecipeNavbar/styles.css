@@ -1,0 +1,11 @@
+.CreateRecipeNavbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    padding-bottom: 0;
+}
+
+.CreateRecipeNavbar_createButton {
+    padding: 0.2rem;
+    border: solid 1px black;
+}

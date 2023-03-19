@@ -1,7 +1,18 @@
-.VideoSearchPage {
+.VideoSearch {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
     row-gap: 1rem;
-    padding: .5rem;
 }
 
+.VideoSearch_main {
+    display: flex;
+    flex-direction: column;
+}
+
+.VideoSearch_resultsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem 0.5rem 5rem 0.5rem;
+}

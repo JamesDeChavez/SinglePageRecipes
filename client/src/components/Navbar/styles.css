@@ -2,12 +2,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 60px;
     border-bottom: solid 1px #000000;
+    padding: 0.5rem;
 }
 
 .Navbar_logo {
     border: solid 1px #000000;
+    padding: 0.2rem 0.5rem;
 }
 
 .Navbar_logo:hover {
@@ -24,6 +25,7 @@
 
 .Navbar_button {
     border: solid 1px #000000;
+    padding: 0.2rem 0.5rem;
 }
 
 .Navbar_button:hover {
