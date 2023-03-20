@@ -67,3 +67,13 @@
     display: flex;
     justify-content: space-between;
 }
+
+.InstructionDetails_pageButtonsContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.InstructionDetails_deleteButton {
+    border: solid 1px black;
+    padding: 0 0.2rem;
+}

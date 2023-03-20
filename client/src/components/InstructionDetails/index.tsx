@@ -6,12 +6,22 @@ interface Props {
     setDetailsActive: React.Dispatch<React.SetStateAction<boolean>>,
     selectedStep: Instruction | undefined,
     instructions: Instruction[]
+    setInstructions?: React.Dispatch<React.SetStateAction<Instruction[]>>
 }
 
-const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, instructions }) => {
+const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, instructions, setInstructions }) => {
     
     const handleReturnToTableClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
+        setDetailsActive(false)
+    }
+
+    const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        if (!setInstructions) return
+        const index = instructions.findIndex(step => step.description === selectedStep?.description)
+        const newInstructions = [...instructions.slice(0, index), ...instructions.slice(index + 1)]
+        setInstructions(newInstructions)
         setDetailsActive(false)
     }
 
@@ -56,6 +66,7 @@ const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, i
                 <button className={`${className}_pageButton`} onClick={handleReturnToTableClick}>
                     {`< `}<span style={{textDecoration: 'underline'}}>Return to table</span>
                 </button>
+                <button className={`${className}_deleteButton`} onClick={handleDeleteClick} style={{ display: setInstructions ? 'block' : 'none'}}>X Delete Step</button>
             </div>
         </div>
     )

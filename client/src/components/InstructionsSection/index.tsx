@@ -21,7 +21,7 @@ const InstructionsSection = () => {
             {detailsActive ?
                 <InstructionDetails setDetailsActive={setDetailsActive} selectedStep={selectedStep} instructions={instructions} />
             :
-                <InstructionsTable detailsActive={detailsActive} setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} />
+                <InstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} />
             }
         </div>
     )

@@ -36,8 +36,8 @@ const VideoSearchForm: React.FC<Props> = ({ setSearchResults }) => {
     const className = 'VideoSearchForm'
     return (
         <form className={className} onSubmit={handleFormSubmit}>
-            <input type="text" name="search" id="search" value={search} className={`${className}_input`} placeholder='Recipe Search' onChange={e => setSearch(e.target.value)} autoComplete='off' />
-            <input type="submit" value="Submit" className={`${className}_submit`} />
+            <input type="text" name="search" id="search" value={search} className={`${className}_input`} placeholder='Youtube Recipe Search' onChange={e => setSearch(e.target.value)} autoComplete='off' />
+            <input type="submit" value="Search" className={`${className}_submit`} />
         </form>
     )
 }

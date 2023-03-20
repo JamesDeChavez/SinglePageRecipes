@@ -7,7 +7,7 @@ import InstructionsTable from '../InstructionsTable'
 import './styles.css'
 
 const CreateRecipeInstructions = () => {
-    const { instructions, addStepActive, setAddStepActive } = useContext(CreateRecipeFormContext)
+    const { instructions, setInstructions, addStepActive, setAddStepActive } = useContext(CreateRecipeFormContext)
     const [detailsActive, setDetailsActive] = useState(false)
     const [selectedStep, setSelectedStep] = useState<Instruction>()
 
@@ -23,9 +23,9 @@ const CreateRecipeInstructions = () => {
                 <AddStepForm/>
             :
                 detailsActive ?
-                    <InstructionDetails setDetailsActive={setDetailsActive} selectedStep={selectedStep} instructions={instructions} />
+                    <InstructionDetails setDetailsActive={setDetailsActive} selectedStep={selectedStep} instructions={instructions} setInstructions={setInstructions} />
                 :
-                    <InstructionsTable detailsActive={detailsActive} setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} handleAddStepClick={handleAddStepClick}  />
+                    <InstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} handleAddStepClick={handleAddStepClick}  />
             }
         </div>
     )

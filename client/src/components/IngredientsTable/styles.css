@@ -1,0 +1,43 @@
+.IngredientsTable {
+    display: grid;
+    grid-template-rows: auto 6fr 1fr auto;
+    gap: 0.5rem;
+}
+
+.IngredientsTable_header {
+    font-size: 1rem;
+}
+
+.IngredientsTable_table {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);   
+    row-gap: .5rem;
+    padding: 0 0.5rem;
+}
+
+.IngredientsTable_button {
+    border: solid 1px #000000;
+    padding: 0.1rem;
+}
+
+.IngredientsTable_button:hover {
+    background-color: blue;
+    color: #FFFFFF;
+}
+
+.IngredientsTable_addButton {
+    margin: 0 0.5rem;
+}
+
+.IngredientsTable_resultsText {
+    font-size: 0.8rem;
+}
+
+.IngredientsTable_pageButtonsContainer {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    border-top: solid 1px #000000;
+    padding: 0.5rem;
+}
+

@@ -4,20 +4,19 @@ import InstructionItem from '../InstructionItem'
 import './styles.css'
 
 interface Props {
-    detailsActive: boolean
     setDetailsActive: React.Dispatch<React.SetStateAction<boolean>>,
     setSelectedStep: React.Dispatch<React.SetStateAction<Instruction | undefined>>
     instructions: Instruction[],
     handleAddStepClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-const InstructionsTable: React.FC<Props> = ({ detailsActive, setDetailsActive, setSelectedStep, instructions, handleAddStepClick }) => {
+const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep, instructions, handleAddStepClick }) => {
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(handleAddStepClick ? 4 : 5)
     const [numberStepsDisplayed, setNumberStepsDisplayed] = useState(handleAddStepClick ? 4 : 5)
     
     const handleNextClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        if (end >= instructions.length - 1) return
+        if (end >= instructions.length) return
         e.preventDefault()
         const endCheck = end + numberStepsDisplayed >= instructions.length
         const newStart = start + numberStepsDisplayed

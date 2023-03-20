@@ -4,15 +4,16 @@ import './styles.css'
 
 interface Props {
     item: Ingredient,
-    orderActive: boolean,
-    shoppingList: Ingredient[],
-    setShoppingList: React.Dispatch<React.SetStateAction<Ingredient[]>>
+    orderActive?: boolean,
+    shoppingList?: Ingredient[],
+    setShoppingList?: React.Dispatch<React.SetStateAction<Ingredient[]>>
 }
 
 const IngredientItem: React.FC<Props> = ({ item, orderActive, shoppingList, setShoppingList }) => {
     
     const handleItemClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault()
+        if (!setShoppingList || !shoppingList) return
         const newShoppingList = [...shoppingList]
         const index = shoppingList.findIndex(ingredient => ingredient.name === item.name)
         newShoppingList[index] = { name: item.name, amount: item.amount, 

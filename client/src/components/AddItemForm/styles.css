@@ -1,0 +1,19 @@
+.AddItemForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.AddItemForm_header {
+    font-size: 1rem;
+}
+
+.AddItemForm_nameInput,
+.AddItemForm_amountInput {
+    border: solid 1px black;
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+}

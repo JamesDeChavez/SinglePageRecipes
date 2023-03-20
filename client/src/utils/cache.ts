@@ -30,7 +30,7 @@ const cache = {
                             items: ['Garlic']
                         },
                         time: '30 sec.',
-                        description: 'Add 2 cloves of garlic to the sauce pan and sautee for about 30 seconds',
+                        description: 'Add 2 cloves of garlic to the sauce pan and sauté for about 30 seconds',
                         ingredients: [
                             { name: 'Garlic', amount: '2 cloves' }
                         ]
@@ -41,7 +41,7 @@ const cache = {
                             items: ['Tomato Paste', 'Red Chili Flakes']
                         },
                         time: '1 min.',
-                        description: 'Add 2-3 tablespoons of tomato paste and a shake of red chili flakes to the sauce pan and sautee for about 1 minute',
+                        description: 'Add 2-3 tablespoons of tomato paste and a shake of red chili flakes to the sauce pan and sauté for about 1 minute',
                         ingredients: [
                             { name: 'Tomato Paste', amount: '3 tbsp.' },
                             { name: 'Red Chili Flakes', amount: 'To Taste' }

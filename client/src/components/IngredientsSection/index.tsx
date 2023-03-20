@@ -9,8 +9,8 @@ const associatesTag = 'jamesrecipeap-20'
 const IngredientsSection = () => {
     const [ingredients, setIngredients] = useState<Ingredient[]>([])
     const [start, setStart] = useState(0)
-    const [end, setEnd] = useState(6)
-    const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(6)
+    const [end, setEnd] = useState(Math.min(cache.User.recipes[0].ingredients.length, 6))
+    const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(Math.min(cache.User.recipes[0].ingredients.length, 6))
     const [orderActive, setOrderActive] = useState(false)
     const [shoppingList, setShoppingList] = useState<Ingredient[]>([])
 
@@ -20,7 +20,6 @@ const IngredientsSection = () => {
         })
         setShoppingList(newShoppingList)
         setIngredients(cache.User.recipes[0].ingredients)
-        setEnd(Math.min(cache.User.recipes[0].ingredients.length, 6))
     }, [])
 
     const handleOrderIngredientsClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -82,9 +81,7 @@ const IngredientsSection = () => {
             <div className={`${className}_table`}>
                 {ingredients && ingredients.slice(start, end).map((item, i) => {
                     return <IngredientItem item={item} key={i} orderActive={orderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} />
-                })
-
-                }
+                })}
             </div>
             <div className={`${className}_orderButtonsContainer`}>
                 {orderActive ?

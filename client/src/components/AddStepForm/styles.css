@@ -32,10 +32,9 @@
 .AddStepForm_ingredientNameInput,
 .AddStepForm_ingredientAmountInput {
     border: solid 1px black;
-    border-radius: 5px;
     width: 100%;
     font-size: 0.9rem;
-    padding: 0.2rem;
+    padding: 0.5rem;
 }
 
 .AddStepForm_itemContainer {
@@ -48,7 +47,6 @@
 .AddStepForm_addIngredientButton {
     white-space: nowrap;
     border: solid 1px black;
-    border-radius: 5px;
     padding: 0 0.2rem;
 }
 

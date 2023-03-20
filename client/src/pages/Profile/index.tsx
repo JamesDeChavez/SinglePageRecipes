@@ -1,5 +1,6 @@
 import AuthFooter from '../../components/AuthFooter'
 import Navbar from '../../components/Navbar'
+import Profile from '../../components/Profile'
 import './styles.css'
 
 const ProfilePage = () => {
@@ -7,7 +8,7 @@ const ProfilePage = () => {
     return (
         <div className={className}>
             <Navbar/>
-            <div>Profile Page</div>
+            <Profile/>
             <AuthFooter/>
         </div>
     )
