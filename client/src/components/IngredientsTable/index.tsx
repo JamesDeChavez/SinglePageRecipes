@@ -1,19 +1,22 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Ingredient } from '../../utils/interfaces'
 import IngredientItem from '../IngredientItem'
 import './styles.css'
 
 interface Props {
     ingredients: Ingredient[],
-    handleAddIngredient: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+    handleAddIngredient?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient }) => {
-    
+const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient }) => {    
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(6)
     const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(6)
     
+    const buttonRef = useRef<HTMLButtonElement | null>(null)
+    useEffect(() => {
+        buttonRef.current && buttonRef.current.focus()
+    }, [buttonRef])
 
     const handleNextClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
@@ -47,7 +50,7 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient })
                 })}
             </div>
 
-            <button className={`${className}_button ${className}_addButton`} onClick={handleAddIngredient}>Add Ingredient</button>
+            <button className={`${className}_button ${className}_addButton`} onClick={handleAddIngredient} style={{ display: handleAddIngredient ? 'block' : 'none' }} ref={buttonRef}>Add Ingredient</button>
 
             <div className={`${className}_pageButtonsContainer`}>
                     <button className={`${className}_button`} onClick={handlePrevClick}>Prev</button>

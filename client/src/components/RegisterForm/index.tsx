@@ -6,7 +6,7 @@ import { CREATE_USER } from '../../graphql/mutations'
 import './styles.css'
 
 const RegisterForm = () => {
-    const [_, setUserLoggedIn] = useContext(UserLoggedInContext)
+    const { setUserLoggedIn, setUserId } = useContext(UserLoggedInContext)
     const [createUser,  { error }] = useMutation(CREATE_USER)
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -15,9 +15,7 @@ const RegisterForm = () => {
     const [errorMessage, setErrorMessage] = useState<string | undefined>()
 
     useEffect(() => {
-        console.log(error)
         if (error) setErrorMessage(error.message)
-        error && console.log(error.message)
     }, [error])
 
     useEffect(() => {
@@ -36,6 +34,9 @@ const RegisterForm = () => {
         try {
             const newUser = await createUser({variables: registerData})
             if (newUser.data.createUser) {
+                const token = newUser.data.createUser.token
+                localStorage.setItem('sprToken', `Bearer ${token}`)
+                setUserId(newUser.data.createUser._id)
                 setUserLoggedIn(true)
             }
         } catch (error) {

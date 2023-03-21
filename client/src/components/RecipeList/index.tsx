@@ -1,8 +1,15 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { client } from '../..'
+import { UserLoggedInContext } from '../../App'
+import { RecipesFragment } from '../../graphql/fragments'
+import { Recipe } from '../../utils/interfaces'
 import RecipeOption from '../RecipeOption'
 import './styles.css'
 
 const RecipeList = () => {
+    const { userId } = useContext(UserLoggedInContext)
+    const recipes = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment })
+
     const [search, setSearch] = useState('')
 
     const className = 'RecipeList'
@@ -13,7 +20,14 @@ const RecipeList = () => {
                 <input type="text" name="search" id="search" value={search} autoComplete='off' onChange={(e) => setSearch(e.target.value)} />
             </div>
             <div className={`${className}_recipesContainer`}>
-                <RecipeOption/>
+                {recipes.length ?
+                    recipes.map((recipe: Recipe, i: number) => {
+                        return <RecipeOption key={i} recipe={recipe} />
+                    })
+                
+                :
+                    <p>No Recipes Created</p>
+                }
             </div>
         </div>
     )

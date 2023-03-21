@@ -22,6 +22,7 @@ export interface Video {
 }
 
 export interface Recipe {
+    _id?: string,
     title: string,
     video: Video,
     instructions: Instruction[],

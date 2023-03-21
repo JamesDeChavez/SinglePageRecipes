@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Instruction } from '../../utils/interfaces'
 import InstructionItem from '../InstructionItem'
 import './styles.css'
@@ -14,6 +14,11 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(handleAddStepClick ? 4 : 5)
     const [numberStepsDisplayed, setNumberStepsDisplayed] = useState(handleAddStepClick ? 4 : 5)
+
+    const buttonRef = useRef<HTMLButtonElement | null>(null)
+    useEffect(() => {
+        buttonRef.current && buttonRef.current.focus()
+    }, [buttonRef])
     
     const handleNextClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (end >= instructions.length) return
@@ -45,7 +50,7 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
                 })}
             </div>
         
-            <button className={`${className}_addStepButton`} onClick={handleAddStepClick}style={{ display: handleAddStepClick ? 'block' : 'none' }}>Add Step</button>
+            <button className={`${className}_addStepButton`} onClick={handleAddStepClick}style={{ display: handleAddStepClick ? 'block' : 'none' }} ref={buttonRef} >Add Step</button>
 
             <div className={`${className}_pageButtonsContainer`}> 
                 <button className={`${className}_pageButton`} onClick={handlePrevClick}>Prev</button>

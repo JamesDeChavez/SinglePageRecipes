@@ -31,6 +31,48 @@ export const CREATE_USER = gql`
                     amount
                 }
             }
+            token
         }
     }
+`
+
+export const CREATE_RECIPE = gql`
+  mutation CreateRecipe($recipes: [RecipeInput]!, $userId: String!) {
+    createRecipe(recipes: $recipes, userId: $userId) {
+      _id
+      recipes {
+        title
+        video {
+          title
+          thumbnail
+          channel
+          videoId
+        }
+        instructions {
+          summary {
+            action
+            items
+          }
+          time
+          description
+          ingredients {
+            name
+            amount
+          }
+        }
+        ingredients {
+          name
+          amount
+        }
+      }
+    }
+  }
+`
+
+export const DELETE_USER = gql`
+  mutation DeleteUser($deleteUserId: ID!) {
+    deleteUser(id: $deleteUserId) {
+      _id
+    }
+  }
 `

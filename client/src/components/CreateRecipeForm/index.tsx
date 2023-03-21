@@ -1,5 +1,11 @@
+import { useMutation } from "@apollo/client"
 import React, { useState, useContext } from "react"
+import { client } from "../.."
+import { UserLoggedInContext } from "../../App"
+import { AuthRenderContext } from "../../branches/Auth"
 import { CreateRecipeRenderContext } from "../../branches/CreateRecipe"
+import { RecipesFragment } from "../../graphql/fragments"
+import { CREATE_RECIPE } from "../../graphql/mutations"
 import { Ingredient, Instruction } from "../../utils/interfaces"
 import AddItemFooter from "../AddItemFooter"
 import AddStepFooter from "../AddStepFooter"
@@ -18,7 +24,6 @@ export const CreateRecipeFormContext = React.createContext<{
     addStepActive: boolean, setAddStepActive: React.Dispatch<React.SetStateAction<boolean>>,
     addIngredientActive: boolean, setAddIngredientActive: React.Dispatch<React.SetStateAction<boolean>>,
     action: string, setAction: React.Dispatch<React.SetStateAction<string>>,
-    item: string, setItem: React.Dispatch<React.SetStateAction<string>>,
     items: string[], setItems: React.Dispatch<React.SetStateAction<string[]>>,
     time: string, setTime: React.Dispatch<React.SetStateAction<string>>,
     description: string, setDescription: React.Dispatch<React.SetStateAction<string>>,
@@ -33,7 +38,6 @@ export const CreateRecipeFormContext = React.createContext<{
     addStepActive: false, setAddStepActive: () => {},
     addIngredientActive: false, setAddIngredientActive: () => {},
     action: '', setAction: () => {},
-    item: '', setItem: () => {},
     items: [], setItems: () => {},
     time: '', setTime: () => {},
     description: '', setDescription: () => {},
@@ -43,9 +47,14 @@ export const CreateRecipeFormContext = React.createContext<{
 })
 
 const CreateRecipeForm = () => {
-    const { videoSelected, setVideoSelected } = useContext(CreateRecipeRenderContext)
-    const RENDERS = ['INSTRUCTIONS', 'INGREDIENTS']
-    const [sectionVisible, setSectionVisible] = useState(RENDERS[0])
+    const { videoSelected } = useContext(CreateRecipeRenderContext)
+    const { userId } = useContext(UserLoggedInContext)
+    const [RENDERS, setRender] = useContext(AuthRenderContext)
+    const [createRecipe] = useMutation(CREATE_RECIPE)
+    const currentRecipes = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment })
+
+    const SECTIONS = ['INSTRUCTIONS', 'INGREDIENTS']
+    const [sectionVisible, setSectionVisible] = useState(SECTIONS[0])
     const [addStepActive, setAddStepActive] = useState(false)
     const [addIngredientActive, setAddIngredientActive] = useState(false)
     const [title, setTitle] = useState('')
@@ -54,7 +63,6 @@ const CreateRecipeForm = () => {
     const [ingName, setIngName] = useState('')
     const [ingAmount, setIngAmount] = useState('')
     const [action, setAction] = useState('')
-    const [item, setItem] = useState('')
     const [items, setItems] = useState<string[]>([])
     const [time, setTime] = useState('')
     const [description, setDescription] = useState('')
@@ -62,7 +70,7 @@ const CreateRecipeForm = () => {
     const [ingredientAmount, setIngredientAmount] = useState('')
     const [recipeIngredients, setRecipeIngredients] = useState<Ingredient[]>([])
 
-    const handleCreateRecipe = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleCreateRecipe = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         if(!title || !videoSelected || !instructions.length || !ingredients.length) return
         const newRecipe = {
@@ -71,21 +79,27 @@ const CreateRecipeForm = () => {
             instructions: instructions,
             ingredients: ingredients
         }
-        console.log(newRecipe)
+        console.log([...currentRecipes.recipes, newRecipe])
+        try {
+            const newRecipes = await createRecipe({ variables: { userId, recipes: [...currentRecipes.recipes, newRecipe] }})
+            if (newRecipes) setRender(RENDERS[0])
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const className = 'CreateRecipeForm'
     return (
     <CreateRecipeFormContext.Provider value={{ 
-        ingredients, setIngredients, ingName, setIngName, ingAmount, setIngAmount, instructions, setInstructions, addStepActive, setAddStepActive, addIngredientActive, setAddIngredientActive, action, setAction, item, setItem, items, setItems, time, setTime, description, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, recipeIngredients, setRecipeIngredients
+        ingredients, setIngredients, ingName, setIngName, ingAmount, setIngAmount, instructions, setInstructions, addStepActive, setAddStepActive, addIngredientActive, setAddIngredientActive, action, setAction, items, setItems, time, setTime, description, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, recipeIngredients, setRecipeIngredients
     }} >
         <div className={className}>
             <CreateRecipeNavbar handleCreateRecipe={handleCreateRecipe} />
             <div className={`${className}_main`}>
                 <CreateRecipeVideoSection title={title} setTitle={setTitle} />
                 {{
-                    [RENDERS[0]]: <CreateRecipeInstructions />,
-                    [RENDERS[1]]: <CreateRecipeIngredients />
+                    [SECTIONS[0]]: <CreateRecipeInstructions />,
+                    [SECTIONS[1]]: <CreateRecipeIngredients />
                 }[sectionVisible]}                
             </div>
             {addStepActive ?

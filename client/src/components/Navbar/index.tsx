@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { client } from '../..'
 import { UserLoggedInContext } from '../../App'
 import { AuthRenderContext } from '../../branches/Auth'
 import { NonAuthRenderContext } from '../../branches/NonAuth'
@@ -7,13 +8,17 @@ import './styles.css'
 const Navbar = () => {
     const [RENDERS_NONAUTH, setRender_Nonauth] = useContext(NonAuthRenderContext)
     const [RENDERS_AUTH, setRender_Auth] = useContext(AuthRenderContext)
-    const [userLoggedIn, setUserLoggedIn] = useContext(UserLoggedInContext)
+    const {userLoggedIn, setUserLoggedIn} = useContext(UserLoggedInContext)
 
     const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, n: number) => {
         e.preventDefault()
         if (!userLoggedIn) setRender_Nonauth(RENDERS_NONAUTH[n])
         if (userLoggedIn && n === 0) setRender_Auth(RENDERS_AUTH[n])
-        if (userLoggedIn && n === 1) setUserLoggedIn(false)
+        if (userLoggedIn && n === 1) {
+            client.clearStore()
+            localStorage.clear()
+            setUserLoggedIn(false)
+        }
     }
 
     const className = 'Navbar'

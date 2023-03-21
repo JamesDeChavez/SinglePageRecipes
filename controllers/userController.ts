@@ -33,6 +33,20 @@ export default {
             console.log(error);
         }
     },
+    updateForNewRecipe: async (req: any) => {
+        try {
+            const request = await db.User.findOneAndUpdate({
+                _id: req.userId
+            }, {
+                recipes: req.recipes
+            }, {
+                new: true
+            })
+            return request
+        } catch (error) {
+            console.log(error)
+        }
+    },
     delete: async (req: any) => {
         try {
             const request = await db.User.findOneAndDelete({ _id: req.id });

@@ -7,8 +7,7 @@ const AddStepFooter = () => {
             items, setItems, 
             time, setTime,
             description, setDescription,
-            recipeIngredients, setRecipeIngredients,
-            setItem, setIngredientName, setIngredientAmount,
+            recipeIngredients, setRecipeIngredients, setIngredientName, setIngredientAmount,
             setInstructions, setAddStepActive } = useContext(CreateRecipeFormContext)
 
     const handleAddStep = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -26,7 +25,6 @@ const AddStepFooter = () => {
         setTime('')
         setDescription('')
         setRecipeIngredients([])
-        setItem('')
         setIngredientName('')
         setIngredientAmount('')
         setAddStepActive(false)
@@ -39,7 +37,6 @@ const AddStepFooter = () => {
         setTime('')
         setDescription('')
         setRecipeIngredients([])
-        setItem('')
         setIngredientName('')
         setIngredientAmount('')
         setAddStepActive(false)

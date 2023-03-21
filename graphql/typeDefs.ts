@@ -4,7 +4,8 @@ const typeDefs = `#graphql
         username: String!
         email: String!
         password: String!
-        recipes:[Recipe]!
+        recipes: [Recipe]!
+        token: String
     }
 
     type Recipe {
@@ -38,12 +39,47 @@ const typeDefs = `#graphql
         amount: String!
     }
 
+    input RecipeInput {
+        title: String!
+        video: VideoInput!
+        instructions: [InstructionInput]!
+        ingredients: [IngredientInput]!
+    }
+
+    input VideoInput {
+        title: String!
+        thumbnail: String!
+        channel: String!
+        videoId: String!
+    }
+
+    input InstructionInput {
+        summary: SummaryInput!
+        time: String!
+        description: String!
+        ingredients: [IngredientInput]!
+    }
+
+    input SummaryInput {
+        action: String!
+        items: [String]!
+    }
+
+    input IngredientInput {
+        name: String!
+        amount: String!
+    }
+
     type Query {
-        user(id: ID): User
+        user(id: ID!): User
+        login(username: String!, password: String!): User
+        returningUser: User
     }
 
     type Mutation {
         createUser(username: String!, password: String!, email: String!): User
+        createRecipe(userId: String!, recipes: [RecipeInput]!): User
+        deleteUser(id: ID!): User
     }
 
 `

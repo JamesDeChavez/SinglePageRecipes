@@ -9,8 +9,19 @@
     justify-content: space-between;
 }
 
+.Profile_buttonsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    text-align: center;
+}
+
 .Profile_delete {
     border: solid 1px black;
     padding: 1rem;
     margin-top: 1rem;
+}
+
+.Profile_confirmText {
+    text-align: center;
 }
