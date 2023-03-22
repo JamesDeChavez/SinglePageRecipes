@@ -10,5 +10,7 @@
 
 .CreateRecipeVideoSection_titleInput {
     border: none;
-    border-bottom: solid 1px black;
+    background-color: #112728;
+    color: #FFFFFF;
+    font-size: 1rem;
 }

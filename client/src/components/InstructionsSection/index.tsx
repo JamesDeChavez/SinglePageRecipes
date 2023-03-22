@@ -1,18 +1,16 @@
-import { useEffect, useState } from "react"
-import cache from "../../utils/cache"
+import { useState } from "react"
 import { Instruction } from "../../utils/interfaces"
 import InstructionDetails from "../InstructionDetails"
 import InstructionsTable from "../InstructionsTable"
 import './styles.css'
 
-const InstructionsSection = () => {
-    const [detailsActive, setDetailsActive] = useState(false)
-    const [instructions, setInstructions] = useState<Instruction[]>([])
-    const [selectedStep, setSelectedStep] = useState<Instruction>()
+interface Props {
+    instructions: Instruction[]
+}
 
-    useEffect(() => {
-        setInstructions(cache.User.recipes[0].instructions)
-    }, [])
+const InstructionsSection: React.FC<Props> = ({ instructions }) => {
+    const [detailsActive, setDetailsActive] = useState(false)
+    const [selectedStep, setSelectedStep] = useState<Instruction>()
 
     const className = 'InstructionsSection'
     return (

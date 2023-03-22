@@ -2,10 +2,11 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    border-top: solid 1px #000000;
-    padding: 0.5rem;
+    border-top: solid 1px #070b0b;
+    padding: 1rem 0.5rem;
 }
 
 .Footer_text {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    color: #FFFFFF;
 }

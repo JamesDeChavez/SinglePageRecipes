@@ -1,31 +1,67 @@
 .LoginForm {
-    padding: 1rem 2rem;
+    display: grid;
+    place-content: center;
+    position: relative;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+.LoginForm_imageContainer {
+    display: flex;
+    place-content: center;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.LoginForm_image {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
 
 .LoginForm_form {
     display: grid;
     grid-template-columns: 1fr;
+    padding: 1rem 3rem;
     row-gap: 1rem;
+    color: #FFFFFF;
+    z-index: 2;
+    border: solid 1px #070b0b30;
+    background-color: #070b0b90;
+    backdrop-filter: blur(10px);
 }
 
 .LoginForm_header {
     font-size: 2rem;
-    text-align: center;
+}
+
+.LoginForm_inputContainer {
+    display: flex;
+    justify-content: center;
+}
+.LoginForm_buttonsContainer {
+    display: flex;
 }
 
 .LoginForm_input {
     border: none;
-    border-bottom: solid 1px #000000;
-    width: 100%;
+    background-color: #112728;
+    color: #FFFFFF;
+    font-size: 1rem;
+    padding: 1rem;
 }
 
 .LoginForm_button {
-    background-color: transparent;
-    border: solid 1px #000000;
+    font-size: 1rem;
+    border: solid 1px #9f5922;
+    padding: 0.5rem;
+    background-color: #9f5922;
+    color: #FFFFFF;
     width: 100%;
 }
 
 .LoginForm_button:hover {
-    background-color: blue;
-    color: #FFFFFF;
+    cursor: pointer;
 }

@@ -44,10 +44,12 @@
     grid-template-columns: 1fr 1fr;
 }
 
+
 .InstructionDetails_description,
 .InstructionDetails_itemsContainer {
-    border: solid 1px #000000;
+    border: solid 1px #FFFFFF;
     padding: 0.5rem;
+    background-color: #112728;
 }
 
 .InstructionDetails_summary,
@@ -76,4 +78,8 @@
 .InstructionDetails_deleteButton {
     border: solid 1px black;
     padding: 0 0.2rem;
+}
+
+.InstructionDetails_pageButton {
+    color: #FFFFFF;
 }

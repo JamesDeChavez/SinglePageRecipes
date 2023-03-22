@@ -53,9 +53,12 @@ const AddStepForm = () => {
                 />
                 <button className={`${className}_addIngredientButton`} onClick={handleAddIngredient} >Add</button>
             </div>
-            <textarea 
-                name="description" id="description" placeholder='Description' value={description} autoComplete='off' maxLength={170} onChange={e => setDescription(e.target.value)} className={`${className}_descriptionInput`} >
-            </textarea>
+            <div className={`${className}_textAreaContainer`}>
+                <textarea 
+                    name="description" id="description" placeholder='Description' value={description} autoComplete='off' maxLength={170} onChange={e => setDescription(e.target.value)} className={`${className}_descriptionInput`} >
+                </textarea>
+                <span className={`${className}_charLimit`}>{`${description.length} / 170`}</span>
+            </div>
             <input 
                 type="text" name='time' id='time' placeholder='Time' value={time} autoComplete='off' maxLength={6} onChange={e => setTime(e.target.value)} className={`${className}_timeInput`} 
             />

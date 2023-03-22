@@ -9,10 +9,22 @@
 }
 
 .AuthFooter_button {
-    padding: 0.5rem 0;
-    border: solid 1px black;
+    background-color: #9f5922;
+    color: #FFFFFF;
+    border: solid 1px #FFFFFF;
+    border-right: none;
+    padding: 1rem 0;
+}
+
+.AuthFooter_button:hover {
+    cursor: pointer;
+    color:#112728;
+}
+
+.AuthFooter_button:last-child {
+    border-right: solid 1px #FFFFFF;
 }
 
 .AuthFooter_active {
-    color: red
+    color: #112728
 }

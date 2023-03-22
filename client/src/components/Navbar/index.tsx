@@ -3,6 +3,7 @@ import { client } from '../..'
 import { UserLoggedInContext } from '../../App'
 import { AuthRenderContext } from '../../branches/Auth'
 import { NonAuthRenderContext } from '../../branches/NonAuth'
+import logoImage from '../../assets/logo.png'
 import './styles.css'
 
 const Navbar = () => {
@@ -24,7 +25,9 @@ const Navbar = () => {
     const className = 'Navbar'
     return (
         <div className={className}>
-            <div className={`${className}_logo`} onClick={(e) => handleClick(e, 0)}>LOGO</div>
+            <div className={`${className}_logo`} onClick={(e) => handleClick(e, 0)}>
+                <img src={logoImage} alt="logoImage" className={`${className}_image`} />
+            </div>
 
             {userLoggedIn ?
                 <div className={`${className}_buttonsContainer`}>

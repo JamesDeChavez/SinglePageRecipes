@@ -1,6 +1,6 @@
 .VideoSearchResult {
     position: relative;
-    border: solid 1px black;
+    border: solid 1px #FFFFFF;
     padding-bottom: 2rem;
 }
 
@@ -12,7 +12,7 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    background-color: grey;
+    background-color: #112728;
 }
 
 .VideoSearchResult_text {

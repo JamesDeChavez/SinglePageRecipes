@@ -50,6 +50,18 @@
     padding: 0 0.2rem;
 }
 
+.AddStepForm_textAreaContainer {
+    position: relative;
+}
+
+.AddStepForm_charLimit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 0.8rem;
+    margin: 0 0.2rem 0.5rem 0;
+}
+
 .AddStepForm_descriptionInput {
     height: 4rem;
     resize: none;

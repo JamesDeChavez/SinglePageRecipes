@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client'
 import { useContext } from 'react'
 import { UserLoggedInContext } from '../../App'
 import { CREATE_USER } from '../../graphql/mutations'
+import backgroundImage from '../../assets/background.jpg'
 import './styles.css'
 
 const RegisterForm = () => {
@@ -47,6 +48,9 @@ const RegisterForm = () => {
     const className = 'RegisterForm'
     return (
         <div className={className}>
+            <div className={`${className}_imageContainer`}>
+                <img className={`${className}_image`} src={backgroundImage} alt="background image" />
+            </div>
             <form className={`${className}_form`} onSubmit={handleSubmit}>
                 <h1 className={`${className}_header`}>Register</h1>
                 <div className={`${className}_inputContainer`}>

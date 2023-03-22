@@ -6,8 +6,11 @@ import './styles.css'
 
 const associatesTag = 'jamesrecipeap-20'
 
-const IngredientsSection = () => {
-    const [ingredients, setIngredients] = useState<Ingredient[]>([])
+interface Props {
+    ingredients: Ingredient[]
+}
+
+const IngredientsSection: React.FC<Props> = ({ ingredients }) => {
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(Math.min(cache.User.recipes[0].ingredients.length, 6))
     const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(Math.min(cache.User.recipes[0].ingredients.length, 6))
@@ -15,11 +18,10 @@ const IngredientsSection = () => {
     const [shoppingList, setShoppingList] = useState<Ingredient[]>([])
 
     useEffect(() => {
-        const newShoppingList = cache.User.recipes[0].ingredients.map(item => {
+        const newShoppingList = ingredients.map(item => {
             return { ...item, include: true}
         })
         setShoppingList(newShoppingList)
-        setIngredients(cache.User.recipes[0].ingredients)
     }, [])
 
     const handleOrderIngredientsClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -82,6 +84,11 @@ const IngredientsSection = () => {
                 {ingredients && ingredients.slice(start, end).map((item, i) => {
                     return <IngredientItem item={item} key={i} orderActive={orderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} />
                 })}
+            </div>            
+            <div className={`${className}_pageButtonsContainer`}>
+                    <button className={`${className}_button`} onClick={handlePrevClick}>Prev</button>
+                    <button className={`${className}_button`} onClick={handleNextClick}>Next</button>
+                    <p className={`${className}_resultsText`}>{`Items ${!ingredients.length ? 0 : start + 1} - ${Math.min(ingredients.length, end)} (Total Items ${ingredients.length})`}</p>
             </div>
             <div className={`${className}_orderButtonsContainer`}>
                 {orderActive ?
@@ -102,11 +109,6 @@ const IngredientsSection = () => {
                 :
                     <button className={`${className}_button`} onClick={handleOrderIngredientsClick}>Order Ingredients</button>
                 }
-            </div>
-            <div className={`${className}_pageButtonsContainer`}>
-                    <button className={`${className}_button`} onClick={handlePrevClick}>Prev</button>
-                    <button className={`${className}_button`} onClick={handleNextClick}>Next</button>
-                    <p className={`${className}_resultsText`}>{`Items ${start + 1} - ${end} (Total Items ${ingredients.length})`}</p>
             </div>
         </div>
     )

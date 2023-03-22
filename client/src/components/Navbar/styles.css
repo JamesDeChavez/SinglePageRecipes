@@ -2,19 +2,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: solid 1px #000000;
+    border-bottom: solid 1px #070b0b;
     padding: 0.5rem;
 }
 
 .Navbar_logo {
-    border: solid 1px #000000;
-    padding: 0.2rem 0.5rem;
+    display: flex;
 }
 
 .Navbar_logo:hover {
     cursor: pointer;
-    background-color: blue;
-    color: white;
+}
+
+.Navbar_image {
+    width: 8rem;
+    height: auto;
 }
 
 .Navbar_buttonsContainer {
@@ -24,11 +26,13 @@
 }
 
 .Navbar_button {
-    border: solid 1px #000000;
-    padding: 0.2rem 0.5rem;
+    font-size: 0.9rem;
+    border: solid 1px #9f5922;
+    padding: 0.2rem 1rem;
+    background-color: #9f5922;
+    color: #FFFFFF;
 }
 
 .Navbar_button:hover {
-    background-color: blue;
-    color: white;
+    cursor: pointer;
 }

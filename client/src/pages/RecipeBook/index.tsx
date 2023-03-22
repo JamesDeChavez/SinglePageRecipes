@@ -25,7 +25,7 @@ const RecipeBookPage = () => {
             {recipeSelected ?
             <div className={`${className}_recipeContainer`}>
                 <RecipeNavbar/>
-                <Recipe/>
+                <Recipe recipe={recipeSelected} />
             </div>
             :
             <div className={`${className}_recipeListContainer`}>

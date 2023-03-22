@@ -2,10 +2,11 @@
     display: flex;
     justify-content: space-between;
     padding: 0.1rem 0.5rem;
-    border: solid 1px #000000;
+    border: solid 1px #FFFFFF;
     font-size: 0.8rem;
+    background-color: #112728;
 }
 
 .IngredientItem_active {
-    background-color: greenyellow;
+    background-color: #9f5922;
 }

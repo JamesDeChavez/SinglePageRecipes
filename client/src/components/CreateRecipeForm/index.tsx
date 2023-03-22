@@ -79,10 +79,43 @@ const CreateRecipeForm = () => {
             instructions: instructions,
             ingredients: ingredients
         }
-        console.log([...currentRecipes.recipes, newRecipe])
-        try {
-            const newRecipes = await createRecipe({ variables: { userId, recipes: [...currentRecipes.recipes, newRecipe] }})
+        try {            
+            const currRecipesFormatted = currentRecipes.recipes.map((recipe: any) => {
+                return {
+                    title: recipe.title,
+                    video: {
+                        title: recipe.video.title,
+                        thumbnail: recipe.video.thumbnail,
+                        channel: recipe.video.channel,
+                        videoId: recipe.video.videoId
+                    },
+                    instructions: recipe.instructions.map((step: any) => {
+                        return {
+                            summary: {
+                                action: step.summary.action,
+                                items: step.summary.items
+                            },
+                            time: step.time,
+                            description: step.description,
+                            ingredients: step.ingredients.map((item: any) => {
+                                return {
+                                    name: item.name,
+                                    amount: item.amount
+                                }
+                            })
+                        }
+                    }),
+                    ingredients: recipe.ingredients.map((ing: any) => {
+                        return {
+                            name: ing.name,
+                            amount: ing.amount
+                        }
+                    })
+                }
+            })
+            const newRecipes = await createRecipe({ variables: { userId, recipes: [...currRecipesFormatted, newRecipe] }})
             if (newRecipes) setRender(RENDERS[0])
+
         } catch (error) {
             console.log(error)
         }

@@ -19,3 +19,9 @@ button {
 button:hover {
     cursor: pointer;
 }
+
+input,
+input::placeholder {
+    font-family: 'Poppins', sans-serif;
+    color:#FFFFFF;
+}

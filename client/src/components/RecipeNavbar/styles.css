@@ -1,4 +1,10 @@
 .RecipeNavbar {
     display: flex;
     justify-content: space-between;
+    padding: 0.3rem;
+    padding-bottom: 0;
+}
+
+.RecipeNavbar_button {
+    color: #FFFFFF
 }

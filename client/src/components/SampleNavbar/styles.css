@@ -1,4 +1,18 @@
 .SampleNavbar {
     display: flex;
     justify-content: space-between;
+    padding: 0.3rem;
+    padding-bottom: 0;
+}
+
+.SampleNavbar_return {
+    color: #FFFFFF
+}
+
+.SampleNavbar_register {
+    font-size: 0.8rem;
+    border: solid 1px #9f5922;
+    background-color: #9f5922;
+    color: #FFFFFF;
+    padding: 0.1rem 0.2rem;
 }

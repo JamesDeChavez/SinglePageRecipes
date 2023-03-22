@@ -3,6 +3,7 @@
     height: 100svh;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    gap: 0.5rem;
 }
 
 .CreateRecipeForm_main {

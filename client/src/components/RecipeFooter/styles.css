@@ -7,11 +7,16 @@
 }
 
 .RecipeFooter_button {
-    border: solid 1px #000000;
+    background-color: #9f5922;
+    color: #FFFFFF;
+    border: solid 1px #FFFFFF;
     padding: 1rem 0;
 }
 
+.RecipeFooter_button:last-child {
+    border-left: none;
+}
+
 .RecipeFooter_button:hover {
-    background-color: blue;
-    color: white
+    cursor: pointer;
 }

@@ -11,6 +11,17 @@
     gap: 0.5rem;
 }
 
+.RecipeList_searchText {
+    color: #FFFFFF
+}
+
+.RecipeList_search {
+    border: none;
+    background-color: #112728;
+    color: #FFFFFF;
+    font-size: 1rem;
+}
+
 .RecipeList_recipesContainer {
     display: flex;
     flex-wrap: wrap;

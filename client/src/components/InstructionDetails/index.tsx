@@ -51,8 +51,8 @@ const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, i
                 <div className={`${className}_ingredientsContainer`}>
                     <p>[  ]</p>
                     <div className={`${className}_itemsContainer`}>
-                        {selectedStep.ingredients.map(item => 
-                            <p className={`${className}_item`}>
+                        {selectedStep.ingredients.map((item, i) => 
+                            <p className={`${className}_item`} key={i} >
                                 {`${item.name} - ${item.amount}`}
                             </p>
                         )}
