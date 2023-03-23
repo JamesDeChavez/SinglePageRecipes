@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
+import { UserLoggedInContext } from '../../App'
 import { Instruction } from '../../utils/interfaces'
 import InstructionItem from '../InstructionItem'
 import './styles.css'
@@ -11,9 +12,27 @@ interface Props {
 }
 
 const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep, instructions, handleAddStepClick }) => {
+    const { windowSize } = useContext(UserLoggedInContext)
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(handleAddStepClick ? 4 : 5)
     const [numberStepsDisplayed, setNumberStepsDisplayed] = useState(handleAddStepClick ? 4 : 5)
+    const [gridTemplateRows, setGridTemplateRows] = useState(handleAddStepClick ? 'repeat(4, 1fr)' : 'repeat(5, 1fr)')
+    const [gridTemplateRowsTwo, setGridTemplateRowsTwo] = useState(handleAddStepClick ? 'auto 5fr 1fr auto' : 'auto 1fr auto')
+
+    useEffect(() => {
+        if (!windowSize) return
+        let numberRows = windowSize[0] < 850 ? Math.floor((windowSize[1] - 100) / 60) : Math.floor((((windowSize[1] - 30) / 2) - 25) / 60)
+        if (windowSize[0] < 1250) {
+            setEnd(handleAddStepClick ? numberRows - 1 : numberRows)
+            setNumberStepsDisplayed(handleAddStepClick ? numberRows - 1 : numberRows)
+        } else {
+            setEnd(handleAddStepClick ? (numberRows - 1) * 2 : numberRows * 2)
+            setNumberStepsDisplayed(handleAddStepClick ? (numberRows - 1) * 2 : numberRows * 2)
+        }
+        setGridTemplateRows(handleAddStepClick ? `repeat(${numberRows - 1}, 1fr)` : `repeat(${numberRows}, 1fr)`)
+        setGridTemplateRowsTwo(handleAddStepClick ? `auto ${numberRows - 1}fr 1fr auto` : `auto 1fr auto`)
+
+    }, [windowSize])
 
     const buttonRef = useRef<HTMLButtonElement | null>(null)
     useEffect(() => {
@@ -42,9 +61,9 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
 
     const className = 'InstructionsTable'
     return (
-        <div className={className} style={{ gridTemplateRows: handleAddStepClick ? 'auto 5fr 1fr auto' : 'auto 1fr auto' }}>
+        <div className={className} style={{ gridTemplateRows: gridTemplateRowsTwo }}>
             <h2 className={`${className}_header`}>Instructions (Click step for more details)</h2>    
-            <div className={`${className}_table`} style={{ gridTemplateRows: handleAddStepClick ? 'repeat(4, 1fr)' : 'repeat(5, 1fr)' }}>
+            <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }}>
                 {instructions && instructions.slice(start, end).map((step, i) => {
                     return <InstructionItem setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} step={step} index={i + start} key={i} />
                 })}

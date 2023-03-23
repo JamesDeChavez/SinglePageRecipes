@@ -1,5 +1,6 @@
 .VideoSection {
-    display: grid;
+    display: flex;
+    flex-direction: column;
 }
 
 .VideoSection_header {
@@ -11,5 +12,7 @@
 
 iframe {
     width: 100%;
+    max-width: 1400px;
     aspect-ratio: 16 / 9;
+    border: solid 1px #FFFFFF30;
 }

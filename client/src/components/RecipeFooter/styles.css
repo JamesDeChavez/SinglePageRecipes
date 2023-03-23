@@ -3,20 +3,27 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     align-items: center;
-    border-top: solid 1px #000000;
 }
 
 .RecipeFooter_button {
     background-color: #9f5922;
     color: #FFFFFF;
-    border: solid 1px #FFFFFF;
+    border: solid 1px #FFFFFF30;
     padding: 1rem 0;
-}
-
-.RecipeFooter_button:last-child {
-    border-left: none;
 }
 
 .RecipeFooter_button:hover {
     cursor: pointer;
+}
+
+.RecipeFooter_active {
+    border: solid 1px #FFFFFF;
+}
+
+@media screen and (min-width: 850px) {
+
+.RecipeFooter {
+    display: none;
+}
+
 }

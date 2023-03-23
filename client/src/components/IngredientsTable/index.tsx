@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
+import { UserLoggedInContext } from '../../App'
 import { Ingredient } from '../../utils/interfaces'
 import IngredientItem from '../IngredientItem'
 import './styles.css'
@@ -8,10 +9,22 @@ interface Props {
     handleAddIngredient?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient }) => {    
+const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient }) => { 
+    const { windowSize } = useContext(UserLoggedInContext)   
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(6)
     const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(6)
+    const [gridTemplateRows, setGridTemplateRows] = useState(`repeat(6, 1fr)`)
+    const [gridTemplateRowsTwo, setGridTemplateRowsTwo] = useState(`auto 6fr 1fr auto`)
+
+    useEffect(() => {
+        if (!windowSize) return
+        const numberRows = Math.floor((windowSize[1] - (windowSize[0] / 1.8) - 135) / 50)
+        setEnd(numberRows)
+        setNumberItemsDisplayed(numberRows)
+        setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
+        setGridTemplateRowsTwo(`auto ${numberRows}fr 1fr auto`)
+    }, [windowSize])
     
     const buttonRef = useRef<HTMLButtonElement | null>(null)
     useEffect(() => {
@@ -42,9 +55,9 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient })
 
     const className = 'IngredientsTable'
     return (
-        <div className={className}>
+        <div className={className} style={{ gridTemplateRows: gridTemplateRowsTwo}}>
             <h2 className={`${className}_header`}>Ingredients:</h2>
-            <div className={`${className}_table`}>
+            <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }} >
                 {ingredients && ingredients.slice(start, end).map((item, i) => {
                     return <IngredientItem item={item} key={i} />
                 })}

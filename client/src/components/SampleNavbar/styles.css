@@ -11,8 +11,13 @@
 
 .SampleNavbar_register {
     font-size: 0.8rem;
-    border: solid 1px #9f5922;
+    border: solid 1px #FFFFFF30;
     background-color: #9f5922;
     color: #FFFFFF;
     padding: 0.1rem 0.2rem;
+}
+
+.SampleNavbar_return,
+.SampleNavbar_register {
+    cursor: pointer;
 }

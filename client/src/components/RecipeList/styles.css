@@ -20,6 +20,7 @@
     background-color: #112728;
     color: #FFFFFF;
     font-size: 1rem;
+    border: solid 1px #FFFFFF30;
 }
 
 .RecipeList_recipesContainer {

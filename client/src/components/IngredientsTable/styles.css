@@ -1,23 +1,21 @@
 .IngredientsTable {
     display: grid;
-    grid-template-rows: auto 6fr 1fr auto;
     gap: 0.5rem;
     padding: 0 0.5rem;
 }
 
 .IngredientsTable_header {
     font-size: 1rem;
+    font-weight: 400;
 }
 
 .IngredientsTable_table {
     display: grid;
-    grid-template-rows: repeat(6, 1fr);   
     row-gap: .5rem;
-    padding: 0 0.5rem;
 }
 
 .IngredientsTable_button {
-    border: solid 1px #FFFFFF;
+    border: solid 1px #FFFFFF30;
     color: #FFFFFF;
     background-color: #112728;
     padding: 0 0.2rem;
@@ -29,7 +27,7 @@
 
 .IngredientsTable_addButton {
     font-size: 1rem;
-    border: solid 1px #9f5922;
+    border: solid 1px #FFFFFF30;
     background-color: #9f5922;
     color: #FFFFFF;
     width: 100%;

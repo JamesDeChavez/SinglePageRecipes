@@ -20,8 +20,8 @@ const VideoSearchResult: React.FC<Props> = ({ video }) => {
         <div className={className} onClick={handleVideoClick} >
             <img src={video.thumbnail} alt="youtubeThumbnail" className={`${className}_thumbnail`}/>
             <div className={`${className}_textOverlay`}>
-                <p className={`${className}_text`}>Video: Chicken Parmesan | Basics with Babish </p>
-                <p className={`${className}_text`}>Channel: Babish Culinary Universe</p>
+                <p className={`${className}_text`}>{`Video: ${video.title}`}</p>
+                <p className={`${className}_text`}>{`Channel: ${video.channel}`}</p>
             </div>
         </div>
     )

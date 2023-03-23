@@ -27,7 +27,7 @@
     row-gap: 1rem;
     color: #FFFFFF;
     z-index: 2;
-    border: solid 1px #070b0b30;
+    border: solid 1px #FFFFFF30;
     background-color: #070b0b90;
     backdrop-filter: blur(10px);
     padding: 1rem 3rem;
@@ -43,7 +43,7 @@
 }
 
 .RegisterForm_input {
-    border: none;
+    border: solid 1px #FFFFFF30;
     background-color: #112728;
     color: #FFFFFF;
     font-size: 1rem;
@@ -57,7 +57,7 @@
 
 .RegisterForm_button {
     font-size: 1rem;
-    border: solid 1px #9f5922;
+    border: solid 1px #FFFFFF30;
     padding: 0.5rem;
     background-color: #9f5922;
     color: #FFFFFF;

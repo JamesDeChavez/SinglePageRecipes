@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import cache from '../../utils/cache'
+import { useState, useEffect, useContext } from 'react'
+import { UserLoggedInContext } from '../../App'
 import { Ingredient } from '../../utils/interfaces'
 import IngredientItem from '../IngredientItem'
 import './styles.css'
@@ -11,11 +11,13 @@ interface Props {
 }
 
 const IngredientsSection: React.FC<Props> = ({ ingredients }) => {
+    const { windowSize } = useContext(UserLoggedInContext)
     const [start, setStart] = useState(0)
-    const [end, setEnd] = useState(Math.min(cache.User.recipes[0].ingredients.length, 6))
-    const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(Math.min(cache.User.recipes[0].ingredients.length, 6))
+    const [end, setEnd] = useState(Math.min(ingredients.length, 6))
+    const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(Math.min(ingredients.length, 6))
     const [orderActive, setOrderActive] = useState(false)
     const [shoppingList, setShoppingList] = useState<Ingredient[]>([])
+    const [gridTemplateRows, setGridTemplateRows] = useState(`repeat(6, 1fr)`)
 
     useEffect(() => {
         const newShoppingList = ingredients.map(item => {
@@ -23,6 +25,21 @@ const IngredientsSection: React.FC<Props> = ({ ingredients }) => {
         })
         setShoppingList(newShoppingList)
     }, [])
+
+    
+    useEffect(() => {
+        if (!windowSize) return
+        const numberRows = windowSize[0] < 850 ? Math.floor((windowSize[1] - (windowSize[0] / 1.8) - 135) / 50) : Math.floor((((windowSize[1] - 30) / 2) - 25) / 50)
+        if (windowSize[0] < 1250) {
+            setEnd(numberRows)
+            setNumberItemsDisplayed(numberRows)
+        } else {
+            setEnd(numberRows * 2)
+            setNumberItemsDisplayed(numberRows * 2)
+
+        }
+        setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
+    }, [windowSize])
 
     const handleOrderIngredientsClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
@@ -80,7 +97,7 @@ const IngredientsSection: React.FC<Props> = ({ ingredients }) => {
     return (
         <div className={className}>
             <h2 className={`${className}_header`}>Ingredients:</h2>
-            <div className={`${className}_table`}>
+            <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }} >
                 {ingredients && ingredients.slice(start, end).map((item, i) => {
                     return <IngredientItem item={item} key={i} orderActive={orderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} />
                 })}

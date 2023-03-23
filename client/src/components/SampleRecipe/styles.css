@@ -7,4 +7,45 @@
     gap: 0.5rem;
 }
 
+.SampleRecipe_mainWide {
+    display: none;
+}
+
+@media screen and (min-width: 850px) {
+
+.SampleRecipe {
+    grid-template-columns: 1fr 400px;
+    grid-template-rows: auto 1fr;
+    padding: 0.5rem;
+}
+
+.SampleRecipe_main {
+    display: none;
+}
+
+.SampleRecipe_mainWide {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.5rem;
+    grid-row: 1/3;
+    grid-column: 2/3;
+}
+
+}
+
+@media screen and (min-width: 1250px) {
+
+.SampleRecipe {
+    grid-template-columns: 1fr 800px;
+}
+
+.SampleRecipe_mainWide {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.5rem;
+    grid-row: 1/3;
+    grid-column: 2/3;
+}
+
+}
 

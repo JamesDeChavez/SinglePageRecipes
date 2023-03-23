@@ -45,30 +45,33 @@ const Profile = () => {
     const className = 'Profile'
     return (
         <div className={className}>
-            <h2 className={`${className}_header`} >Profile</h2>
-            <p className={`${className}_text`}>
-                <span>{`Username:`}</span>
-                <span>{profileData && profileData.username}</span>
-            </p>
-            <p className={`${className}_text`}>
-                <span>{`Email:`}</span>
-                <span>{profileData && profileData.email}</span>
-            </p>
-            <p className={`${className}_text`}>
-                <span>{`# of Recipes:`}</span>
-                <span>{profileData && `${profileData.recipes.length} recipes`}</span>
-            </p>
-            {confirmActive ?
-            <>
-                <div className={`${className}_buttonsContainer`}>
-                    <button className={`${className}_delete`} onClick={handleDeleteClickTwo}>Confirm Delete</button>
-                    <button className={`${className}_delete`} onClick={handleCancelClick}>Cancel</button>
-                </div>
-                <p className={`${className}_confirmText`}>Are you sure?</p>
-            </>
-            :   
-                <button className={`${className}_delete`} onClick={handleDeleteClickOne}>Delete Account</button>
-            }
+
+            <div className={`${className}_formContainer`}>
+                <h2 className={`${className}_header`} >Profile</h2>
+                <p className={`${className}_text`}>
+                    <span>{`Username:`}</span>
+                    <span>{profileData && profileData.username}</span>
+                </p>
+                <p className={`${className}_text`}>
+                    <span>{`Email:`}</span>
+                    <span>{profileData && profileData.email}</span>
+                </p>
+                <p className={`${className}_text`}>
+                    <span>{`# of Recipes:`}</span>
+                    <span>{profileData && `${profileData.recipes.length} recipes`}</span>
+                </p>
+                {confirmActive ?
+                <>
+                    <div className={`${className}_buttonsContainer`}>
+                        <button className={`${className}_delete`} onClick={handleDeleteClickTwo}>Confirm Delete</button>
+                        <button className={`${className}_delete`} onClick={handleCancelClick}>Cancel</button>
+                    </div>
+                    <p className={`${className}_confirmText`}>Are you sure?</p>
+                </>
+                :
+                    <button className={`${className}_delete`} onClick={handleDeleteClickOne}>Delete Account</button>
+                }
+            </div>
 
         </div>
     )

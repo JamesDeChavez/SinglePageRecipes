@@ -142,7 +142,7 @@ const CreateRecipeForm = () => {
                     <AddItemFooter />
                 :
 
-                    <RecipeFooter setSectionVisible={setSectionVisible} /> 
+                    <RecipeFooter sectionVisible={sectionVisible} setSectionVisible={ setSectionVisible } /> 
             }
         </div>
     </CreateRecipeFormContext.Provider>

@@ -22,7 +22,7 @@ const Recipe: React.FC<Props> = ({ recipe }) => {
                 [RENDERS[0]]: <InstructionsSection instructions={recipe.instructions} />,
                 [RENDERS[1]]: <IngredientsSection ingredients={recipe.ingredients} />
             }[sectionVisible]}
-            <RecipeFooter setSectionVisible={setSectionVisible} />
+            <RecipeFooter sectionVisible={sectionVisible} setSectionVisible={setSectionVisible} />
         </div>
     )
 }

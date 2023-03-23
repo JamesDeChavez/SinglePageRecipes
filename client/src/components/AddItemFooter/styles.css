@@ -3,15 +3,19 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     align-items: center;
-    border-top: solid 1px #000000;
 }
 
 .AddItemFooter_button {
-    border: solid 1px #000000;
+    background-color: #9f5922;
+    color: #FFFFFF;
+    border: solid 1px #FFFFFF30;
     padding: 1rem 0;
 }
 
+.AddItemFooter_button {
+    border-left: none;
+}
+
 .AddItemFooter_button:hover {
-    background-color: blue;
-    color: white
+    cursor: pointer;
 }

@@ -20,8 +20,8 @@ const Hero = () => {
             <div className={`${className}_overlayContainer`}>
                 <h1 className={`${className}_header`}>Single Page Recipes</h1>
                 <div className={`${className}_textContainer`}>
+                    <p className={`${className}_text`}>Single-Page Interace - No Scrolling</p>
                     <p className={`${className}_text`}>Easily Learn Youtube Recipes</p>
-                    <p className={`${className}_text`}>Single-Page Recipes - No Scrolling</p>
                     <p className={`${className}_text`}>Simple Amazon Fresh Ordering</p>
                 </div>
                 <div className={`${className}_buttonContainer`}>
