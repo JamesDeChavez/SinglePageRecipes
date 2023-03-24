@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar"
 import Recipe from '../../components/Recipe'
 import RecipeList from "../../components/RecipeList"
 import RecipeNavbar from '../../components/RecipeNavbar'
+import backgroundImage from '../../assets/background.jpg'
 import { Recipe as RecipeInterface } from '../../utils/interfaces'
 import './styles.css'
 
@@ -28,7 +29,10 @@ const RecipeBookPage = () => {
                 <Recipe recipe={recipeSelected} />
             </div>
             :
-            <div className={`${className}_recipeListContainer`}>
+            <div className={`${className}_recipeListContainer`}>        
+                <div className={`${className}_imageContainer`}>
+                    <img className={`${className}_image`} src={backgroundImage} alt="background" />
+                </div>
                 <Navbar/>
                 <RecipeList/>
                 <AuthFooter/>

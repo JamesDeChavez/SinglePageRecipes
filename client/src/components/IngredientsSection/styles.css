@@ -40,13 +40,14 @@
 
 .IngredientsSection_button {
     border: solid 1px #FFFFFF30;
-    padding: 0.1rem;
+    padding: 0 0.2rem;
     color: #FFFFFF;
-    background-color: #112728;
+    background-color: #9f5922;
 }
 
 .IngredientsSection_button:hover {
     cursor: pointer;
+    border: solid 1px #FFFFFF;
 }
 
 .IngredientsSection_resultsText {
@@ -60,9 +61,15 @@
 }
 
 @media screen and (min-width: 850px) {
-    .IngredientsSection {
-        padding: 0;
-    }
+
+.IngredientsSection_button{
+    font-size: 1rem;
+}
+
+.IngredientsSection_resultsText {
+    font-size: 1rem;
+}
+
 }
 
 

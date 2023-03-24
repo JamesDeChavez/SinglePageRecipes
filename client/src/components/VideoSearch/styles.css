@@ -1,18 +1,47 @@
 .VideoSearch {
     display: grid;
-    grid-template-rows: auto 1fr auto;
-    row-gap: 1rem;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
 }
 
 .VideoSearch_main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 0.5rem;
+    padding-bottom: 8rem;
+}
+
+.VideoSearch_imageContainer {
     display: flex;
-    flex-direction: column;
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.VideoSearch_image {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
 
 .VideoSearch_resultsContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 1rem;
-    padding: 0.5rem 0.5rem 5rem 0.5rem;
+    z-index: 2;
+    justify-content: center;
+    justify-self: center;
+}
+
+.VideoSearch_text {
+    text-align: center;
+    border: solid 1px #FFFFFF30;
+    background-color: #070b0b90;
+    backdrop-filter: blur(10px);
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    height: min-content;
 }

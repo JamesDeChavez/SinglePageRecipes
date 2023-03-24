@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useRef } from 'react'
 import { UserLoggedInContext } from '../../App'
 import { Ingredient } from '../../utils/interfaces'
 import IngredientItem from '../IngredientItem'
@@ -18,13 +18,14 @@ const IngredientsSection: React.FC<Props> = ({ ingredients }) => {
     const [orderActive, setOrderActive] = useState(false)
     const [shoppingList, setShoppingList] = useState<Ingredient[]>([])
     const [gridTemplateRows, setGridTemplateRows] = useState(`repeat(6, 1fr)`)
+    const root = useRef(null)
 
     useEffect(() => {
         const newShoppingList = ingredients.map(item => {
             return { ...item, include: true}
         })
         setShoppingList(newShoppingList)
-    }, [])
+    }, [ingredients])
 
     
     useEffect(() => {
@@ -95,11 +96,11 @@ const IngredientsSection: React.FC<Props> = ({ ingredients }) => {
     });
     const className = 'IngredientsSection'
     return (
-        <div className={className}>
+        <div className={className} ref={root}>
             <h2 className={`${className}_header`}>Ingredients:</h2>
             <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }} >
                 {ingredients && ingredients.slice(start, end).map((item, i) => {
-                    return <IngredientItem item={item} key={i} orderActive={orderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} />
+                    return <IngredientItem item={item} key={i} orderActive={orderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} root={root} start={start} />
                 })}
             </div>            
             <div className={`${className}_pageButtonsContainer`}>

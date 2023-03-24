@@ -22,6 +22,12 @@
     white-space: nowrap;
 }
 
+.InstructionDetails_svgIcon {
+    width: 1rem;
+    height: auto;
+    fill: #FFFFFF;
+}
+
 .InstructionDetails_summaryContainer,
 .InstructionDetails_timeContainer {
     display: flex;
@@ -45,7 +51,8 @@
     grid-template-columns: 1fr 1fr;
 }
 
-
+.InstructionDetails_summary,
+.InstructionDetails_time,
 .InstructionDetails_description,
 .InstructionDetails_itemsContainer {
     border: solid 1px #FFFFFF30;
@@ -83,4 +90,20 @@
 
 .InstructionDetails_pageButton {
     color: #FFFFFF;
+}
+
+.InstructionDetails_pageButton:hover {
+    color: #9f5922
+}
+
+
+@media screen and (min-width: 850px) {
+ 
+.InstructionDetails_summary,
+.InstructionDetails_time,
+.InstructionDetails_description,
+.InstructionDetails_item {
+    font-size: 1rem;
+}
+
 }

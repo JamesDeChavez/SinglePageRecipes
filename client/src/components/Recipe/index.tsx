@@ -12,16 +12,21 @@ interface Props {
 
 const Recipe: React.FC<Props> = ({ recipe }) => {
     const RENDERS = ['INSTRUCTIONS', 'INGREDIENTS']
-    const [sectionVisible, setSectionVisible] = useState(RENDERS[0])
-    
+    const [sectionVisible, setSectionVisible] = useState(RENDERS[0])    
     const className = 'Recipe'
     return (
         <div className={className}>
             <VideoSection title={recipe.title} videoId={recipe.video.videoId} />
-            {{
-                [RENDERS[0]]: <InstructionsSection instructions={recipe.instructions} />,
-                [RENDERS[1]]: <IngredientsSection ingredients={recipe.ingredients} />
-            }[sectionVisible]}
+            <div className={`${className}_main`}>
+                {{
+                    [RENDERS[0]]: <InstructionsSection instructions={recipe.instructions} />,
+                    [RENDERS[1]]: <IngredientsSection ingredients={recipe.ingredients} />
+                }[sectionVisible]}
+            </div>
+            <div className={`${className}_mainWide`}>
+                <InstructionsSection instructions={recipe.instructions} />
+                <IngredientsSection ingredients={recipe.ingredients} />
+            </div>
             <RecipeFooter sectionVisible={sectionVisible} setSectionVisible={setSectionVisible} />
         </div>
     )

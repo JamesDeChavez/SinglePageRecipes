@@ -1,6 +1,11 @@
-import React from "react"
+import React, { useRef, useLayoutEffect } from "react"
 import { Instruction } from "../../utils/interfaces"
+import { ReactComponent as StickNoteSVG } from '../../assets/note-sticky-regular.svg'
+import { ReactComponent as ClockSVG } from '../../assets/clock-regular.svg'
+import { ReactComponent as FileLinesSVG } from '../../assets/file-lines-regular.svg'
+import { ReactComponent as CarrotSVG } from '../../assets/carrot-solid.svg'
 import './styles.css'
+import gsap from "gsap"
 
 interface Props {
     setDetailsActive: React.Dispatch<React.SetStateAction<boolean>>,
@@ -10,6 +15,16 @@ interface Props {
 }
 
 const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, instructions, setInstructions }) => {
+    const root = useRef(null)
+
+    useLayoutEffect(() => {
+        const gsapContext = gsap.context(() => {
+            gsap.fromTo(`.${className}_topRow`,{x: 1000 }, { duration: 0.5, x: 0 })
+            gsap.fromTo(`.${className}_descriptionContainer`,{x: 1000 }, { duration: 0.5, x: 0 })
+            gsap.fromTo(`.${className}_ingredientsContainer`,{x: 1000 }, { duration: 0.5, x: 0 })
+            return () => gsapContext.revert()
+        }, root)
+    }, [])
     
     const handleReturnToTableClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
@@ -27,29 +42,29 @@ const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, i
 
     const className = 'InstructionDetails'
     return (
-        <div className={className}>
+        <div className={className} ref={root}>
             <h2 className={`${className}_header`}>{`Step ${instructions.findIndex(step => step.description === selectedStep?.description) + 1} Details`}</h2>
             {selectedStep ?
             <>
                 <div className={`${className}_topRow`}>
                     
                     <div className={`${className}_summaryContainer`}>
-                        <p>[ ]</p>
+                        <StickNoteSVG className={`${className}_svgIcon`} />
                         <p className={`${className}_summary`}>
                             {`${selectedStep.summary.action}: ${selectedStep.summary.items.map(item => item).join(', ')}`}
                         </p>
                     </div>
                     <div className={`${className}_timeContainer`}>
-                        <p>[ ]</p>
+                        <ClockSVG className={`${className}_svgIcon`} />
                         <p className={`${className}_time`}>{`${selectedStep.time}`}</p>
                     </div>
                 </div>
                 <div className={`${className}_descriptionContainer`}>
-                    <p>[  ]</p>
+                    <FileLinesSVG className={`${className}_svgIcon`} />
                     <p className={`${className}_description`}>{selectedStep.description}</p>
                 </div>
                 <div className={`${className}_ingredientsContainer`}>
-                    <p>[  ]</p>
+                    <CarrotSVG className={`${className}_svgIcon`} />
                     <div className={`${className}_itemsContainer`}>
                         {selectedStep.ingredients.map((item, i) => 
                             <p className={`${className}_item`} key={i} >

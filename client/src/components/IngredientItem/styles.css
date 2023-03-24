@@ -10,3 +10,17 @@
 .IngredientItem_active {
     border: solid 1px #9f5922;
 }
+
+.IngredientItem_orderActive:hover {
+    cursor: pointer;
+    border: solid 1px #9f5922;
+}
+
+
+@media screen and (min-width: 850px) {
+ 
+.IngredientItem {
+    font-size: 1rem;
+}
+
+}

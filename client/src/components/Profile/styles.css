@@ -1,14 +1,18 @@
 .Profile { 
+    display: grid;
+    justify-content: center;
     padding: 1rem;
+    overflow: hidden;
 }
 
 
 .Profile_formContainer {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    height: fit-content;
     padding: 1rem;
     gap: 0.5rem;
     color: #FFFFFF;
+    z-index: 2;
     border: solid 1px #FFFFFF30;
     background-color: #11272890;
     backdrop-filter: blur(10px); 
@@ -17,6 +21,7 @@
 
 .Profile_text {
     display: flex;
+    gap: 7rem;
     justify-content: space-between;
 }
 

@@ -1,22 +1,25 @@
+import { useState, useContext, useRef, useLayoutEffect } from 'react'
 import { useMutation } from '@apollo/client'
-import { useState, useContext, useEffect } from 'react'
-import { client } from '../..'
+import { client } from '../../index'
 import { UserLoggedInContext } from '../../App'
 import { ProfileFragment } from '../../graphql/fragments'
 import { DELETE_USER } from '../../graphql/mutations'
-import cache from '../../utils/cache'
 import './styles.css'
+import gsap from 'gsap'
 
 const Profile = () => {
     const { userId, setUserLoggedIn } = useContext(UserLoggedInContext)
     const profileData = client.readFragment({ id: `User:${userId}`, fragment: ProfileFragment })
     const [deleteUser] = useMutation(DELETE_USER)
-
-    useEffect(() => {
-        console.log(profileData)
-    })
-
     const [confirmActive, setConfirmActive] = useState(false)
+    const root = useRef(null)
+
+    useLayoutEffect(() => {
+        const gsapContext = gsap.context(() => {
+            gsap.fromTo(`.${className}_formContainer`, { x: 1000 }, { duration: 0.5, x: 0 })
+            return () => gsapContext.revert()
+        }, root)
+    }, [])
 
     const handleDeleteClickOne = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
@@ -44,8 +47,7 @@ const Profile = () => {
 
     const className = 'Profile'
     return (
-        <div className={className}>
-
+        <div className={className} ref={root} >
             <div className={`${className}_formContainer`}>
                 <h2 className={`${className}_header`} >Profile</h2>
                 <p className={`${className}_text`}>
@@ -72,7 +74,6 @@ const Profile = () => {
                     <button className={`${className}_delete`} onClick={handleDeleteClickOne}>Delete Account</button>
                 }
             </div>
-
         </div>
     )
 }

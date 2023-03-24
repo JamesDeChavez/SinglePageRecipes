@@ -1,14 +1,24 @@
-import { useContext } from "react"
+import gsap from "gsap"
+import { useContext, useLayoutEffect } from "react"
 import { CreateRecipeRenderContext } from "../../branches/CreateRecipe"
 import { Video } from "../../utils/interfaces"
 import './styles.css'
 
 interface Props {
-    video: Video
+    video: Video,
+    root: React.MutableRefObject<null>,
+    searchResults: Video[]
 }
 
-const VideoSearchResult: React.FC<Props> = ({ video }) => {
+const VideoSearchResult: React.FC<Props> = ({ video, root, searchResults }) => {
     const { setVideoSelected } = useContext(CreateRecipeRenderContext)
+
+    useLayoutEffect(() => {
+        const gsapContext = gsap.context(() => {
+            gsap.fromTo(`.${className}`, { x: 1000 }, { duration: 0.5, x: 0 })
+            return () => gsapContext.revert()
+        }, root)
+    }, [searchResults, root])
 
     const handleVideoClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault()

@@ -1,7 +1,16 @@
 .VideoSearchResult {
     position: relative;
-    border: solid 1px #FFFFFF30;
+    border: solid 1px #FFFFFF;
     padding-bottom: 2rem;
+}
+
+.VideoSearchResult:hover {
+    cursor: pointer;
+    border: solid 1px #9f5922;
+}
+
+.VideoSearchResult:hover > div > p {
+    color: #9f5922;
 }
 
 .VideoSearchResult_textOverlay {
@@ -22,4 +31,12 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 850px) {
+    
+.VideoSearchResult_text {
+    font-size: 1rem;
+}
+
 }

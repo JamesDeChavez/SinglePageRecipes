@@ -1,6 +1,9 @@
-import classNames from 'classnames'
 import { useContext } from 'react'
+import classNames from 'classnames'
 import { AuthRenderContext } from '../../branches/Auth'
+import { ReactComponent as BookSVG } from '../../assets/book-solid.svg'
+import { ReactComponent as PlusSVG } from '../../assets/square-plus-solid.svg'
+import { ReactComponent as UserSVG } from '../../assets/user-solid.svg'
 import './styles.css'
 
 const AuthFooter = () => {
@@ -13,13 +16,13 @@ const AuthFooter = () => {
 
     const className = 'AuthFooter'
     return (
-        <div className={className}>
+        <div className={className} >
             <button className={classNames(
                 `${className}_button`,
                 {[`${className}_active`]: render === RENDERS[0]}
                 )} onClick={(e) => navButtonClick(e, 0)}
             >
-                <div>[ ]</div>
+                <BookSVG className={`${className}_svgIcon`} />
                 <p>Recipe Book</p>
             </button>
             <button className={classNames(
@@ -27,7 +30,7 @@ const AuthFooter = () => {
                 {[`${className}_active`]: render === RENDERS[1]}
                 )} onClick={(e) => navButtonClick(e, 1)}
             >
-                <div>[ ]</div>
+                <PlusSVG className={`${className}_svgIcon`} />
                 <p>New Recipe</p>
             </button>
             <button className={classNames(
@@ -35,7 +38,7 @@ const AuthFooter = () => {
                 {[`${className}_active`]: render === RENDERS[2]}
                 )} onClick={(e) => navButtonClick(e, 2)}
             >
-                <div>[ ]</div>
+                <UserSVG className={`${className}_svgIcon`} />
                 <p>Profile</p>
             </button>
         </div>

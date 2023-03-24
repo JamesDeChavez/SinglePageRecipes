@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client"
 import React, { useState, useContext } from "react"
-import { client } from "../.."
+import { client } from "../../index"
 import { UserLoggedInContext } from "../../App"
 import { AuthRenderContext } from "../../branches/Auth"
 import { CreateRecipeRenderContext } from "../../branches/CreateRecipe"
@@ -128,12 +128,18 @@ const CreateRecipeForm = () => {
     }} >
         <div className={className}>
             <CreateRecipeNavbar handleCreateRecipe={handleCreateRecipe} />
-            <div className={`${className}_main`}>
+            <div className={`${className}_midSection`}>
                 <CreateRecipeVideoSection title={title} setTitle={setTitle} />
-                {{
-                    [SECTIONS[0]]: <CreateRecipeInstructions />,
-                    [SECTIONS[1]]: <CreateRecipeIngredients />
-                }[sectionVisible]}                
+                <div className={`${className}_main`}>
+                    {{
+                        [SECTIONS[0]]: <CreateRecipeInstructions />,
+                        [SECTIONS[1]]: <CreateRecipeIngredients />
+                    }[sectionVisible]}
+                </div>
+                <div className={`${className}_mainWide`}>
+                    <CreateRecipeInstructions />
+                    <CreateRecipeIngredients />
+                </div>                   
             </div>
             {addStepActive ?
                 <AddStepFooter />
@@ -141,7 +147,6 @@ const CreateRecipeForm = () => {
                 addIngredientActive ?
                     <AddItemFooter />
                 :
-
                     <RecipeFooter sectionVisible={sectionVisible} setSectionVisible={ setSectionVisible } /> 
             }
         </div>

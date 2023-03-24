@@ -18,4 +18,12 @@
 
 .AddItemFooter_button:hover {
     cursor: pointer;
+    border: solid 1px #FFFFFF;
 }
+
+@media screen and (min-width: 850px) {
+    .AddItemFooter{
+        display: none;
+    }
+}
+

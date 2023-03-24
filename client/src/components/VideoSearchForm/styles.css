@@ -1,7 +1,14 @@
 .VideoSearchForm {
     display: flex;
-    justify-content: center;
+    width: fit-content;
+    justify-self: center;
     gap: 0.5rem;
+    margin-top: 0.5rem;
+    z-index: 2;
+    border: solid 1px #FFFFFF30;
+    background-color: #070b0b90;
+    backdrop-filter: blur(10px);
+    padding: 0.5rem;
 }
 
 .VideoSearchForm_input {
@@ -21,4 +28,6 @@
 
 .VideoSearchForm_submit:hover {
     cursor: pointer;
+    border: solid 1px #FFFFFF;
 }
+

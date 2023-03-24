@@ -1,8 +1,9 @@
 import { useLazyQuery } from '@apollo/client'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useLayoutEffect, useRef } from 'react'
 import { UserLoggedInContext } from '../../App'
 import { LOGIN } from '../../graphql/queries'
 import backgroundImage from '../../assets/background.jpg'
+import gsap from 'gsap'
 import './styles.css'
 
 const LoginForm = () => {
@@ -11,6 +12,7 @@ const LoginForm = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState<string | undefined>()
+    const root = useRef(null)
     
     useEffect(() => {
         if (error) setErrorMessage(error.message)
@@ -19,6 +21,13 @@ const LoginForm = () => {
     useEffect(() => {
         setErrorMessage(undefined)
     }, [username, password])
+
+    useLayoutEffect(() => {
+        const gsapContext = gsap.context(() => {
+            gsap.fromTo(`.${className}_form`,{x: 1000 }, { duration: 0.5, x: 0 })
+            return () => gsapContext.revert()
+        }, root)
+    }, [])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -40,9 +49,9 @@ const LoginForm = () => {
 
     const className = 'LoginForm'
     return (
-        <div className={className}>
+        <div className={className} ref={root} >
             <div className={`${className}_imageContainer`}>
-                <img className={`${className}_image`} src={backgroundImage} alt="background image" />
+                <img className={`${className}_image`} src={backgroundImage} alt="background" />
             </div>
             <form className={`${className}_form`} onSubmit={handleSubmit}>
                 <h1 className={`${className}_header`}>Log In</h1>

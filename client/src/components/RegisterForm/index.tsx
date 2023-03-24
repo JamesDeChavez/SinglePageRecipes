@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import { useMutation } from '@apollo/client'
 import { useContext } from 'react'
 import { UserLoggedInContext } from '../../App'
 import { CREATE_USER } from '../../graphql/mutations'
 import backgroundImage from '../../assets/background.jpg'
 import './styles.css'
+import gsap from 'gsap'
 
 const RegisterForm = () => {
     const { setUserLoggedIn, setUserId } = useContext(UserLoggedInContext)
@@ -14,6 +15,7 @@ const RegisterForm = () => {
     const [password, setPassword] = useState('')
     const [repeatPW, setRepeatPW] = useState('')
     const [errorMessage, setErrorMessage] = useState<string | undefined>()
+    const root = useRef(null)
 
     useEffect(() => {
         if (error) setErrorMessage(error.message)
@@ -22,6 +24,13 @@ const RegisterForm = () => {
     useEffect(() => {
         setErrorMessage(undefined)
     }, [username, email, password, repeatPW])
+
+    useLayoutEffect(() => {
+        const gsapContext = gsap.context(() => {
+            gsap.fromTo(`.${className}_form`,{x: 1000 }, { duration: 0.5, x: 0 })
+            return () => gsapContext.revert()
+        }, root)
+    }, [])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -47,9 +56,9 @@ const RegisterForm = () => {
 
     const className = 'RegisterForm'
     return (
-        <div className={className}>
+        <div className={className} ref={root}>
             <div className={`${className}_imageContainer`}>
-                <img className={`${className}_image`} src={backgroundImage} alt="background image" />
+                <img className={`${className}_image`} src={backgroundImage} alt="background" />
             </div>
             <form className={`${className}_form`} onSubmit={handleSubmit}>
                 <h1 className={`${className}_header`}>Register</h1>

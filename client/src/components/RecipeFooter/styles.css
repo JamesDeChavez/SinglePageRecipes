@@ -3,6 +3,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     align-items: center;
+    z-index: 2;
 }
 
 .RecipeFooter_button {
@@ -18,6 +19,7 @@
 
 .RecipeFooter_active {
     border: solid 1px #FFFFFF;
+    text-decoration: underline;
 }
 
 @media screen and (min-width: 850px) {

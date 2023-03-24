@@ -3,8 +3,8 @@ import InstructionsSection from '../InstructionsSection'
 import RecipeFooter from '../RecipeFooter'
 import VideoSection from '../VideoSection'
 import IngredientsSection from '../IngredientsSection'
-import './styles.css'
 import cache from '../../utils/cache'
+import './styles.css'
 
 const SampleRecipe = () => {
     const RENDERS = ['INSTRUCTIONS', 'INGREDIENTS']

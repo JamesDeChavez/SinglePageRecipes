@@ -1,4 +1,5 @@
-import { useContext, useRef, useEffect } from 'react'
+import gsap from 'gsap'
+import { useContext, useRef, useEffect, useLayoutEffect } from 'react'
 import { CreateRecipeFormContext } from '../CreateRecipeForm'
 import './styles.css'
 
@@ -9,13 +10,26 @@ const AddStepForm = () => {
             description, setDescription,
             ingredientName, setIngredientName,
             ingredientAmount, setIngredientAmount,
-            recipeIngredients, setRecipeIngredients 
+            recipeIngredients, setRecipeIngredients,
+            setAddStepActive, setInstructions
     } = useContext(CreateRecipeFormContext)
-
     const inputRef = useRef<HTMLInputElement | null>(null)
+    const root = useRef(null)
+    
     useEffect(() => {
         inputRef.current && inputRef.current.focus()
     }, [inputRef])
+
+    useLayoutEffect(() => {
+        const gsapContext = gsap.context(() => {
+            gsap.fromTo(`.${className}_actionInput`, { x: 1000 }, { duration: 0.5, x: 0})
+            gsap.fromTo(`.${className}_text`, { x: 1000 }, { duration: 0.5, x: 0})
+            gsap.fromTo(`.${className}_ingredientInputContainer`, { x: 1000 }, { duration: 0.5, x: 0})
+            gsap.fromTo(`.${className}_textAreaContainer`, { x: 1000 }, { duration: 0.5, x: 0})
+            gsap.fromTo(`.${className}_timeInput`, { x: 1000 }, { duration: 0.5, x: 0})
+            return () => gsapContext.revert()
+        }, root)
+    }, [])
 
     const handleAddIngredient = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
@@ -32,9 +46,42 @@ const AddStepForm = () => {
         else setIngredientName(e.target.value)        
     }
 
+    const handleAddClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        if (!action || !items.length || !time || !description || !recipeIngredients.length ) return
+        const newStep = {
+            summary: { action: action, items: items },
+            time: time,
+            description: description,
+            ingredients: recipeIngredients
+        }
+        setInstructions(prevState => [...prevState, newStep])
+        setAction('')
+        setItems([])
+        setTime('')
+        setDescription('')
+        setRecipeIngredients([])
+        setIngredientName('')
+        setIngredientAmount('')
+        setAddStepActive(false)
+    }
+    
+
+    const handleCancelClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        setAction('')
+        setItems([])
+        setTime('')
+        setDescription('')
+        setRecipeIngredients([])
+        setIngredientName('')
+        setIngredientAmount('')
+        setAddStepActive(false)
+    }
+
     const className = 'AddStepForm'
     return (
-        <form className={className}>
+        <form className={className} ref={root} >
             <h2 className={`${className}_header`}>Create Step</h2>
             <div className={`${className}_summaryContainer`}>
                 <input 
@@ -71,7 +118,10 @@ const AddStepForm = () => {
                     <p className={`${className}_text`}>[No Ingredients Added]</p>
                 }
             </div>
-
+            <div className={`${className}_buttonsContainer`}>
+                <button className={`${className}_button`} onClick={handleAddClick}>Add</button>
+                <button className={`${className}_button`} onClick={handleCancelClick}>Cancel</button>
+            </div>
         </form>
     )
 }

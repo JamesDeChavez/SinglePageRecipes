@@ -18,10 +18,12 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
     const [numberStepsDisplayed, setNumberStepsDisplayed] = useState(handleAddStepClick ? 4 : 5)
     const [gridTemplateRows, setGridTemplateRows] = useState(handleAddStepClick ? 'repeat(4, 1fr)' : 'repeat(5, 1fr)')
     const [gridTemplateRowsTwo, setGridTemplateRowsTwo] = useState(handleAddStepClick ? 'auto 5fr 1fr auto' : 'auto 1fr auto')
+    const buttonRef = useRef<HTMLButtonElement | null>(null)
+    const root = useRef(null)
 
     useEffect(() => {
         if (!windowSize) return
-        let numberRows = windowSize[0] < 850 ? Math.floor((windowSize[1] - 100) / 60) : Math.floor((((windowSize[1] - 30) / 2) - 25) / 60)
+        let numberRows = windowSize[0] < 850 ? Math.floor(((windowSize[1] - windowSize[0] / 1.8) - 135) / 60) : Math.floor((((windowSize[1] - 30) / 2) - 25) / 60)
         if (windowSize[0] < 1250) {
             setEnd(handleAddStepClick ? numberRows - 1 : numberRows)
             setNumberStepsDisplayed(handleAddStepClick ? numberRows - 1 : numberRows)
@@ -32,9 +34,8 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
         setGridTemplateRows(handleAddStepClick ? `repeat(${numberRows - 1}, 1fr)` : `repeat(${numberRows}, 1fr)`)
         setGridTemplateRowsTwo(handleAddStepClick ? `auto ${numberRows - 1}fr 1fr auto` : `auto 1fr auto`)
 
-    }, [windowSize])
+    }, [windowSize, handleAddStepClick])
 
-    const buttonRef = useRef<HTMLButtonElement | null>(null)
     useEffect(() => {
         buttonRef.current && buttonRef.current.focus()
     }, [buttonRef])
@@ -61,11 +62,11 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
 
     const className = 'InstructionsTable'
     return (
-        <div className={className} style={{ gridTemplateRows: gridTemplateRowsTwo }}>
+        <div className={className} style={{ gridTemplateRows: gridTemplateRowsTwo }} ref={root} >
             <h2 className={`${className}_header`}>Instructions (Click step for more details)</h2>    
             <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }}>
                 {instructions && instructions.slice(start, end).map((step, i) => {
-                    return <InstructionItem setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} step={step} index={i + start} key={i} />
+                    return <InstructionItem setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} step={step} index={i + start} key={i} root={root} start={start} />
                 })}
             </div>
         

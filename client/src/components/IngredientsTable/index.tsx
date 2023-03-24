@@ -16,17 +16,18 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient })
     const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(6)
     const [gridTemplateRows, setGridTemplateRows] = useState(`repeat(6, 1fr)`)
     const [gridTemplateRowsTwo, setGridTemplateRowsTwo] = useState(`auto 6fr 1fr auto`)
+    const root = useRef(null)
+    const buttonRef = useRef<HTMLButtonElement | null>(null)
 
     useEffect(() => {
         if (!windowSize) return
-        const numberRows = Math.floor((windowSize[1] - (windowSize[0] / 1.8) - 135) / 50)
+        const numberRows = windowSize[0] < 850 ? Math.floor((windowSize[1] - (windowSize[0] / 1.8) - 135) / 50) : Math.floor((((windowSize[1] - 30) / 2) - 25) / 50)
         setEnd(numberRows)
         setNumberItemsDisplayed(numberRows)
         setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
         setGridTemplateRowsTwo(`auto ${numberRows}fr 1fr auto`)
     }, [windowSize])
     
-    const buttonRef = useRef<HTMLButtonElement | null>(null)
     useEffect(() => {
         buttonRef.current && buttonRef.current.focus()
     }, [buttonRef])
@@ -55,11 +56,11 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient })
 
     const className = 'IngredientsTable'
     return (
-        <div className={className} style={{ gridTemplateRows: gridTemplateRowsTwo}}>
+        <div className={className} style={{ gridTemplateRows: gridTemplateRowsTwo}} >
             <h2 className={`${className}_header`}>Ingredients:</h2>
-            <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }} >
+            <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }} ref={root} >
                 {ingredients && ingredients.slice(start, end).map((item, i) => {
-                    return <IngredientItem item={item} key={i} />
+                    return <IngredientItem item={item} key={i} root={root} start={start} />
                 })}
             </div>
 

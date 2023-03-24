@@ -17,7 +17,11 @@
     padding: 0.1rem 0.2rem;
 }
 
-.SampleNavbar_return,
-.SampleNavbar_register {
+.SampleNavbar_return:hover,
+.SampleNavbar_register:hover {
     cursor: pointer;
+}
+
+.SampleNavbar_register:hover {
+    border: solid 1px #FFFFFF;
 }

@@ -3,10 +3,54 @@
     height: 100svh;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    overflow: hidden;
     gap: 0.5rem;
 }
 
-.CreateRecipeForm_main {
+.CreateRecipeForm_midSection {
     display: grid;
     grid-template-rows: auto 1fr;
+    gap: 0.5rem;
+}
+
+.CreateRecipeForm_mainWide {
+    display: none;
+}
+
+@media screen and (min-width: 850px) {
+
+    .CreateRecipeForm_midSection {
+        grid-template-columns: 1fr 400px;
+        grid-template-rows: auto 1fr;
+        padding: 0.5rem;
+    }
+    
+    .CreateRecipeForm_main {
+        display: none;
+    }
+    
+    .CreateRecipeForm_mainWide {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 0.5rem;
+        grid-row: 1/3;
+        grid-column: 2/3;
+    }
+    
+}
+    
+@media screen and (min-width: 1250px) {
+    
+    .CreateRecipeForm_midSection {
+        grid-template-columns: 1fr 800px;
+    }
+    
+    .CreateRecipeForm_mainWide {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 0.5rem;
+        grid-row: 1/3;
+        grid-column: 2/3;
+    }
+    
 }

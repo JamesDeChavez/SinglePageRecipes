@@ -4,11 +4,13 @@
     gap: 0.5rem;
     width: 100%;
     padding: 0.5rem;
+    overflow: hidden;
 }
 
 .AddStepForm_header {
     font-size: 1rem;
     height: 1rem;
+    font-weight: 400;
 }
 
 .AddStepForm_summaryContainer {
@@ -80,4 +82,35 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+}
+
+.AddStepForm_buttonsContainer {
+    display: none;
+}
+
+.AddStepForm_button {
+    font-size: 1rem;
+    border: solid 1px #FFFFFF30;
+    background-color: #9f5922;
+    color: #FFFFFF;
+    width: 100%;
+    padding: 0.5rem 1rem;
+}
+
+.AddStepForm_button:hover {
+    cursor: pointer;
+    border: solid 1px #FFFFFF;
+}
+
+@media screen and (min-width: 850px) {
+    .AddStepForm {
+        display: grid;
+        grid-template-rows: repeat(5, auto) 1fr auto;
+    }
+
+    .AddStepForm_buttonsContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
 }

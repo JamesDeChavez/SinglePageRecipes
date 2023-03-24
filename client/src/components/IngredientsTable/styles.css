@@ -17,12 +17,13 @@
 .IngredientsTable_button {
     border: solid 1px #FFFFFF30;
     color: #FFFFFF;
-    background-color: #112728;
+    background-color: #9f5922;
     padding: 0 0.2rem;
 }
 
 .IngredientsTable_button:hover {
     cursor: pointer;
+    border: solid 1px #FFFFFF;
 }
 
 .IngredientsTable_addButton {
@@ -43,4 +44,23 @@
     align-items: center;
     border-top: solid 1px #000000;
 }
+
+@media screen and (min-width: 850px) {
+    
+.IngredientsTable_button {
+    font-size: 1rem;
+}
+
+}
+
+@media screen and (min-width: 1250px) { 
+
+.IngredientsTable_table {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: column;
+}
+
+
+}
+
 

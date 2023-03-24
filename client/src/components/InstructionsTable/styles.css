@@ -22,6 +22,11 @@
     width: 100%;
 }
 
+.InstructionsTable_addStepButton:hover {
+    cursor: pointer;
+    border: solid 1px #FFFFFF;
+}
+
 .InstructionsTable_pageButtonsContainer {
     display: flex;
     gap: 0.5rem;
@@ -30,8 +35,13 @@
 .InstructionsTable_pageButton {
     border: solid 1px #FFFFFF30;
     color: #FFFFFF;
-    background-color: #112728;
+    background-color: #9f5922;
     padding: 0 0.2rem;
+}
+
+.InstructionsTable_pageButton:hover {
+    cursor: pointer;
+    border: solid 1px #FFFFFF;
 }
 
 .InstructionsTable_resultsText {
@@ -39,10 +49,14 @@
     color:#FFFFFF;
 }
 
-@media screen and (min-width: 850px) { 
-    .InstructionsTable {
-        padding: 0;
-    }
+
+@media screen and (min-width: 850px) {
+ 
+.InstructionsTable_pageButton,
+.InstructionsTable_resultsText {
+    font-size: 1rem;
+}
+    
 }
 
 @media screen and (min-width: 1250px) { 

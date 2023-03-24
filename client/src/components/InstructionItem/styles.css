@@ -12,6 +12,7 @@
 
 .InstructionItem:hover {
     cursor: pointer;
+    border: solid 1px #9f5922;
 }
 
 .InstructionItem_number,

@@ -4,6 +4,8 @@
     align-items: center;
     border-bottom: solid 1px #FFFFFF30;
     padding: 0.5rem;
+    z-index: 2;
+    background-color: #070b0b;
 }
 
 .Navbar_logo {
@@ -12,6 +14,7 @@
 
 .Navbar_logo:hover {
     cursor: pointer;
+    opacity: 0.3;
 }
 
 .Navbar_image {
@@ -35,4 +38,17 @@
 
 .Navbar_button:hover {
     cursor: pointer;
+    border: solid 1px #FFFFFF;
+}
+
+@media screen and (min-width: 850px) {
+
+.Navbar_image {
+    width: 10rem;
+}
+
+.Navbar_button {
+font-size: 1rem
+}
+
 }
