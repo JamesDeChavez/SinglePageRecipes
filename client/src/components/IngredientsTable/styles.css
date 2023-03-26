@@ -14,6 +14,15 @@
     row-gap: .5rem;
 }
 
+.IngredientsTable_itemContainer {
+    height: 100%;
+}
+
+.IngredientsTable_itemContainer:hover {
+    cursor: pointer;
+    border: solid 1px #FFFFFF;
+}
+
 .IngredientsTable_button {
     border: solid 1px #FFFFFF30;
     color: #FFFFFF;
@@ -42,12 +51,19 @@
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    border-top: solid 1px #000000;
 }
 
 @media screen and (min-width: 850px) {
     
 .IngredientsTable_button {
+    font-size: 1rem;
+}
+
+.IngredientsTable_addButton {
+    display: none !important;
+}
+
+.IngredientsTable_resultsText {
     font-size: 1rem;
 }
 

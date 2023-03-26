@@ -99,6 +99,15 @@ const resolvers = {
                 return error
             }
         },
+        deleteRecipe: async (_: any, args: any) => {
+            try {
+                const updatedUser = await controllers.User.updateForNewRecipe(args)
+                return updatedUser
+            } catch (error) {
+                console.log(error)
+                return error
+            }
+        },
         deleteUser: async (_: any, args: any) => {
             try {
                 const deletedUser = await controllers.User.delete(args)

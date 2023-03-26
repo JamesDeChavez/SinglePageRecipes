@@ -39,6 +39,11 @@
     border: solid 1px #FFFFFF30;
 }
 
+.Profile_delete:hover {
+    cursor: pointer;
+    border: solid 1px #FFFFFF;
+}
+
 .Profile_confirmText {
     text-align: center;
 }

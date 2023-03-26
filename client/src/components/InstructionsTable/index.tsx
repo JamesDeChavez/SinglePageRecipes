@@ -24,15 +24,23 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
     useEffect(() => {
         if (!windowSize) return
         let numberRows = windowSize[0] < 850 ? Math.floor(((windowSize[1] - windowSize[0] / 1.8) - 135) / 60) : Math.floor((((windowSize[1] - 30) / 2) - 25) / 60)
-        if (windowSize[0] < 1250) {
+        if (windowSize[0] < 850) {
             setEnd(handleAddStepClick ? numberRows - 1 : numberRows)
             setNumberStepsDisplayed(handleAddStepClick ? numberRows - 1 : numberRows)
-        } else {
-            setEnd(handleAddStepClick ? (numberRows - 1) * 2 : numberRows * 2)
-            setNumberStepsDisplayed(handleAddStepClick ? (numberRows - 1) * 2 : numberRows * 2)
+            setGridTemplateRows(handleAddStepClick ? `repeat(${numberRows - 1}, 1fr)` : `repeat(${numberRows}, 1fr)`)
+            setGridTemplateRowsTwo(handleAddStepClick ? `auto ${numberRows - 1}fr 1fr auto` : `auto 1fr auto`)
+        } 
+        else if (windowSize[0] < 1250) {
+            setEnd(numberRows)
+            setNumberStepsDisplayed(numberRows)
+            setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
+            setGridTemplateRowsTwo(`auto 1fr auto`)
         }
-        setGridTemplateRows(handleAddStepClick ? `repeat(${numberRows - 1}, 1fr)` : `repeat(${numberRows}, 1fr)`)
-        setGridTemplateRowsTwo(handleAddStepClick ? `auto ${numberRows - 1}fr 1fr auto` : `auto 1fr auto`)
+        else {
+            setEnd(numberRows * 2)
+            setNumberStepsDisplayed(numberRows * 2)
+            setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
+            setGridTemplateRowsTwo(`auto 1fr auto`)        }
 
     }, [windowSize, handleAddStepClick])
 

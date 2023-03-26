@@ -1,0 +1,63 @@
+.CreateRecipeActions {
+    display: none;
+    text-align: center;
+    border: solid 1px #FFFFFF30;
+    background-color: #112728;
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+}
+
+.CreateRecipeActions_textContainer {
+    display: grid;
+    gap: 1rem;
+}
+
+.CreateRecipeActions_header {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.CreateRecipeActions_addButton,
+.CreateRecipeActions_createButton {
+    font-size: 1rem;
+    border: solid 1px #FFFFFF30;
+    background-color: #9f5922;
+    color: #FFFFFF;
+    width: 100%;
+    padding: 0.5rem 1rem;
+}
+
+.CreateRecipeActions_addButton:hover,
+.CreateRecipeActions_createButton:hover {
+    cursor: pointer;
+    border: solid 1px #FFFFFF;
+}
+
+.CreateRecipeActions_buttonsContainer {
+    display: grid;
+    gap: 1rem;
+}
+
+.CreateRecipeActions_addButtonsContainer {
+    display: grid;
+    gap: 0.5rem;
+}
+
+
+@media screen and (min-width: 850px) {
+    
+.CreateRecipeActions {
+    display: grid;
+    gap: 1rem;
+    place-content: center;
+}
+
+}
+
+@media screen and (min-width: 1650px) {
+ 
+.CreateRecipeActions_addButtonsContainer {
+    grid-template-columns: 1fr 1fr;
+}
+
+}

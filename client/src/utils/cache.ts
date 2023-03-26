@@ -188,7 +188,6 @@ const cache = {
                     { name: 'Eggs', amount: '4 units' },
                     { name: 'Flour', amount: '1 cup' },
                     { name: 'Garlic Powder', amount: '1/2 tsp' },
-                    { name: 'Oregano', amount: '1/2 tsp' },
                     { name: 'Panko Bread Crumbs', amount: '2 cups' },
                     { name: 'Parmesan Cheese', amount: '1 cup' },
                     { name: 'Peanut Oil', amount: '4 cups' },

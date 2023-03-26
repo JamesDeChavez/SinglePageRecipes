@@ -1,31 +1,43 @@
 import { useState, useRef, useEffect, useContext } from 'react'
 import { UserLoggedInContext } from '../../App'
 import { Ingredient } from '../../utils/interfaces'
+import { CreateRecipeFormContext } from '../CreateRecipeForm'
 import IngredientItem from '../IngredientItem'
 import './styles.css'
 
 interface Props {
     ingredients: Ingredient[],
-    handleAddIngredient?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+    handleAddIngredient?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+    setEditIngredientActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient }) => { 
-    const { windowSize } = useContext(UserLoggedInContext)   
+const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient, setEditIngredientActive }) => { 
+    const { windowSize } = useContext(UserLoggedInContext)
+    const { setIngName, setIngAmount, setSelectedItem } = useContext(CreateRecipeFormContext)  
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(6)
     const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(6)
     const [gridTemplateRows, setGridTemplateRows] = useState(`repeat(6, 1fr)`)
     const [gridTemplateRowsTwo, setGridTemplateRowsTwo] = useState(`auto 6fr 1fr auto`)
-    const root = useRef(null)
     const buttonRef = useRef<HTMLButtonElement | null>(null)
+    const root = useRef(null)
 
     useEffect(() => {
         if (!windowSize) return
         const numberRows = windowSize[0] < 850 ? Math.floor((windowSize[1] - (windowSize[0] / 1.8) - 135) / 50) : Math.floor((((windowSize[1] - 30) / 2) - 25) / 50)
-        setEnd(numberRows)
-        setNumberItemsDisplayed(numberRows)
-        setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
-        setGridTemplateRowsTwo(`auto ${numberRows}fr 1fr auto`)
+        
+        if (windowSize[0] < 850) {
+            setEnd(numberRows - 1)
+            setNumberItemsDisplayed(numberRows - 1)
+            setGridTemplateRows(`repeat(${numberRows - 1}, 1fr)`)
+            setGridTemplateRowsTwo(`auto ${numberRows - 1}fr 1fr auto`)
+        }
+        else {
+            setEnd(numberRows)
+            setNumberItemsDisplayed(numberRows)
+            setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
+            setGridTemplateRowsTwo(`auto 1fr auto`)
+        }
     }, [windowSize])
     
     useEffect(() => {
@@ -33,7 +45,6 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient })
     }, [buttonRef])
 
     const handleNextClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault()
         if (end >= ingredients.length) return
 
         const endCheck = end + numberItemsDisplayed >= ingredients.length
@@ -54,13 +65,21 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient })
         setStart(newStart)
     }
 
+    const handleEditClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: Ingredient) => {
+        e.preventDefault()
+        setIngName(item.name)
+        setIngAmount(item.amount)
+        setSelectedItem(item)
+        setEditIngredientActive(true)
+    }
+
     const className = 'IngredientsTable'
     return (
         <div className={className} style={{ gridTemplateRows: gridTemplateRowsTwo}} >
             <h2 className={`${className}_header`}>Ingredients:</h2>
             <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }} ref={root} >
                 {ingredients && ingredients.slice(start, end).map((item, i) => {
-                    return <IngredientItem item={item} key={i} root={root} start={start} />
+                    return <div className={`${className}_itemContainer`} onClick={e => handleEditClick(e, item)}><IngredientItem item={item} key={i} root={root} start={start} /></div>
                 })}
             </div>
 

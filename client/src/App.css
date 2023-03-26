@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body, h1, h2, p {
+body, h1, h2, p, h3 {
     margin: 0;
     font-family: 'Poppins', sans-serif;
 }

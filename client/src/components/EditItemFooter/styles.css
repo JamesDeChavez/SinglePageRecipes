@@ -1,0 +1,29 @@
+.EditItemFooter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+}
+
+.EditItemFooter_button {
+    background-color: #9f5922;
+    color: #FFFFFF;
+    border: solid 1px #FFFFFF30;
+    padding: 1rem 0;
+}
+
+.EditItemFooter_button {
+    border-left: none;
+}
+
+.EditItemFooter_button:hover {
+    cursor: pointer;
+    border: solid 1px #FFFFFF;
+}
+
+@media screen and (min-width: 850px) {
+    .EditItemFooter{
+        display: none;
+    }
+}
+

@@ -56,6 +56,10 @@
 .InstructionsTable_resultsText {
     font-size: 1rem;
 }
+
+.InstructionsTable_addStepButton {
+    display: none !important;
+}
     
 }
 

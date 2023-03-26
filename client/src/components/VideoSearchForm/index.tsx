@@ -14,7 +14,7 @@ const VideoSearchForm: React.FC<Props> = ({ setSearchResults }) => {
     const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
         if (!search) return
         e.preventDefault()
-        const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${search.replaceAll(' ', '%20')}&key=${apiKey}`
+        const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=24&q=${search.replaceAll(' ', '%20')}&key=${apiKey}`
 
         try {
             const res = await fetch(url)

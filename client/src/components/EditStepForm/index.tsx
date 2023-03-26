@@ -3,7 +3,7 @@ import { CreateRecipeFormContext } from '../CreateRecipeForm'
 import gsap from 'gsap'
 import './styles.css'
 
-const AddStepForm = () => {
+const EditStepForm = () => {
     const { action, setAction,
             items, setItems,
             time, setTime,
@@ -45,10 +45,10 @@ const AddStepForm = () => {
         else setIngredientName(e.target.value)        
     }
 
-    const className = 'AddStepForm'
+    const className = 'EditStepForm'
     return (
         <form className={className} ref={root} >
-            <h2 className={`${className}_header`}>Create Step</h2>
+            <h2 className={`${className}_header`}>Edit Step</h2>
             <div className={`${className}_summaryContainer`}>
                 <input 
                     type="text" name="action" id="action" placeholder='Action' value={action} autoComplete='off' maxLength={5} onChange={e => setAction(e.target.value.toUpperCase())} className={`${className}_actionInput`} ref={inputRef}
@@ -88,4 +88,4 @@ const AddStepForm = () => {
     )
 }
 
-export default AddStepForm
+export default EditStepForm

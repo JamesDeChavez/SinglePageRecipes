@@ -3,8 +3,63 @@
     justify-content: space-between;
     padding: 0.3rem;
     padding-bottom: 0;
+    position: relative;
 }
 
-.RecipeNavbar_button {
+.RecipeNavbar_returnButton {
     color: #FFFFFF
 }
+
+.RecipeNavbar_optionButton {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.RecipeNavbar_optionButton:hover {
+    cursor: pointer;
+}
+
+
+.RecipeNavbar_text:hover {
+    text-decoration: underline;
+}
+
+.RecipeNavbar_text,
+.RecipeNavbar_x {
+    color: #FFFFFF;
+}
+
+.RecipeNavbar_triangle {
+    width: 0.6rem;
+    fill: #FFFFFF;
+}
+
+.RecipeNavbar_optionsContainer {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    z-index: 3;
+    overflow: hidden;
+}
+
+.RecipeNavbar_option {
+    color: #FFFFFF;
+    border: solid 1px #FFFFFF30;
+    padding: 1rem 2rem;
+    background-color: #9f5922;
+}
+
+.RecipeNavbar_option:last-child {
+    border-top: none;
+}
+
+.RecipeNavbar_option:hover {
+    cursor: pointer;
+    border: solid 1px #FFFFFF;
+}
+

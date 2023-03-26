@@ -1,5 +1,5 @@
+import React, { useState, useContext, useRef } from "react"
 import { useMutation } from "@apollo/client"
-import React, { useState, useContext } from "react"
 import { client } from "../../index"
 import { UserLoggedInContext } from "../../App"
 import { AuthRenderContext } from "../../branches/Auth"
@@ -14,7 +14,10 @@ import CreateRecipeInstructions from "../CreateRecipeInstructions"
 import CreateRecipeNavbar from "../CreateRecipeNavbar"
 import CreateRecipeVideoSection from "../CreateRecipeVideoSection"
 import RecipeFooter from "../RecipeFooter"
+import CreateRecipeActions from "../CreateRecipeActions"
 import './styles.css'
+import EditStepFooter from "../EditStepFooter"
+import EditItemFooter from "../EditItemFooter"
 
 export const CreateRecipeFormContext = React.createContext<{
     instructions: Instruction[], setInstructions: React.Dispatch<React.SetStateAction<Instruction[]>>,
@@ -22,28 +25,36 @@ export const CreateRecipeFormContext = React.createContext<{
     ingName: string, setIngName: React.Dispatch<React.SetStateAction<string>>,
     ingAmount: string, setIngAmount: React.Dispatch<React.SetStateAction<string>>,
     addStepActive: boolean, setAddStepActive: React.Dispatch<React.SetStateAction<boolean>>,
+    editStepActive: boolean, setEditStepActive: React.Dispatch<React.SetStateAction<boolean>>,
     addIngredientActive: boolean, setAddIngredientActive: React.Dispatch<React.SetStateAction<boolean>>,
+    editIngredientActive: boolean, setEditIngredientActive: React.Dispatch<React.SetStateAction<boolean>>,
     action: string, setAction: React.Dispatch<React.SetStateAction<string>>,
     items: string[], setItems: React.Dispatch<React.SetStateAction<string[]>>,
     time: string, setTime: React.Dispatch<React.SetStateAction<string>>,
     description: string, setDescription: React.Dispatch<React.SetStateAction<string>>,
     ingredientName: string, setIngredientName: React.Dispatch<React.SetStateAction<string>>,
     ingredientAmount: string, setIngredientAmount: React.Dispatch<React.SetStateAction<string>>,
-    recipeIngredients: Ingredient[], setRecipeIngredients: React.Dispatch<React.SetStateAction<Ingredient[]>>
+    recipeIngredients: Ingredient[], setRecipeIngredients: React.Dispatch<React.SetStateAction<Ingredient[]>>,
+    selectedStep: Instruction | undefined, setSelectedStep: React.Dispatch<React.SetStateAction<Instruction | undefined>>,
+    selectedItem: Ingredient | undefined, setSelectedItem: React.Dispatch<React.SetStateAction<Ingredient | undefined>>
 }>({
     instructions: [], setInstructions: () => {},
     ingredients: [], setIngredients: () => {},
     ingName: '', setIngName: () => {},
     ingAmount: '', setIngAmount: () => {},
     addStepActive: false, setAddStepActive: () => {},
+    editStepActive: false, setEditStepActive: () => {},
     addIngredientActive: false, setAddIngredientActive: () => {},
+    editIngredientActive: false, setEditIngredientActive: () => {},
     action: '', setAction: () => {},
     items: [], setItems: () => {},
     time: '', setTime: () => {},
     description: '', setDescription: () => {},
     ingredientName: '', setIngredientName: () => {},
     ingredientAmount: '', setIngredientAmount: () => {},
-    recipeIngredients: [], setRecipeIngredients: () => {}
+    recipeIngredients: [], setRecipeIngredients: () => {},
+    selectedStep: undefined, setSelectedStep: () => {},
+    selectedItem: undefined, setSelectedItem: () => {}
 })
 
 const CreateRecipeForm = () => {
@@ -56,7 +67,9 @@ const CreateRecipeForm = () => {
     const SECTIONS = ['INSTRUCTIONS', 'INGREDIENTS']
     const [sectionVisible, setSectionVisible] = useState(SECTIONS[0])
     const [addStepActive, setAddStepActive] = useState(false)
+    const [editStepActive, setEditStepActive] = useState(false)
     const [addIngredientActive, setAddIngredientActive] = useState(false)
+    const [editIngredientActive, setEditIngredientActive] = useState(false)
     const [title, setTitle] = useState('')
     const [instructions, setInstructions] = useState<Instruction[]>([])
     const [ingredients, setIngredients] = useState<Ingredient[]>([])
@@ -69,6 +82,9 @@ const CreateRecipeForm = () => {
     const [ingredientName, setIngredientName] = useState('')
     const [ingredientAmount, setIngredientAmount] = useState('')
     const [recipeIngredients, setRecipeIngredients] = useState<Ingredient[]>([])
+    const [selectedStep, setSelectedStep] = useState<Instruction>()
+    const [selectedItem, setSelectedItem] = useState<Ingredient>()
+    const root = useRef(null)
 
     const handleCreateRecipe = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
@@ -124,12 +140,13 @@ const CreateRecipeForm = () => {
     const className = 'CreateRecipeForm'
     return (
     <CreateRecipeFormContext.Provider value={{ 
-        ingredients, setIngredients, ingName, setIngName, ingAmount, setIngAmount, instructions, setInstructions, addStepActive, setAddStepActive, addIngredientActive, setAddIngredientActive, action, setAction, items, setItems, time, setTime, description, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, recipeIngredients, setRecipeIngredients
+        ingredients, setIngredients, ingName, setIngName, ingAmount, setIngAmount, instructions, setInstructions, addStepActive, setAddStepActive, editStepActive, setEditStepActive, addIngredientActive, setAddIngredientActive, editIngredientActive, setEditIngredientActive, action, setAction, items, setItems, time, setTime, description, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, recipeIngredients, setRecipeIngredients, selectedStep, setSelectedStep, selectedItem, setSelectedItem
     }} >
-        <div className={className}>
+        <div className={className} ref={root} >
             <CreateRecipeNavbar handleCreateRecipe={handleCreateRecipe} />
             <div className={`${className}_midSection`}>
                 <CreateRecipeVideoSection title={title} setTitle={setTitle} />
+                <CreateRecipeActions handleCreateRecipe={handleCreateRecipe} root={root} />
                 <div className={`${className}_main`}>
                     {{
                         [SECTIONS[0]]: <CreateRecipeInstructions />,
@@ -141,13 +158,16 @@ const CreateRecipeForm = () => {
                     <CreateRecipeIngredients />
                 </div>                   
             </div>
-            {addStepActive ?
+            { addStepActive ?
                 <AddStepFooter />
+            : editStepActive ?
+                <EditStepFooter />
+            : addIngredientActive ?
+                <AddItemFooter />
+            : editIngredientActive ?
+                <EditItemFooter />
             :
-                addIngredientActive ?
-                    <AddItemFooter />
-                :
-                    <RecipeFooter sectionVisible={sectionVisible} setSectionVisible={ setSectionVisible } /> 
+                <RecipeFooter sectionVisible={sectionVisible} setSectionVisible={ setSectionVisible } /> 
             }
         </div>
     </CreateRecipeFormContext.Provider>

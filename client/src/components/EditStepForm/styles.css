@@ -1,4 +1,4 @@
-.AddStepForm {
+.EditStepForm {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -7,32 +7,32 @@
     overflow: hidden;
 }
 
-.AddStepForm_header {
+.EditStepForm_header {
     font-size: 1rem;
     height: 1rem;
     font-weight: 400;
 }
 
-.AddStepForm_summaryContainer {
+.EditStepForm_summaryContainer {
     display: grid;
     grid-template-columns: 1fr 3fr;
     gap: 0.5rem;
     align-items: center;
 }
 
-.AddStepForm_text {
+.EditStepForm_text {
     font-size: 0.9rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.AddStepForm_actionInput,
-.AddStepForm_itemInput,
-.AddStepForm_timeInput,
-.AddStepForm_descriptionInput,
-.AddStepForm_ingredientNameInput,
-.AddStepForm_ingredientAmountInput {
+.EditStepForm_actionInput,
+.EditStepForm_itemInput,
+.EditStepForm_timeInput,
+.EditStepForm_descriptionInput,
+.EditStepForm_ingredientNameInput,
+.EditStepForm_ingredientAmountInput {
     border: solid 1px #FFFFFF30;
     background-color: #112728;
     color: #FFFFFF;
@@ -42,13 +42,13 @@
     display: block;
 }
 
-.AddStepForm_itemContainer {
+.EditStepForm_itemContainer {
     display: grid;
     grid-template-columns: 4fr 1fr;
     gap: 0.5rem;
 }
 
-.AddStepForm_addIngredientButton {
+.EditStepForm_addIngredientButton {
     white-space: nowrap;
     border: solid 1px #FFFFFF30;
     color: #FFFFFF;
@@ -56,39 +56,39 @@
     padding: 0 0.2rem;
 }
 
-.AddStepForm_textAreaContainer {
+.EditStepForm_textAreaContainer {
     position: relative;
 }
 
-.AddStepForm_charLimit {
+.EditStepForm_charLimit {
     position: absolute;
     bottom: 0;
     right: 0;
     font-size: 0.8rem;
 }
 
-.AddStepForm_descriptionInput {
+.EditStepForm_descriptionInput {
     height: 4rem;
     resize: none;
 }
 
-.AddStepForm_ingredientInputContainer {
+.EditStepForm_ingredientInputContainer {
     display: grid;
     gap: 0.5rem;
     grid-template-columns: 5fr 3fr 2fr;
 }
 
-.AddStepForm_ingredientsContainer {
+.EditStepForm_ingredientsContainer {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
 
-.AddStepForm_buttonsContainer {
+.EditStepForm_buttonsContainer {
     display: none;
 }
 
-.AddStepForm_button {
+.EditStepForm_button {
     font-size: 1rem;
     border: solid 1px #FFFFFF30;
     background-color: #9f5922;
@@ -97,7 +97,7 @@
     padding: 0.5rem 1rem;
 }
 
-.AddStepForm_button:hover {
+.EditStepForm_button:hover {
     cursor: pointer;
     border: solid 1px #FFFFFF;
 }

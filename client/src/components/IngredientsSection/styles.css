@@ -70,6 +70,10 @@
     font-size: 1rem;
 }
 
+.IngredientsSection_orderButtonsContainer {
+    display: none;
+}
+
 }
 
 

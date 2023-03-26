@@ -24,19 +24,19 @@ const RecipeBookPage = () => {
     <RecipeBookContext.Provider value={{ recipeSelected, setRecipeSelected }}>
         <div className={className}>
             {recipeSelected ?
-            <div className={`${className}_recipeContainer`}>
-                <RecipeNavbar/>
-                <Recipe recipe={recipeSelected} />
-            </div>
-            :
-            <div className={`${className}_recipeListContainer`}>        
-                <div className={`${className}_imageContainer`}>
-                    <img className={`${className}_image`} src={backgroundImage} alt="background" />
+                <div className={`${className}_recipeContainer`}>
+                    <RecipeNavbar selectedRecipe={recipeSelected} />
+                    <Recipe recipe={recipeSelected} />
                 </div>
-                <Navbar/>
-                <RecipeList/>
-                <AuthFooter/>
-            </div>
+            :
+                <div className={`${className}_recipeListContainer`}>        
+                    <div className={`${className}_imageContainer`}>
+                        <img className={`${className}_image`} src={backgroundImage} alt="background" />
+                    </div>
+                    <Navbar/>
+                    <RecipeList/>
+                    <AuthFooter/>
+                </div>
             }
         </div>
     </RecipeBookContext.Provider>

@@ -1,0 +1,27 @@
+.EditStepFooter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+}
+
+.EditStepFooter_button {
+    background-color: #9f5922;
+    color: #FFFFFF;
+    border: solid 1px #FFFFFF30;
+    padding: 1rem 0;
+}
+
+.EditStepFooter_button:last-child {
+    border-left: none;
+}
+
+.EditStepFooter_button:hover {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 850px) {
+    .EditStepFooter {
+        display: none;
+    }
+}

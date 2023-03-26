@@ -16,3 +16,9 @@
     color: #FFFFFF;
     padding: 0.1rem 0.2rem;
 }
+
+@media screen and (min-width: 850px) {
+    .CreateRecipeNavbar_createButton {
+        display: none;
+    }
+}

@@ -1,16 +1,12 @@
 .RecipeOption {
     position: relative;
-    border: solid 1px #FFFFFF;
+    border: solid 1px #FFFFFF30;
     padding-bottom: 2rem;
 }
 
 .RecipeOption:hover {
     cursor: pointer;
-    border: solid 1px #9f5922;
-}
-
-.RecipeOption:hover > div > p {
-    color: #9f5922;
+    border: solid 1px #FFFFFF;
 }
 
 .RecipeOption_textOverlay {

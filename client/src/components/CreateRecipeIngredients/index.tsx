@@ -1,11 +1,12 @@
 import { useContext } from 'react'
 import AddItemForm from '../AddItemForm'
 import { CreateRecipeFormContext } from '../CreateRecipeForm'
+import EditItemForm from '../EditItemForm'
 import IngredientsTable from '../IngredientsTable'
 import './styles.css'
 
 const CreateRecipeIngredients = () => {
-    const { ingredients, addIngredientActive, setAddIngredientActive } = useContext(CreateRecipeFormContext)
+    const { ingredients, addIngredientActive, setAddIngredientActive, editIngredientActive, setEditIngredientActive } = useContext(CreateRecipeFormContext)
 
     const handleAddIngredient = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
@@ -16,10 +17,12 @@ const CreateRecipeIngredients = () => {
     return (
         <div className={className} >
 
-            {addIngredientActive ?
+            { addIngredientActive ?
                 <AddItemForm />
+            : editIngredientActive ?
+                <EditItemForm />
             :
-                <IngredientsTable ingredients={ingredients} handleAddIngredient={handleAddIngredient} />
+                <IngredientsTable ingredients={ingredients} handleAddIngredient={handleAddIngredient} setEditIngredientActive={setEditIngredientActive} />
             }            
 
         </div>

@@ -76,3 +76,36 @@ export const DELETE_USER = gql`
     }
   }
 `
+
+export const DELETE_RECIPE = gql`
+  mutation DeleteRecipe($userId: String!, $recipes: [RecipeInput]!) {
+    deleteRecipe(userId: $userId, recipes: $recipes) {
+      _id
+      recipes {
+        title
+        video {
+          title
+          thumbnail
+          channel
+          videoId
+        }
+        instructions {
+          summary {
+            action
+            items
+          }
+          time
+          description
+          ingredients {
+            name
+            amount
+          }
+        }
+        ingredients {
+          name
+          amount
+        }
+      }
+    }
+  }
+`

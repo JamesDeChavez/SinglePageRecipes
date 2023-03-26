@@ -1,25 +1,28 @@
-import React, { useRef, useLayoutEffect } from "react"
+import React, { useRef, useLayoutEffect, useContext } from "react"
 import { Instruction } from "../../utils/interfaces"
 import { ReactComponent as StickNoteSVG } from '../../assets/note-sticky-regular.svg'
 import { ReactComponent as ClockSVG } from '../../assets/clock-regular.svg'
 import { ReactComponent as FileLinesSVG } from '../../assets/file-lines-regular.svg'
 import { ReactComponent as CarrotSVG } from '../../assets/carrot-solid.svg'
-import './styles.css'
 import gsap from "gsap"
+import './styles.css'
+import { CreateRecipeFormContext } from "../CreateRecipeForm"
 
 interface Props {
     setDetailsActive: React.Dispatch<React.SetStateAction<boolean>>,
     selectedStep: Instruction | undefined,
     instructions: Instruction[]
-    setInstructions?: React.Dispatch<React.SetStateAction<Instruction[]>>
+    setInstructions?: React.Dispatch<React.SetStateAction<Instruction[]>>,
+    setEditStepActive?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, instructions, setInstructions }) => {
+const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, instructions, setInstructions, setEditStepActive }) => {
+    const { setAction, setItems, setTime, setDescription, setRecipeIngredients } = useContext(CreateRecipeFormContext)
     const root = useRef(null)
 
     useLayoutEffect(() => {
         const gsapContext = gsap.context(() => {
-            gsap.fromTo(`.${className}_topRow`,{x: 1000 }, { duration: 0.5, x: 0 })
+            gsap.fromTo(`.${className}_topRow`,{ x: 1000 }, { duration: 0.5, x: 0 })
             gsap.fromTo(`.${className}_descriptionContainer`,{x: 1000 }, { duration: 0.5, x: 0 })
             gsap.fromTo(`.${className}_ingredientsContainer`,{x: 1000 }, { duration: 0.5, x: 0 })
             return () => gsapContext.revert()
@@ -29,6 +32,17 @@ const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, i
     const handleReturnToTableClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         setDetailsActive(false)
+    }
+
+    const handleEditClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        if (!setInstructions || !selectedStep || !setEditStepActive) return
+        setAction(selectedStep.summary.action)
+        setItems(selectedStep.summary.items)
+        setDescription(selectedStep.description)
+        setTime(selectedStep.time)
+        setRecipeIngredients(selectedStep.ingredients)
+        setEditStepActive(true)
     }
 
     const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -81,7 +95,10 @@ const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, i
                 <button className={`${className}_pageButton`} onClick={handleReturnToTableClick}>
                     {`< `}<span style={{textDecoration: 'underline'}}>Return to table</span>
                 </button>
-                <button className={`${className}_deleteButton`} onClick={handleDeleteClick} style={{ display: setInstructions ? 'block' : 'none'}}>X Delete Step</button>
+                <div className={`${className}_editDeleteContainer`} style={{ display: setInstructions ? 'flex' : 'none'}}>
+                    <button className={`${className}_editButton`} onClick={handleEditClick} >Edit Step</button>
+                    <button className={`${className}_deleteButton`} onClick={handleDeleteClick} >Delete Step</button>
+                </div>
             </div>
         </div>
     )

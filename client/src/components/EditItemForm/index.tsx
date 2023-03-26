@@ -3,7 +3,7 @@ import { CreateRecipeFormContext } from '../CreateRecipeForm'
 import gsap from 'gsap'
 import './styles.css'
 
-const AddItemForm = () => {
+const EditItemForm = () => {
     const { 
         ingName, setIngName, 
         ingAmount, setIngAmount
@@ -28,14 +28,14 @@ const AddItemForm = () => {
         else if (ingName.charAt(ingName.length - 1) === ' ' && e.target.value.length >= ingName.length) setIngName(e.target.value.substring(0, e.target.value.length - 1).concat(e.target.value.charAt(e.target.value.length - 1).toUpperCase()))
         else setIngName(e.target.value)        
     }
-    const className = 'AddItemForm'
+    const className = 'EditItemForm'
     return (
         <form className={className} ref={root} >
-            <h2 className={`${className}_header`}>Add Ingredient</h2>
+            <h2 className={`${className}_header`}>Edit Ingredient</h2>
             <input type="text" name='ingName' id='ingName' placeholder='Ingredient Name' value={ingName} autoComplete='off' maxLength={25} onChange={handleIngNameChange} className={`${className}_nameInput`} ref={inputRef} />
             <input type="text" name='ingAmount' id='ingAmount' placeholder='Amount' value={ingAmount} autoComplete='off' maxLength={9} onChange={e => setIngAmount(e.target.value)} className={`${className}_amountInput`} />
         </form>
     )
 }
 
-export default AddItemForm
+export default EditItemForm

@@ -1,15 +1,14 @@
 import { useContext, useState } from 'react'
-import { Instruction } from '../../utils/interfaces'
 import AddStepForm from '../AddStepForm'
 import { CreateRecipeFormContext } from '../CreateRecipeForm'
+import EditStepForm from '../EditStepForm'
 import InstructionDetails from '../InstructionDetails'
 import InstructionsTable from '../InstructionsTable'
 import './styles.css'
 
 const CreateRecipeInstructions = () => {
-    const { instructions, setInstructions, addStepActive, setAddStepActive } = useContext(CreateRecipeFormContext)
+    const { instructions, setInstructions, addStepActive, setAddStepActive, editStepActive, setEditStepActive, selectedStep, setSelectedStep } = useContext(CreateRecipeFormContext)
     const [detailsActive, setDetailsActive] = useState(false)
-    const [selectedStep, setSelectedStep] = useState<Instruction>()
 
     const handleAddStepClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
@@ -22,10 +21,13 @@ const CreateRecipeInstructions = () => {
             {addStepActive ?
                 <AddStepForm/>
             :
-                detailsActive ?
-                    <InstructionDetails setDetailsActive={setDetailsActive} selectedStep={selectedStep} instructions={instructions} setInstructions={setInstructions} />
+            detailsActive ? 
+                editStepActive ?
+                    <EditStepForm />
                 :
-                    <InstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} handleAddStepClick={handleAddStepClick}  />
+                    <InstructionDetails setDetailsActive={setDetailsActive} selectedStep={selectedStep} instructions={instructions} setInstructions={setInstructions} setEditStepActive={setEditStepActive} />
+            :
+                <InstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} handleAddStepClick={handleAddStepClick}  />
             }
         </div>
     )

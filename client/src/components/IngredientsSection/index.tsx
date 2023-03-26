@@ -7,16 +7,18 @@ import './styles.css'
 const associatesTag = 'jamesrecipeap-20'
 
 interface Props {
-    ingredients: Ingredient[]
+    ingredients: Ingredient[],
+    orderActive: boolean, 
+    setOrderActive: React.Dispatch<React.SetStateAction<boolean>>,
+    shoppingList: Ingredient[],
+    setShoppingList: React.Dispatch<React.SetStateAction<Ingredient[]>>
 }
 
-const IngredientsSection: React.FC<Props> = ({ ingredients }) => {
+const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrderActive, shoppingList, setShoppingList }) => {
     const { windowSize } = useContext(UserLoggedInContext)
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(Math.min(ingredients.length, 6))
     const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(Math.min(ingredients.length, 6))
-    const [orderActive, setOrderActive] = useState(false)
-    const [shoppingList, setShoppingList] = useState<Ingredient[]>([])
     const [gridTemplateRows, setGridTemplateRows] = useState(`repeat(6, 1fr)`)
     const root = useRef(null)
 
@@ -45,7 +47,6 @@ const IngredientsSection: React.FC<Props> = ({ ingredients }) => {
     const handleOrderIngredientsClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         setOrderActive(prevState => !prevState)
-        console.log(orderActive)
     }
     
     const handleNextClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
