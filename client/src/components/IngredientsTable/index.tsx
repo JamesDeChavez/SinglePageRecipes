@@ -1,19 +1,20 @@
 import { useState, useRef, useEffect, useContext } from 'react'
 import { UserLoggedInContext } from '../../App'
 import { Ingredient } from '../../utils/interfaces'
-import { CreateRecipeFormContext } from '../CreateRecipeForm'
 import IngredientItem from '../IngredientItem'
 import './styles.css'
 
 interface Props {
     ingredients: Ingredient[],
     handleAddIngredient?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-    setEditIngredientActive: React.Dispatch<React.SetStateAction<boolean>>
+    setEditIngredientActive: React.Dispatch<React.SetStateAction<boolean>>,
+    setIngName: React.Dispatch<React.SetStateAction<string>>,
+    setIngAmount: React.Dispatch<React.SetStateAction<string>>,
+    setSelectedItem: React.Dispatch<React.SetStateAction<Ingredient | undefined>>
 }
 
-const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient, setEditIngredientActive }) => { 
-    const { windowSize } = useContext(UserLoggedInContext)
-    const { setIngName, setIngAmount, setSelectedItem } = useContext(CreateRecipeFormContext)  
+const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient, setEditIngredientActive, setIngName, setIngAmount, setSelectedItem }) => { 
+    const { windowSize } = useContext(UserLoggedInContext) 
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(6)
     const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(6)

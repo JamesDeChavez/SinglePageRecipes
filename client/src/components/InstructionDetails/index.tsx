@@ -1,5 +1,5 @@
 import React, { useRef, useLayoutEffect, useContext } from "react"
-import { Instruction } from "../../utils/interfaces"
+import { Ingredient, Instruction } from "../../utils/interfaces"
 import { ReactComponent as StickNoteSVG } from '../../assets/note-sticky-regular.svg'
 import { ReactComponent as ClockSVG } from '../../assets/clock-regular.svg'
 import { ReactComponent as FileLinesSVG } from '../../assets/file-lines-regular.svg'
@@ -9,15 +9,24 @@ import './styles.css'
 import { CreateRecipeFormContext } from "../CreateRecipeForm"
 
 interface Props {
+    instructions: Instruction[], setInstructions?: React.Dispatch<React.SetStateAction<Instruction[]>>,
+    selectedStep: Instruction | undefined, setEditStepActive?: React.Dispatch<React.SetStateAction<boolean>>,
+    setAction?: React.Dispatch<React.SetStateAction<string>>,
+    setItems?: React.Dispatch<React.SetStateAction<string[]>>,
+    setTime?: React.Dispatch<React.SetStateAction<string>>,
+    setDescription?: React.Dispatch<React.SetStateAction<string>>,
     setDetailsActive: React.Dispatch<React.SetStateAction<boolean>>,
-    selectedStep: Instruction | undefined,
-    instructions: Instruction[]
-    setInstructions?: React.Dispatch<React.SetStateAction<Instruction[]>>,
-    setEditStepActive?: React.Dispatch<React.SetStateAction<boolean>>
+    setRecipeIngredients?: React.Dispatch<React.SetStateAction<Ingredient[]>>
 }
 
-const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, instructions, setInstructions, setEditStepActive }) => {
-    const { setAction, setItems, setTime, setDescription, setRecipeIngredients } = useContext(CreateRecipeFormContext)
+const InstructionDetails: React.FC<Props> = ({ 
+    instructions, setInstructions, 
+    selectedStep, setEditStepActive,
+    setAction, setItems, 
+    setTime, setDescription,
+    setRecipeIngredients, setDetailsActive 
+}) => {
+
     const root = useRef(null)
 
     useLayoutEffect(() => {
@@ -36,7 +45,7 @@ const InstructionDetails: React.FC<Props> = ({ setDetailsActive, selectedStep, i
 
     const handleEditClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        if (!setInstructions || !selectedStep || !setEditStepActive) return
+        if (!setInstructions || !selectedStep || !setEditStepActive || !setAction || !setItems || !setDescription || !setTime || !setRecipeIngredients) return
         setAction(selectedStep.summary.action)
         setItems(selectedStep.summary.items)
         setDescription(selectedStep.description)

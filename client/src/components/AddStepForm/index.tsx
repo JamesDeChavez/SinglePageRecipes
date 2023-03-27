@@ -1,17 +1,27 @@
-import { useContext, useRef, useEffect, useLayoutEffect } from 'react'
-import { CreateRecipeFormContext } from '../CreateRecipeForm'
+import { useRef, useEffect, useLayoutEffect } from 'react'
+import { Ingredient } from '../../utils/interfaces'
 import gsap from 'gsap'
 import './styles.css'
 
-const AddStepForm = () => {
-    const { action, setAction,
-            items, setItems,
-            time, setTime,
-            description, setDescription,
-            ingredientName, setIngredientName,
-            ingredientAmount, setIngredientAmount,
-            recipeIngredients, setRecipeIngredients,
-    } = useContext(CreateRecipeFormContext)
+interface Props {
+    action: string, setAction: React.Dispatch<React.SetStateAction<string>>,
+    items: string[], setItems: React.Dispatch<React.SetStateAction<string[]>>,
+    time: string, setTime: React.Dispatch<React.SetStateAction<string>>,
+    description: string, setDescription: React.Dispatch<React.SetStateAction<string>>,
+    ingredientName: string, setIngredientName: React.Dispatch<React.SetStateAction<string>>,
+    ingredientAmount: string, setIngredientAmount: React.Dispatch<React.SetStateAction<string>>,
+    recipeIngredients: Ingredient[], setRecipeIngredients: React.Dispatch<React.SetStateAction<Ingredient[]>>
+}
+
+const AddStepForm: React.FC<Props> = ({
+    action, setAction,
+    items, setItems,
+    time, setTime,
+    description, setDescription,
+    ingredientName, setIngredientName,
+    ingredientAmount, setIngredientAmount,
+    recipeIngredients, setRecipeIngredients
+}) => {
     const inputRef = useRef<HTMLInputElement | null>(null)
     const root = useRef(null)
     

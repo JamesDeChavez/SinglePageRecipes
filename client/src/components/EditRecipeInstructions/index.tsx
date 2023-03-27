@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react'
 import AddStepForm from '../AddStepForm'
-import { CreateRecipeFormContext } from '../CreateRecipeForm'
+import { EditRecipeFormContext } from '../EditRecipeForm'
 import EditStepForm from '../EditStepForm'
 import InstructionDetails from '../InstructionDetails'
 import InstructionsTable from '../InstructionsTable'
 import './styles.css'
 
-const CreateRecipeInstructions = () => {
+const EditRecipeInstructions = () => {
     const { 
         instructions, setInstructions, 
         addStepActive, setAddStepActive, 
@@ -18,8 +18,8 @@ const CreateRecipeInstructions = () => {
         description, setDescription,
         ingredientName, setIngredientName,
         ingredientAmount, setIngredientAmount,
-        recipeIngredients, setRecipeIngredients  
-    } = useContext(CreateRecipeFormContext)
+        recipeIngredients, setRecipeIngredients 
+    } = useContext(EditRecipeFormContext)
     const [detailsActive, setDetailsActive] = useState(false)
 
     const handleAddStepClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -27,7 +27,7 @@ const CreateRecipeInstructions = () => {
         setAddStepActive(true)
     }
 
-    const className = 'CreateRecipeInstructions'
+    const className = 'EditRecipeInstructions'
     return (
         <div className={className}>
             {addStepActive ?
@@ -66,4 +66,4 @@ const CreateRecipeInstructions = () => {
     )
 }
 
-export default CreateRecipeInstructions
+export default EditRecipeInstructions

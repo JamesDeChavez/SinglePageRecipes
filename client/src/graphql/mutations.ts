@@ -69,6 +69,39 @@ export const CREATE_RECIPE = gql`
   }
 `
 
+export const EDIT_RECIPE = gql`
+  mutation EditRecipe($recipes: [RecipeInput]!, $userId: String!) {
+    editRecipe(recipes: $recipes, userId: $userId) {
+      _id
+      recipes {
+        title
+        video {
+          title
+          thumbnail
+          channel
+          videoId
+        }
+        instructions {
+          summary {
+            action
+            items
+          }
+          time
+          description
+          ingredients {
+            name
+            amount
+          }
+        }
+        ingredients {
+          name
+          amount
+        }
+      }
+    }
+  }
+`
+
 export const DELETE_USER = gql`
   mutation DeleteUser($deleteUserId: ID!) {
     deleteUser(id: $deleteUserId) {

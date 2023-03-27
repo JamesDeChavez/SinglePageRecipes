@@ -8,9 +8,7 @@ const ProfilePage = () => {
     const className = 'ProfilePage'
     return (
         <div className={className}>   
-            <div className={`${className}_imageContainer`}>
-                <img className={`${className}_image`} src={backgroundImage} alt="background" />
-            </div>
+            <div className={`${className}_overlay`}></div>
             <Navbar/>
             <Profile/>
             <AuthFooter/>

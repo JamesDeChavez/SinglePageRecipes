@@ -1,17 +1,24 @@
 import { useState } from "react"
-import { Instruction } from "../../utils/interfaces"
+import { Ingredient, Instruction } from "../../utils/interfaces"
 import EditStepForm from "../EditStepForm"
 import InstructionDetails from "../InstructionDetails"
 import InstructionsTable from "../InstructionsTable"
 import './styles.css'
 
 interface Props {
-    instructions: Instruction[]
+    instructions: Instruction[],
+    ingredientName?: string, setIngredientName?: React.Dispatch<React.SetStateAction<string>>,
+    ingredientAmount?: string, setIngredientAmount?: React.Dispatch<React.SetStateAction<string>>,
+    setAction?: React.Dispatch<React.SetStateAction<string>>,
+    setItems?: React.Dispatch<React.SetStateAction<string[]>>,
+    setTime?: React.Dispatch<React.SetStateAction<string>>,
+    setDescription?: React.Dispatch<React.SetStateAction<string>>,
+    setRecipeIngredients?: React.Dispatch<React.SetStateAction<Ingredient[]>>,
 }
 
-const InstructionsSection: React.FC<Props> = ({ instructions }) => {
+const InstructionsSection: React.FC<Props> = ({ instructions, setAction, setItems, setTime, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, setRecipeIngredients  }) => {
     const [detailsActive, setDetailsActive] = useState(false)
-    const [editActive, setEditActive] = useState(false)
+    const [editStepActive, setEditStepActive] = useState(false)
     const [selectedStep, setSelectedStep] = useState<Instruction>()
 
     const className = 'InstructionsSection'
@@ -20,11 +27,18 @@ const InstructionsSection: React.FC<Props> = ({ instructions }) => {
             
             {!detailsActive ?
                 <InstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} />
-            :
-                !editActive ?
-                        <InstructionDetails setDetailsActive={setDetailsActive} selectedStep={selectedStep} instructions={instructions} />
-                    :
-                        <EditStepForm />
+            : selectedStep && !editStepActive ?
+                <InstructionDetails setDetailsActive={setDetailsActive} selectedStep={selectedStep} instructions={instructions} setEditStepActive={setEditStepActive} />
+            : selectedStep &&
+                <EditStepForm 
+                    action={selectedStep.summary.action} setAction={setAction!}
+                    items={selectedStep.summary.items} setItems={setItems!}
+                    time={selectedStep.time} setTime={setTime!}
+                    description={selectedStep.description} setDescription={setDescription!}
+                    ingredientName={ingredientName!} setIngredientName={setIngredientName!}
+                    ingredientAmount={ingredientAmount!} setIngredientAmount={setIngredientAmount!}
+                    recipeIngredients={selectedStep.ingredients} setRecipeIngredients={setRecipeIngredients!}
+                />
             }
         </div>
     )

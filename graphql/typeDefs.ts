@@ -79,6 +79,7 @@ const typeDefs = `#graphql
     type Mutation {
         createUser(username: String!, password: String!, email: String!): User
         createRecipe(userId: String!, recipes: [RecipeInput]!): User
+        editRecipe(userId: String!, recipes: [RecipeInput]!): User
         deleteUser(id: ID!): User
         deleteRecipe(userId: String!, recipes: [RecipeInput]!): User
     }

@@ -14,7 +14,7 @@ const VideoSearch = () => {
 
     useLayoutEffect(() => {
         const gsapContext = gsap.context(() => {
-            gsap.fromTo(`.${className}_main`, { x: 1000 }, { duration: 0.5, x: 0 })
+            gsap.fromTo(`.${className}_resultsContainer`, { x: 1000 }, { duration: 0.5, x: 0 })
             return () => gsapContext.revert()
         }, root)
     }, [])
@@ -22,9 +22,7 @@ const VideoSearch = () => {
     const className = 'VideoSearch'
     return (
         <div className={className} ref={root} >
-            <div className={`${className}_imageContainer`}>
-                <img className={`${className}_image`} src={backgroundImage} alt="background" />
-            </div>
+            <div className={`${className}_overlay`}></div>
             <Navbar/>
             <div className={`${className}_main`}>
                 <VideoSearchForm setSearchResults={setSearchResults} />                

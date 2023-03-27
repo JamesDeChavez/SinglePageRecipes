@@ -1,25 +1,25 @@
 import React, { useState, useContext, useRef } from "react"
-import { useMutation } from "@apollo/client"
 import { client } from "../../index"
 import { UserLoggedInContext } from "../../App"
 import { AuthRenderContext } from "../../branches/Auth"
-import { CreateRecipeRenderContext } from "../../branches/CreateRecipe"
 import { RecipesFragment } from "../../graphql/fragments"
-import { CREATE_RECIPE } from "../../graphql/mutations"
-import { Ingredient, Instruction } from "../../utils/interfaces"
+import { Ingredient, Instruction, Recipe } from "../../utils/interfaces"
 import AddItemFooter from "../AddItemFooter"
 import AddStepFooter from "../AddStepFooter"
-import CreateRecipeIngredients from "../CreateRecipeIngredients"
-import CreateRecipeInstructions from "../CreateRecipeInstructions"
-import CreateRecipeNavbar from "../CreateRecipeNavbar"
-import CreateRecipeVideoSection from "../CreateRecipeVideoSection"
 import RecipeFooter from "../RecipeFooter"
-import CreateRecipeActions from "../CreateRecipeActions"
-import './styles.css'
 import EditStepFooter from "../EditStepFooter"
 import EditItemFooter from "../EditItemFooter"
+import { RecipeBookContext } from "../../pages/RecipeBook"
+import EditRecipeNavbar from "../EditRecipeNavbar"
+import EditRecipeActions from "../EditRecipeActions"
+import EditRecipeVideoSection from "../EditRecipeVideoSection"
+import EditRecipeInstructions from "../EditRecipeInstructions"
+import EditRecipeIngredients from "../EditRecipeIngredients"
+import { useMutation } from "@apollo/client"
+import { EDIT_RECIPE } from "../../graphql/mutations"
+import './styles.css'
 
-export const CreateRecipeFormContext = React.createContext<{
+export const EditRecipeFormContext = React.createContext<{
     instructions: Instruction[], setInstructions: React.Dispatch<React.SetStateAction<Instruction[]>>,
     ingredients: Ingredient[], setIngredients: React.Dispatch<React.SetStateAction<Ingredient[]>>,
     ingName: string, setIngName: React.Dispatch<React.SetStateAction<string>>,
@@ -57,11 +57,12 @@ export const CreateRecipeFormContext = React.createContext<{
     selectedItem: undefined, setSelectedItem: () => {}
 })
 
-const CreateRecipeForm = () => {
-    const { videoSelected } = useContext(CreateRecipeRenderContext)
+
+
+const EditRecipeForm = () => {
+    const { recipeSelected, setRecipeSelected, setEditRecipeActive } = useContext(RecipeBookContext)
     const { userId } = useContext(UserLoggedInContext)
-    const [RENDERS, setRender] = useContext(AuthRenderContext)
-    const [createRecipe] = useMutation(CREATE_RECIPE)
+    const [editRecipe] = useMutation(EDIT_RECIPE)
     const currentRecipes = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment })
 
     const SECTIONS = ['INSTRUCTIONS', 'INGREDIENTS']
@@ -70,9 +71,34 @@ const CreateRecipeForm = () => {
     const [editStepActive, setEditStepActive] = useState(false)
     const [addIngredientActive, setAddIngredientActive] = useState(false)
     const [editIngredientActive, setEditIngredientActive] = useState(false)
-    const [title, setTitle] = useState('')
-    const [instructions, setInstructions] = useState<Instruction[]>([])
-    const [ingredients, setIngredients] = useState<Ingredient[]>([])
+
+    const [title, setTitle] = useState(recipeSelected?.title ? recipeSelected?.title : '')
+    const [instructions, setInstructions] = useState<Instruction[]>(recipeSelected?.instructions ? 
+        recipeSelected?.instructions.map((step: any) => {
+            return {
+                summary: {
+                    action: step.summary.action,
+                    items: step.summary.items
+                },
+                time: step.time,
+                description: step.description,
+                ingredients: step.ingredients.map((item: any) => {
+                    return {
+                        name: item.name,
+                        amount: item.amount
+                    }
+                })
+            }
+        }) : []
+    )
+    const [ingredients, setIngredients] = useState<Ingredient[]>(recipeSelected?.ingredients ? 
+        recipeSelected?.ingredients.map((item: any) => {
+            return {
+                name: item.name,
+                amount: item.amount
+            }
+        }) : []
+    )
     const [ingName, setIngName] = useState('')
     const [ingAmount, setIngAmount] = useState('')
     const [action, setAction] = useState('')
@@ -86,76 +112,88 @@ const CreateRecipeForm = () => {
     const [selectedItem, setSelectedItem] = useState<Ingredient>()
     const root = useRef(null)
 
-    const handleCreateRecipe = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleUpdateRecipe = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        if(!title || !videoSelected || !instructions.length || !ingredients.length) return
-        const newRecipe = {
+        if(!title || !recipeSelected || !instructions.length || !ingredients.length) return
+        const updatedRecipe = {
             title: title,
-            video: videoSelected,
+            video: {
+                title: recipeSelected.video.title,
+                thumbnail: recipeSelected.video.thumbnail,
+                channel: recipeSelected.video.channel,
+                videoId: recipeSelected.video.videoId
+            },
             instructions: instructions,
             ingredients: ingredients
         }
-        try {            
-            const currRecipesFormatted = currentRecipes.recipes.map((recipe: any) => {
-                return {
-                    title: recipe.title,
-                    video: {
-                        title: recipe.video.title,
-                        thumbnail: recipe.video.thumbnail,
-                        channel: recipe.video.channel,
-                        videoId: recipe.video.videoId
-                    },
-                    instructions: recipe.instructions.map((step: any) => {
-                        return {
-                            summary: {
-                                action: step.summary.action,
-                                items: step.summary.items
-                            },
-                            time: step.time,
-                            description: step.description,
-                            ingredients: step.ingredients.map((item: any) => {
-                                return {
-                                    name: item.name,
-                                    amount: item.amount
-                                }
-                            })
-                        }
-                    }),
-                    ingredients: recipe.ingredients.map((ing: any) => {
-                        return {
-                            name: ing.name,
-                            amount: ing.amount
-                        }
-                    })
-                }
-            })
-            const newRecipes = await createRecipe({ variables: { userId, recipes: [...currRecipesFormatted, newRecipe] }})
-            if (newRecipes) setRender(RENDERS[0])
+        const currRecipesFormatted: Recipe[] = currentRecipes.recipes.map((recipe: any) => {
+            return {
+                title: recipe.title,
+                video: {
+                    title: recipe.video.title,
+                    thumbnail: recipe.video.thumbnail,
+                    channel: recipe.video.channel,
+                    videoId: recipe.video.videoId
+                },
+                instructions: recipe.instructions.map((step: any) => {
+                    return {
+                        summary: {
+                            action: step.summary.action,
+                            items: step.summary.items
+                        },
+                        time: step.time,
+                        description: step.description,
+                        ingredients: step.ingredients.map((item: any) => {
+                            return {
+                                name: item.name,
+                                amount: item.amount
+                            }
+                        })
+                    }
+                }),
+                ingredients: recipe.ingredients.map((ing: any) => {
+                    return {
+                        name: ing.name,
+                        amount: ing.amount
+                    }
+                })
+            }
+        })
+        const indexToChange = currRecipesFormatted.findIndex(recipe => recipe.title === recipeSelected.title) 
+        
+        currRecipesFormatted[indexToChange] = updatedRecipe
+
+        try {                
+            const updatedRecipes = await editRecipe({ variables: { userId: userId, recipes: [...currRecipesFormatted] }})
+            if (updatedRecipes) {
+                setRecipeSelected(updatedRecipe)
+                setEditRecipeActive(false)
+            }
 
         } catch (error) {
             console.log(error)
         }
     }
 
-    const className = 'CreateRecipeForm'
+    const className = 'EditRecipeForm'
     return (
-    <CreateRecipeFormContext.Provider value={{ 
+    <EditRecipeFormContext.Provider value={{ 
         ingredients, setIngredients, ingName, setIngName, ingAmount, setIngAmount, instructions, setInstructions, addStepActive, setAddStepActive, editStepActive, setEditStepActive, addIngredientActive, setAddIngredientActive, editIngredientActive, setEditIngredientActive, action, setAction, items, setItems, time, setTime, description, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, recipeIngredients, setRecipeIngredients, selectedStep, setSelectedStep, selectedItem, setSelectedItem
     }} >
         <div className={className} ref={root} >
-            <CreateRecipeNavbar handleCreateRecipe={handleCreateRecipe} />
+            <EditRecipeNavbar handleUpdateRecipe={handleUpdateRecipe} />
             <div className={`${className}_midSection`}>
-                <CreateRecipeVideoSection title={title} setTitle={setTitle} />
-                <CreateRecipeActions handleCreateRecipe={handleCreateRecipe} root={root} />
+                <EditRecipeVideoSection title={title} setTitle={setTitle} />
+                <EditRecipeActions handleUpdateRecipe={handleUpdateRecipe} root={root} />
                 <div className={`${className}_main`}>
                     {{
-                        [SECTIONS[0]]: <CreateRecipeInstructions />,
-                        [SECTIONS[1]]: <CreateRecipeIngredients />
+                        [SECTIONS[0]]: <EditRecipeInstructions />,
+                        [SECTIONS[1]]: <EditRecipeIngredients />
                     }[sectionVisible]}
                 </div>
                 <div className={`${className}_mainWide`}>
-                    <CreateRecipeInstructions />
-                    <CreateRecipeIngredients />
+                    <EditRecipeInstructions />
+                    <EditRecipeIngredients />
                 </div>                   
             </div>
             { addStepActive ?
@@ -197,8 +235,8 @@ const CreateRecipeForm = () => {
                 <RecipeFooter sectionVisible={sectionVisible} setSectionVisible={ setSectionVisible } /> 
             }
         </div>
-    </CreateRecipeFormContext.Provider>
+    </EditRecipeFormContext.Provider>
     )
 }
 
-export default CreateRecipeForm
+export default EditRecipeForm

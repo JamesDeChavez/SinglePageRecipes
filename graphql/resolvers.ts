@@ -99,6 +99,15 @@ const resolvers = {
                 return error
             }
         },
+        editRecipe: async (_: any, args: any) => {
+            try {
+                const updatedUser = await controllers.User.updateForNewRecipe(args)
+                return updatedUser
+            } catch (error) {
+                console.log(error)
+                return error
+            }
+        },
         deleteRecipe: async (_: any, args: any) => {
             try {
                 const updatedUser = await controllers.User.updateForNewRecipe(args)

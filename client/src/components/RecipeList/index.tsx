@@ -15,7 +15,6 @@ const RecipeList = () => {
 
     useLayoutEffect(() => {
         const gsapContext = gsap.context(() => {
-            gsap.fromTo(`.${className}_searchContainer`, { x: 1000 }, { duration: 0.5, x: 0 })
             gsap.fromTo(`.${className}_recipesContainer`, { x: 1000 }, { duration: 0.5, x: 0 })
             return () => gsapContext.revert()
         }, root)

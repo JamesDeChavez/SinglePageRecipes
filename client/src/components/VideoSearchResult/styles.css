@@ -1,18 +1,18 @@
 .VideoSearchResult {
     position: relative;
-    border: solid 1px #FFFFFF30;
+    border: solid 2px #112728;
     padding-bottom: 2rem;
 }
 
 .VideoSearchResult:hover {
     cursor: pointer;
-    border: solid 1px #FFFFFF;
+    border: solid 2px #FFFFFF;
 }
 
 .VideoSearchResult_textOverlay {
     display: grid;
     gap: 0.2rem;
-    padding: 0.2rem;
+    padding: 0.5rem 1rem;
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -21,18 +21,20 @@
     border-top: solid 1px #FFFFFF30;
 }
 
-.VideoSearchResult_text {
+.VideoSearchResult_title,
+.VideoSearchResult_channel {
     color: #FFFFFF;
-    font-size: 0.8rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-@media screen and (min-width: 850px) {
-    
-.VideoSearchResult_text {
-    font-size: 1rem;
+.VideoSearchResult_title {
+    font-size: 0.9rem;
+    border-bottom: solid 1px #FFFFFF30;
+    padding-bottom: 0.5rem;
 }
 
+.VideoSearchResult_channel {
+    font-size: 0.8rem;
 }

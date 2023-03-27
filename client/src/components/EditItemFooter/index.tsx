@@ -1,9 +1,22 @@
 import { useContext } from 'react'
+import { Ingredient } from '../../utils/interfaces'
 import { CreateRecipeFormContext } from '../CreateRecipeForm'
 import './styles.css'
 
-const EditItemFooter = () => {
-    const { ingName, setIngName, ingAmount, setIngAmount, ingredients, setIngredients, setEditIngredientActive, selectedItem } = useContext(CreateRecipeFormContext)
+interface Props {
+    ingName: string, setIngName: React.Dispatch<React.SetStateAction<string>>, 
+    ingAmount: string, setIngAmount: React.Dispatch<React.SetStateAction<string>>, 
+    ingredients: Ingredient[], setIngredients: React.Dispatch<React.SetStateAction<Ingredient[]>>, 
+    setEditIngredientActive: React.Dispatch<React.SetStateAction<boolean>>, selectedItem: Ingredient | undefined
+
+}
+
+const EditItemFooter: React.FC<Props> = ({ 
+    ingName, setIngName, 
+    ingAmount, setIngAmount, 
+    ingredients, setIngredients, 
+    setEditIngredientActive, selectedItem 
+}) => {
 
     const handleEditStep = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()

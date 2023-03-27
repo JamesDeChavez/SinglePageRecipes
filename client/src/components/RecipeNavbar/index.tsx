@@ -1,20 +1,20 @@
 import { useContext, useState, useRef, useLayoutEffect } from 'react'
 import { RecipeBookContext } from '../../pages/RecipeBook'
 import gsap from 'gsap'
-import './styles.css'
 import { UserLoggedInContext } from '../../App'
 import { client } from '../..'
 import { RecipesFragment } from '../../graphql/fragments'
 import { DELETE_RECIPE } from "../../graphql/mutations"
 import { useMutation } from '@apollo/client'
 import { Recipe } from '../../utils/interfaces'
+import './styles.css'
 
 interface Props {
     selectedRecipe: Recipe
 }
 
 const RecipeNavbar: React.FC<Props> = ({ selectedRecipe }) => {
-    const { setRecipeSelected } = useContext(RecipeBookContext)
+    const { setRecipeSelected, setEditRecipeActive } = useContext(RecipeBookContext)
     const { userId } = useContext(UserLoggedInContext)
     const currentRecipes = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment })
     const [deleteRecipe] = useMutation(DELETE_RECIPE)
@@ -36,6 +36,11 @@ const RecipeNavbar: React.FC<Props> = ({ selectedRecipe }) => {
     const handleOptionClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         setOptionsVisible(prevState => !prevState)
+    }
+
+    const handleEditClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        setEditRecipeActive(true)
     }
 
     const handleDeleteClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -86,7 +91,9 @@ const RecipeNavbar: React.FC<Props> = ({ selectedRecipe }) => {
     const className = 'RecipeNavbar'
     return (
         <div className={className} ref={root} >
-            <button className={`${className}_returnButton`} onClick={handleReturnClick}>{`< Return to Recipe Book`}</button>
+            <button className={`${className}_returnButton`} onClick={handleReturnClick}>
+                {`< Return to Recipe Book`}
+            </button>
             <button className={`${className}_optionButton`} onClick={handleOptionClick} >
                 <p className={`${className}_text`}>Options</p>
                 {optionsVisible ?
@@ -98,7 +105,7 @@ const RecipeNavbar: React.FC<Props> = ({ selectedRecipe }) => {
                 }
             </button>
             <div className={`${className}_optionsContainer`} style={{ display: optionsVisible ? 'grid' : 'none' }} >
-                <button className={`${className}_option`}>Edit Recipe</button>
+                <button className={`${className}_option`} onClick={handleEditClick}>Edit Recipe</button>
                 <button className={`${className}_option`} onClick={handleDeleteClick} >Delete Recipe</button>
             </div>
         </div>

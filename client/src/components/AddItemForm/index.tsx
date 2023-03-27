@@ -1,13 +1,17 @@
-import { useContext, useRef, useEffect, useLayoutEffect } from 'react'
-import { CreateRecipeFormContext } from '../CreateRecipeForm'
+import { useRef, useEffect, useLayoutEffect } from 'react'
 import gsap from 'gsap'
 import './styles.css'
 
-const AddItemForm = () => {
-    const { 
-        ingName, setIngName, 
-        ingAmount, setIngAmount
-    } = useContext(CreateRecipeFormContext)
+interface Props {
+    ingName: string, setIngName: React.Dispatch<React.SetStateAction<string>>, 
+    ingAmount: string, setIngAmount: React.Dispatch<React.SetStateAction<string>>
+}
+
+const AddItemForm: React.FC<Props> = ({ 
+    ingName, setIngName, 
+    ingAmount, setIngAmount 
+}) => {
+    
     const inputRef = useRef<HTMLInputElement | null>(null)
     const root = useRef(null)
     

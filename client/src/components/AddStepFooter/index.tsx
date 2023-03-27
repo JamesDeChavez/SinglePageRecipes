@@ -1,14 +1,28 @@
-import { useContext } from 'react'
-import { CreateRecipeFormContext } from '../CreateRecipeForm'
+import { Ingredient, Instruction } from '../../utils/interfaces'
 import './styles.css'
 
-const AddStepFooter = () => {
-    const { action, setAction,
-            items, setItems, 
-            time, setTime,
-            description, setDescription,
-            recipeIngredients, setRecipeIngredients, setIngredientName, setIngredientAmount,
-            setInstructions, setAddStepActive } = useContext(CreateRecipeFormContext)
+interface Props {
+    action: string, setAction: React.Dispatch<React.SetStateAction<string>>,
+    items: string[], setItems: React.Dispatch<React.SetStateAction<string[]>>,
+    time: string, setTime: React.Dispatch<React.SetStateAction<string>>,
+    description: string, setDescription: React.Dispatch<React.SetStateAction<string>>,
+    ingredientName: string, setIngredientName: React.Dispatch<React.SetStateAction<string>>,
+    ingredientAmount: string, setIngredientAmount: React.Dispatch<React.SetStateAction<string>>,
+    recipeIngredients: Ingredient[], setRecipeIngredients: React.Dispatch<React.SetStateAction<Ingredient[]>>,
+    setInstructions: React.Dispatch<React.SetStateAction<Instruction[]>>, setAddStepActive: React.Dispatch<React.SetStateAction<boolean>> 
+
+}
+
+const AddStepFooter: React.FC<Props> = ({
+    action, setAction,
+    items, setItems,
+    time, setTime,
+    description, setDescription,
+    recipeIngredients, setRecipeIngredients,
+    setIngredientName, setIngredientAmount,
+    setInstructions, setAddStepActive 
+}) => {
+   
 
     const handleAddStep = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
