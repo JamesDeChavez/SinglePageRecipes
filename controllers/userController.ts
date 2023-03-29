@@ -1,7 +1,8 @@
 import db from '../models';
+import { RecipeInputs, RegisterInputs } from '../utils/interfaces';
 
 export default {
-    findByUsername: async (req: any) => {
+    findByUsername: async (req: {username: string}) => {
         try {
             const request = await db.User.find({username: req.username});
             return request[0];
@@ -9,7 +10,7 @@ export default {
             console.log(error);
         }
     },
-    findByEmail: async (req: any) => {
+    findByEmail: async (req: {email: string}) => {
         try {
             const request = await db.User.find({email: req.email});
             return request[0];
@@ -17,7 +18,7 @@ export default {
             console.log(error);
         }
     },
-    findById: async (req: any) => {
+    findById: async (req: {id: string}) => {
         try {
             const request = await db.User.findById({ _id: req.id });
             return request;
@@ -25,7 +26,7 @@ export default {
             console.log(error);
         }
     },
-    create: async (req: any) => {
+    create: async (req: RegisterInputs) => {
         try {
             const request = await db.User.create(req);
             return request;
@@ -33,7 +34,7 @@ export default {
             console.log(error);
         }
     },
-    updateForNewRecipe: async (req: any) => {
+    updateForNewRecipe: async (req: RecipeInputs) => {
         try {
             const request = await db.User.findOneAndUpdate({
                 _id: req.userId
@@ -47,7 +48,7 @@ export default {
             console.log(error)
         }
     },
-    delete: async (req: any) => {
+    delete: async (req: {id: string}) => {
         try {
             const request = await db.User.findOneAndDelete({ _id: req.id });
             return request;

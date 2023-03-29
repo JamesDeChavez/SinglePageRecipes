@@ -2,10 +2,11 @@ import { GraphQLError } from 'graphql'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import controllers from "../controllers"
+import { Context, LoginInputs, RecipeInputs, RegisterInputs } from '../utils/interfaces'
 
 const resolvers = {
     Query: {
-        returningUser: async (_: any, __: any, context: any) => {
+        returningUser: async (_: any, __: any, context: Context) => {
             if (!context.authScope) return
             const token = context.authScope.split(' ')[1]
             const decoded: any = token ? jwt.verify(token, "JWT_SECRET") : null
@@ -18,7 +19,7 @@ const resolvers = {
                 return error
             }
         },
-        login: async (_: any, args: any) => {
+        login: async (_: any, args: LoginInputs) => {
             try {
                 const user = await controllers.User.findByUsername({ username: args.username })
                 const passwordMatch = user && await bcrypt.compare(args.password, user.password)
@@ -44,7 +45,7 @@ const resolvers = {
                 return error
             }
         },
-        user: async (_: any, args: any) => {
+        user: async (_: any, args: {id: string}) => {
             try {
                 const user = await controllers.User.findById(args)
                 return user
@@ -55,7 +56,7 @@ const resolvers = {
         } 
     },
     Mutation: {
-        createUser: async (_: any, args: any) => {
+        createUser: async (_: any, args: RegisterInputs) => {
             try {
                 const usernameCheck = await controllers.User.findByUsername({ username: args.username })
                 const emailCheck = await controllers.User.findByEmail({ email: args.email })
@@ -90,7 +91,7 @@ const resolvers = {
                 return error
             }
         },
-        createRecipe: async (_: any, args: any) => {
+        createRecipe: async (_: any, args: RecipeInputs) => {
             try {
                 const updatedUser = await controllers.User.updateForNewRecipe(args)
                 return updatedUser
@@ -99,7 +100,7 @@ const resolvers = {
                 return error
             }
         },
-        editRecipe: async (_: any, args: any) => {
+        editRecipe: async (_: any, args: RecipeInputs) => {
             try {
                 const updatedUser = await controllers.User.updateForNewRecipe(args)
                 return updatedUser
@@ -108,7 +109,7 @@ const resolvers = {
                 return error
             }
         },
-        deleteRecipe: async (_: any, args: any) => {
+        deleteRecipe: async (_: any, args: RecipeInputs) => {
             try {
                 const updatedUser = await controllers.User.updateForNewRecipe(args)
                 return updatedUser
@@ -117,7 +118,7 @@ const resolvers = {
                 return error
             }
         },
-        deleteUser: async (_: any, args: any) => {
+        deleteUser: async (_: any, args: {id: string}) => {
             try {
                 const deletedUser = await controllers.User.delete(args)
                 return deletedUser
