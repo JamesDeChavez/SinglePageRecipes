@@ -27,7 +27,7 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
             return { ...item, include: true}
         })
         setShoppingList(newShoppingList)
-    }, [ingredients])
+    }, [ingredients, setShoppingList])
 
     
     useEffect(() => {

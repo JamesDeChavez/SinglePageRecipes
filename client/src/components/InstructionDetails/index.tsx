@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useContext } from "react"
+import React, { useRef, useLayoutEffect } from "react"
 import { Ingredient, Instruction } from "../../utils/interfaces"
 import { ReactComponent as StickNoteSVG } from '../../assets/note-sticky-regular.svg'
 import { ReactComponent as ClockSVG } from '../../assets/clock-regular.svg'
@@ -6,7 +6,6 @@ import { ReactComponent as FileLinesSVG } from '../../assets/file-lines-regular.
 import { ReactComponent as CarrotSVG } from '../../assets/carrot-solid.svg'
 import gsap from "gsap"
 import './styles.css'
-import { CreateRecipeFormContext } from "../CreateRecipeForm"
 
 interface Props {
     instructions: Instruction[], setInstructions?: React.Dispatch<React.SetStateAction<Instruction[]>>,

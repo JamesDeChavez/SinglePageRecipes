@@ -1,7 +1,6 @@
 import React, { useState, useContext, useRef } from "react"
 import { client } from "../../index"
 import { UserLoggedInContext } from "../../App"
-import { AuthRenderContext } from "../../branches/Auth"
 import { RecipesFragment } from "../../graphql/fragments"
 import { Ingredient, Instruction, Recipe } from "../../utils/interfaces"
 import AddItemFooter from "../AddItemFooter"

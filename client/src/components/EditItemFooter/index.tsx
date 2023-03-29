@@ -1,6 +1,4 @@
-import { useContext } from 'react'
 import { Ingredient } from '../../utils/interfaces'
-import { CreateRecipeFormContext } from '../CreateRecipeForm'
 import './styles.css'
 
 interface Props {

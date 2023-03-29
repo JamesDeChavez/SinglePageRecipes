@@ -21,7 +21,7 @@ const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingL
             gsap.fromTo(`.${className}`, { x: -1000 }, { duration: 0.5, x: 0 })
             return () => gsapContext.revert()
         }, root)
-    }, [])
+    }, [root])
 
     const handleOrderIngredientsClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()

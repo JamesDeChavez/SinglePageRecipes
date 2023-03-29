@@ -4,7 +4,6 @@ import AuthFooter from '../AuthFooter'
 import Navbar from '../Navbar'
 import VideoSearchForm from '../VideoSearchForm'
 import VideoSearchResult from '../VideoSearchResult'
-import backgroundImage from '../../assets/background.jpg'
 import gsap from 'gsap'
 import './styles.css'
 
