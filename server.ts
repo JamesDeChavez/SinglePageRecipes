@@ -10,6 +10,7 @@ const PORT = Number(process.env.PORT) || 3001
 const MONGODB_URI = process.env.MONGODB_URI
 const server = new ApolloServer({ typeDefs, resolvers })
 
+//test
 const main = async () => {
     await mongoose.connect(`${MONGODB_URI}`)  
     const { url } = await startStandaloneServer(server, {
