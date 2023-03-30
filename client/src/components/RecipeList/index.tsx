@@ -32,7 +32,7 @@ const RecipeList = () => {
                     recipes.filter((recipe: any) => recipe.title.toLowerCase().includes(search.toLowerCase())).map((recipe: Recipe, i: number) => {
                         return <RecipeOption key={i} recipe={recipe} />
                     })                
-                : <p>No Recipes Created</p> }
+                : <p className={`${className}_text`}>No Recipes Created</p> }
             </div>
         </div>
     )

@@ -1,9 +1,9 @@
+import { useQuery } from '@apollo/client'
 import { FormEvent, useState, useContext } from 'react'
 import { CreateRecipeRenderContext } from '../../branches/CreateRecipe'
+import { GET_YOUTUBE_KEY } from '../../graphql/queries'
 import { Video } from '../../utils/interfaces'
 import './styles.css'
-
-const apiKey = 'AIzaSyBY28CKWruqrIyXKW9wDfO1Uhx-sAcjCnQ'
 
 interface Props {
     setSearchResults: React.Dispatch<React.SetStateAction<Video[]>>
@@ -11,6 +11,7 @@ interface Props {
 
 const VideoSearchForm: React.FC<Props> = ({ setSearchResults }) => {
     const { setVideoSelected } = useContext(CreateRecipeRenderContext)
+    const { data } = useQuery(GET_YOUTUBE_KEY)
     const [search, setSearch] = useState('')
 
     const isValidUrl = (urlString: string) => {
@@ -26,8 +27,9 @@ const VideoSearchForm: React.FC<Props> = ({ setSearchResults }) => {
     const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (!search) return
-        let videoId: string
-        let url: string
+        const apiKey = data.youtubeKey
+        let videoId= ''
+        let url = ''
 
         if (isValidUrl(search)) {
             videoId = search.split('?v=')[1].split('&')[0]
@@ -47,8 +49,8 @@ const VideoSearchForm: React.FC<Props> = ({ setSearchResults }) => {
             };
             
         } else {
-            url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=24&q=${search.replaceAll(' ', '%20')}&key=${apiKey}`
             try {
+                url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=24&q=${search.replaceAll(' ', '%20')}&key=${apiKey}`
                 const res = await fetch(url)
                 const data = await res.json()            
                 const newSearchResults: Video[] = data.items.map((video: any) => {
@@ -64,13 +66,16 @@ const VideoSearchForm: React.FC<Props> = ({ setSearchResults }) => {
                 console.log(error)
             }
         }
-
     }
 
     const className = 'VideoSearchForm'
     return (
         <form className={className} onSubmit={handleFormSubmit}>
-            <input type="text" name="search" id="search" value={search} className={`${className}_input`} placeholder='Youtube Search or URL' onChange={e => setSearch(e.target.value)} autoComplete='off' />
+            <input 
+                type="text" name="search" id="search" value={search} 
+                className={`${className}_input`} placeholder='Youtube Search or URL' 
+                onChange={e => setSearch(e.target.value)} autoComplete='off' 
+            />
             <input type="submit" value="Search" className={`${className}_submit`} />
         </form>
     )

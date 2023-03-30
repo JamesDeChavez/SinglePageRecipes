@@ -53,7 +53,15 @@ const resolvers = {
                 console.log(error)
                 return error
             }
-        } 
+        },
+        youtubeKey: () => {
+            const youtubeApiKey = process.env.API_KEY
+            return youtubeApiKey
+        },
+        amazonTag: () => {
+            const associatesTag = process.env.ASSOCIATES_TAG
+            return associatesTag
+        }
     },
     Mutation: {
         createUser: async (_: any, args: RegisterInputs) => {

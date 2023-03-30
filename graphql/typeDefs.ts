@@ -74,6 +74,8 @@ const typeDefs = `#graphql
         user(id: ID!): User
         login(username: String!, password: String!): User
         returningUser: User
+        youtubeKey: String
+        amazonTag: String
     }
 
     type Mutation {

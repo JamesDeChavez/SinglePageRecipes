@@ -1,10 +1,10 @@
 
+import { useQuery } from '@apollo/client'
 import gsap from 'gsap'
 import { useLayoutEffect } from 'react'
+import { GET_AMAZON_TAG } from '../../graphql/queries'
 import { Ingredient } from '../../utils/interfaces'
 import './styles.css'
-
-const associatesTag = 'jamesrecipeap-20'
 
 interface Props {
     orderActive: boolean, 
@@ -15,6 +15,7 @@ interface Props {
 }
 
 const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingList, setShoppingList, root }) => {
+    const { data } = useQuery(GET_AMAZON_TAG)
 
     useLayoutEffect(() => {
         const gsapContext = gsap.context(() => {
@@ -48,7 +49,7 @@ const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingL
         setShoppingList(newState);
     };
 
-    const url = `https://www.amazon.com/afx/ingredients/landing?tag=${associatesTag}`;
+    const url = `https://www.amazon.com/afx/ingredients/landing?tag=${data ? data.amazonTag : ''}`;
     const value = JSON.stringify({ 
         ingredients: shoppingList.filter(ingredient => ingredient.include !== false)
     });

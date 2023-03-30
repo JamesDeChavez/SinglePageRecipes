@@ -72,3 +72,15 @@ export const RETURNING_USER = gql`
     }
   }
 `
+
+export const GET_YOUTUBE_KEY = gql`
+  query YoutubeKey {
+    youtubeKey
+  }
+`
+
+export const GET_AMAZON_TAG = gql`
+  query AmazonTag {
+    amazonTag
+  }
+`

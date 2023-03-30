@@ -7,7 +7,7 @@ export const client = new ApolloClient({
   uri: "http://localhost:3001/",
   cache: new InMemoryCache(),
   headers: {
-    authorization: localStorage.getItem('sprToken') || '' 
+    authorization: localStorage.getItem('sprToken') || ''
   }
 })
 
