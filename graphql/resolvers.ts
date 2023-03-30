@@ -3,13 +3,17 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import controllers from "../controllers"
 import { Context, LoginInputs, RecipeInputs, RegisterInputs } from '../utils/interfaces'
+import dotenv from 'dotenv'
+
+dotenv.config()
+const JWT_SECRET = process.env.JWT_SECRET || 'JWT_SECRET'
 
 const resolvers = {
     Query: {
         returningUser: async (_: any, __: any, context: Context) => {
             if (!context.authScope) return
             const token = context.authScope.split(' ')[1]
-            const decoded: any = token ? jwt.verify(token, "JWT_SECRET") : null
+            const decoded: any = token ? jwt.verify(token, JWT_SECRET) : null
             const userId = decoded.userId ? decoded.userId : null
             try {
                 const user = await controllers.User.findById({id: userId})
@@ -27,7 +31,7 @@ const resolvers = {
                 else {
                     const token = jwt.sign(
                         { userId: user._id },
-                        'JWT_SECRET',
+                        JWT_SECRET,
                         { algorithm: 'HS256', expiresIn: '1d' }
                     )
                     const userWithToken = { 
@@ -79,7 +83,7 @@ const resolvers = {
                     if (user) {
                         const token = await jwt.sign( 
                             {userId: user._id},
-                            "JWT_SECRET",
+                            JWT_SECRET,
                             { algorithm: "HS256", expiresIn: "1d" }
                         )
                         const userWithToken = { 

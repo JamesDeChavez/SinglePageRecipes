@@ -5,12 +5,15 @@
 /client/node_modules
 /.pnp
 .pnp.js
+package-lock.json
 
 # testing
 /coverage
 
 # production
 /build
+/client/build
+/client/build.zip
 
 # misc
 .env
