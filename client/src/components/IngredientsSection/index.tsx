@@ -21,6 +21,7 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
     const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(Math.min(ingredients.length, 6))
     const [gridTemplateRows, setGridTemplateRows] = useState(`repeat(6, 1fr)`)
     const root = useRef(null)
+    const formRef = useRef<HTMLFormElement>(null)
 
     useEffect(() => {
         const newShoppingList = ingredients.map(item => {
@@ -91,6 +92,11 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
         setShoppingList(newState);
     };
 
+    const handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        formRef.current && formRef.current.submit()
+    }
+
     const url = `https://www.amazon.com/afx/ingredients/landing?tag=${associatesTag}`;
     const value = JSON.stringify({ 
         ingredients: shoppingList.filter(ingredient => ingredient.include !== false)
@@ -117,8 +123,8 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
                         <button className={`${className}_button`} onClick={unselectAll}>Unselect All</button>
                     </div>
                     <div className={`${className}_rightButtonsContainer`}>
-                        <form method='POST' action={url} target='_blank' >
-                            <button className={`${className}_button`} type='submit'>Submit Order</button>
+                        <form method='POST' action={url} target='_blank' ref={formRef}>
+                            <button className={`${className}_button`} type='submit' onClick={handleSubmitClick}>Submit Order</button>
                             <input type="hidden" name='ingredients' value={value} />
                         </form>
                         
