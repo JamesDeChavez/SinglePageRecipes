@@ -1,6 +1,7 @@
 .ProfilePage {
     display: grid;
     min-height: 100vh;
+    min-height: 100svh;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     background-color: #070b0b;
