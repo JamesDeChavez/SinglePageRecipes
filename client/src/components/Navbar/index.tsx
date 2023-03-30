@@ -7,7 +7,7 @@ import logoImage from '../../assets/logo.png'
 import './styles.css'
 
 const Navbar = () => {
-    const [RENDERS_NONAUTH, setRender_Nonauth] = useContext(NonAuthRenderContext)
+    const {RENDERS: RENDERS_NONAUTH, setRender: setRender_Nonauth} = useContext(NonAuthRenderContext)
     const [RENDERS_AUTH, setRender_Auth] = useContext(AuthRenderContext)
     const {userLoggedIn, setUserLoggedIn} = useContext(UserLoggedInContext)
 

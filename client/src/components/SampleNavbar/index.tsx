@@ -3,7 +3,7 @@ import { NonAuthRenderContext } from '../../branches/NonAuth'
 import './styles.css'
 
 const SampleNavbar = () => {
-    const [RENDERS, setRender] = useContext(NonAuthRenderContext)
+    const {RENDERS, setRender} = useContext(NonAuthRenderContext)
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, n: number) => {
         e.preventDefault()

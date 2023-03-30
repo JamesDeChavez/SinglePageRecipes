@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import './styles.css'
 
 const Hero = () => {
-    const [RENDERS, setRender] = useContext(NonAuthRenderContext)
+    const {RENDERS, setRender} = useContext(NonAuthRenderContext)
     const root = useRef(null)
 
     useLayoutEffect(() => {
