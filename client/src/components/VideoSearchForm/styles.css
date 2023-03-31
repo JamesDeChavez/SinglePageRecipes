@@ -18,6 +18,7 @@
     font-size: 1rem;
     border: solid 1px #FFFFFF30;
     padding: 0 0.5rem;
+    max-width: 200px;
 }
 
 .VideoSearchForm_submit {
@@ -29,5 +30,11 @@
 .VideoSearchForm_submit:hover {
     cursor: pointer;
     border: solid 1px #FFFFFF;
+}
+
+@media screen and (min-width: 500px) {
+    .VideoSearchForm_input {
+        max-width: none;
+    }
 }
 

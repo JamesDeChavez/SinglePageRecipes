@@ -13,8 +13,15 @@
     background-color: #112728;
     color: #FFFFFF;
     font-size: 1rem;
+    max-width: 250px;
 }
 
 .CreateRecipeVideoSection_iframe {
     border: solid 1px #FFFFFF30;
+}
+
+@media screen and (min-width: 500px) {
+    .CreateRecipeVideoSection_titleInput {
+        max-width: none;
+    }
 }
