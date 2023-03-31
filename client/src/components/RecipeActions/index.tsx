@@ -49,10 +49,10 @@ const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingL
         setShoppingList(newState);
     };
 
-    const url = `https://www.amazon.com/afx/ingredients/landing?tag=${data ? data.amazonTag : ''}`;
+    const url = `https://www.amazon.com/afx/ingredients/landing?tag=${data ? data.amazonTag : ''}`
     const value = JSON.stringify({ 
-        ingredients: shoppingList.filter(ingredient => ingredient.include !== false)
-    });
+        ingredients: shoppingList.filter(ingredient => ingredient.include !== false).map(ing => {return { name: ing.name, amount: ing.amount }} )
+    })
 
     const className = 'RecipeActions'
     return (
@@ -71,8 +71,8 @@ const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingL
                         <button className={`${className}_button`} onClick={unselectAll}>Unselect All</button>
                     </div>
                     <div className={`${className}_rightButtonsContainer`}>
-                        <form method='POST' action={url} target='_blank' >
-                            <button className={`${className}_button`} type='submit'>Submit Order</button>
+                        <form method='POST' action={url} target='_blank' rel='noreferrer'>
+                            <input type="submit" name='submit' value="Submit Order" className={`${className}_button`}  />
                             <input type="hidden" name='ingredients' value={value} />
                         </form>
                         

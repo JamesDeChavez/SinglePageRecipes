@@ -2,9 +2,9 @@ import { useState, useEffect, useContext, useRef } from 'react'
 import { UserLoggedInContext } from '../../App'
 import { Ingredient } from '../../utils/interfaces'
 import IngredientItem from '../IngredientItem'
+import { useQuery } from '@apollo/client'
+import { GET_AMAZON_TAG } from '../../graphql/queries'
 import './styles.css'
-
-const associatesTag = 'jamesrecipeap-20'
 
 interface Props {
     ingredients: Ingredient[],
@@ -15,6 +15,7 @@ interface Props {
 }
 
 const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrderActive, shoppingList, setShoppingList }) => {
+    const { data } = useQuery(GET_AMAZON_TAG)
     const { windowSize } = useContext(UserLoggedInContext)
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(Math.min(ingredients.length, 6))
@@ -91,10 +92,10 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
         setShoppingList(newState);
     };
 
-    const url = `https://www.amazon.com/afx/ingredients/landing?tag=${associatesTag}`;
+    const url = `https://www.amazon.com/afx/ingredients/landing?tag=${data ? data.amazonTag : ''}`
     const value = JSON.stringify({ 
         ingredients: shoppingList.filter(ingredient => ingredient.include !== false).map(ing => {return { name: ing.name, amount: ing.amount }} )
-    });
+    })
     const className = 'IngredientsSection'
     return (
         <div className={className} ref={root}>
