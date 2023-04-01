@@ -58,6 +58,23 @@
     border: solid 1px #FFFFFF;
 }
 
+.RegisterForm_error {
+    text-align: center;
+    max-width: 200px;
+    justify-self: center;
+}
+
+.RegisterForm_loadingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.RegisterForm_loadingSvg {
+    width: 2rem;
+    height: 100%;
+}
+
 @media screen and (min-width: 500px) {
 .RegisterForm_input {
     max-width: none;
