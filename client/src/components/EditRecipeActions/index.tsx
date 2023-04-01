@@ -2,13 +2,15 @@ import { useContext, useLayoutEffect } from 'react'
 import { EditRecipeFormContext } from '../EditRecipeForm'
 import gsap from 'gsap'
 import './styles.css'
+import Loading from '../Loading'
 
 interface Props {
     handleUpdateRecipe: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => Promise<void>,
-    root: React.MutableRefObject<null>
+    root: React.MutableRefObject<null>,
+    loading: boolean
 }
 
-const EditRecipeActions: React.FC<Props> = ({ handleUpdateRecipe, root }) => {
+const EditRecipeActions: React.FC<Props> = ({ handleUpdateRecipe, root, loading }) => {
     const { 
         ingName, setIngName, 
         ingAmount, setIngAmount,
@@ -199,7 +201,8 @@ const EditRecipeActions: React.FC<Props> = ({ handleUpdateRecipe, root }) => {
                         <button className={`${className}_addButton`} onClick={handleItemActiveClick}>Add Ingredient</button>
                     </div>
                     <div className={`${className}_createContainer`}>
-                        <button className={`${className}_createButton`} onClick={handleUpdateRecipe} >Update Recipe</button>
+                        <button className={`${className}_createButton`} onClick={handleUpdateRecipe} style={{display: loading ? 'none' : 'block'}} >Update Recipe</button>
+                        <Loading loading={loading} />
                     </div>
                 </>
                 }

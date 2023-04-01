@@ -4,14 +4,16 @@ import { CreateRecipeRenderContext } from '../../branches/CreateRecipe'
 import { GET_YOUTUBE_KEY } from '../../graphql/queries'
 import { Video } from '../../utils/interfaces'
 import './styles.css'
+import Loading from '../Loading'
 
 interface Props {
-    setSearchResults: React.Dispatch<React.SetStateAction<Video[]>>
+    setSearchResults: React.Dispatch<React.SetStateAction<Video[]>>,
+    setSearchLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const VideoSearchForm: React.FC<Props> = ({ setSearchResults }) => {
+const VideoSearchForm: React.FC<Props> = ({ setSearchResults, setSearchLoading }) => {
     const { setVideoSelected } = useContext(CreateRecipeRenderContext)
-    const { data } = useQuery(GET_YOUTUBE_KEY)
+    const { data, loading } = useQuery(GET_YOUTUBE_KEY)
     const [search, setSearch] = useState('')
 
     const isValidUrl = (urlString: string) => {
@@ -35,22 +37,26 @@ const VideoSearchForm: React.FC<Props> = ({ setSearchResults }) => {
             videoId = search.split('?v=')[1].split('&')[0]
             url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${apiKey}`
             try {
-                const res = await fetch(url);
-                const data = await res.json();
+                setSearchLoading(true)
+                const res = await fetch(url)
+                const data = await res.json()
                 const newVideoState: Video = {
                     title: data.items[0].snippet.title,
                     thumbnail: data.items[0].snippet.thumbnails.medium,
                     channel: data.items[0].snippet.channelTitle,
                     videoId: data.items[0].id
                 };
-                setVideoSelected(newVideoState);
+                setVideoSelected(newVideoState)
+                setSearchLoading(false)
             } catch (error) {
+                setSearchLoading(false)
                 console.log(error);
             };
             
         } else {
             try {
                 url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=24&q=${search.replaceAll(' ', '%20')}&key=${apiKey}`
+                setSearchLoading(true)
                 const res = await fetch(url)
                 const data = await res.json()            
                 const newSearchResults: Video[] = data.items.map((video: any) => {
@@ -62,7 +68,9 @@ const VideoSearchForm: React.FC<Props> = ({ setSearchResults }) => {
                     })
                 });            
                 setSearchResults(newSearchResults)
+                setSearchLoading(true)
             } catch (error) {
+                setSearchLoading(true)
                 console.log(error)
             }
         }
@@ -74,9 +82,14 @@ const VideoSearchForm: React.FC<Props> = ({ setSearchResults }) => {
             <input 
                 type="text" name="search" id="search" value={search} 
                 className={`${className}_input`} placeholder='Youtube Search or URL' 
-                onChange={e => setSearch(e.target.value)} autoComplete='off' 
+                onChange={e => setSearch(e.target.value)} autoComplete='off'
+                style={{display: loading ? 'none' : 'block' }}
             />
-            <input type="submit" value="Search" className={`${className}_submit`} />
+            <input 
+                type="submit" value="Search" className={`${className}_submit`}
+                style={{display: loading ? 'none' : 'block' }}
+            />
+            <Loading loading={loading} />
         </form>
     )
 }

@@ -6,11 +6,12 @@ import { ProfileFragment } from '../../graphql/fragments'
 import { DELETE_USER } from '../../graphql/mutations'
 import './styles.css'
 import gsap from 'gsap'
+import Loading from '../Loading'
 
 const Profile = () => {
     const { userId, setUserLoggedIn } = useContext(UserLoggedInContext)
     const profileData = client.readFragment({ id: `User:${userId}`, fragment: ProfileFragment })
-    const [deleteUser] = useMutation(DELETE_USER)
+    const [deleteUser, { loading }] = useMutation(DELETE_USER)
     const [confirmActive, setConfirmActive] = useState(false)
     const root = useRef(null)
 
@@ -73,6 +74,7 @@ const Profile = () => {
                 :
                     <button className={`${className}_delete`} onClick={handleDeleteClickOne}>Delete Account</button>
                 }
+                <Loading loading={loading} />
             </div>
         </div>
     )

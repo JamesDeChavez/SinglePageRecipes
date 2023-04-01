@@ -61,7 +61,7 @@ export const EditRecipeFormContext = React.createContext<{
 const EditRecipeForm = () => {
     const { recipeSelected, setRecipeSelected, setEditRecipeActive } = useContext(RecipeBookContext)
     const { userId } = useContext(UserLoggedInContext)
-    const [editRecipe] = useMutation(EDIT_RECIPE)
+    const [editRecipe, { loading }] = useMutation(EDIT_RECIPE)
     const currentRecipes = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment })
 
     const SECTIONS = ['INSTRUCTIONS', 'INGREDIENTS']
@@ -180,10 +180,10 @@ const EditRecipeForm = () => {
         ingredients, setIngredients, ingName, setIngName, ingAmount, setIngAmount, instructions, setInstructions, addStepActive, setAddStepActive, editStepActive, setEditStepActive, addIngredientActive, setAddIngredientActive, editIngredientActive, setEditIngredientActive, action, setAction, items, setItems, time, setTime, description, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, recipeIngredients, setRecipeIngredients, selectedStep, setSelectedStep, selectedItem, setSelectedItem
     }} >
         <div className={className} ref={root} >
-            <EditRecipeNavbar handleUpdateRecipe={handleUpdateRecipe} />
+            <EditRecipeNavbar handleUpdateRecipe={handleUpdateRecipe} loading={loading} />
             <div className={`${className}_midSection`}>
                 <EditRecipeVideoSection title={title} setTitle={setTitle} />
-                <EditRecipeActions handleUpdateRecipe={handleUpdateRecipe} root={root} />
+                <EditRecipeActions handleUpdateRecipe={handleUpdateRecipe} root={root} loading={loading} />
                 <div className={`${className}_main`}>
                     {{
                         [SECTIONS[0]]: <EditRecipeInstructions />,

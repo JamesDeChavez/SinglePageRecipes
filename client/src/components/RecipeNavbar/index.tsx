@@ -8,6 +8,7 @@ import { DELETE_RECIPE } from "../../graphql/mutations"
 import { useMutation } from '@apollo/client'
 import { Recipe } from '../../utils/interfaces'
 import './styles.css'
+import Loading from '../Loading'
 
 interface Props {
     selectedRecipe: Recipe
@@ -17,7 +18,7 @@ const RecipeNavbar: React.FC<Props> = ({ selectedRecipe }) => {
     const { setRecipeSelected, setEditRecipeActive } = useContext(RecipeBookContext)
     const { userId } = useContext(UserLoggedInContext)
     const currentRecipes = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment })
-    const [deleteRecipe] = useMutation(DELETE_RECIPE)
+    const [deleteRecipe, { loading }] = useMutation(DELETE_RECIPE)
     const [optionsVisible, setOptionsVisible] = useState(false)
     const root = useRef(null)
 
@@ -106,7 +107,10 @@ const RecipeNavbar: React.FC<Props> = ({ selectedRecipe }) => {
             </button>
             <div className={`${className}_optionsContainer`} style={{ display: optionsVisible ? 'grid' : 'none' }} >
                 <button className={`${className}_option`} onClick={handleEditClick}>Edit Recipe</button>
-                <button className={`${className}_option`} onClick={handleDeleteClick} >Delete Recipe</button>
+                <button className={`${className}_option`} onClick={handleDeleteClick} >
+                    <span style={{display: loading ? 'none' : 'block' }} >Delete Recipe</span>
+                    <Loading loading={loading} />
+                </button>
             </div>
         </div>
     )

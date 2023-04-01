@@ -11,7 +11,7 @@ interface Props {
     setOrderActive: React.Dispatch<React.SetStateAction<boolean>>,
     shoppingList: Ingredient[],
     setShoppingList: React.Dispatch<React.SetStateAction<Ingredient[]>>,
-    root: React.MutableRefObject<null>
+    root: React.MutableRefObject<null>,
 }
 
 const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingList, setShoppingList, root }) => {

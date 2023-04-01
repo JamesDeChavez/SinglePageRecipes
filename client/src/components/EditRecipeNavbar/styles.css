@@ -17,6 +17,14 @@
     padding: 0.1rem 0.2rem;
 }
 
+.EditRecipeNavbar > .Loading {
+    font-size: 0.8rem;
+}
+
+.EditRecipeNavbar > .Loading > svg {
+    width: 1.3rem;
+}
+
 @media screen and (min-width: 850px) {
     .EditRecipeNavbar_createButton {
         display: none;

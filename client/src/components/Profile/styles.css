@@ -21,8 +21,7 @@
 
 .Profile_text {
     display: flex;
-    gap: 7rem;
-    justify-content: space-between;
+    gap: 0.5rem;
 }
 
 .Profile_buttonsContainer {

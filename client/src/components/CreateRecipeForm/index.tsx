@@ -61,7 +61,7 @@ const CreateRecipeForm = () => {
     const { videoSelected } = useContext(CreateRecipeRenderContext)
     const { userId } = useContext(UserLoggedInContext)
     const [RENDERS, setRender] = useContext(AuthRenderContext)
-    const [createRecipe] = useMutation(CREATE_RECIPE)
+    const [createRecipe, { loading }] = useMutation(CREATE_RECIPE)
     const currentRecipes = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment })
 
     const SECTIONS = ['INSTRUCTIONS', 'INGREDIENTS']
@@ -143,10 +143,10 @@ const CreateRecipeForm = () => {
         ingredients, setIngredients, ingName, setIngName, ingAmount, setIngAmount, instructions, setInstructions, addStepActive, setAddStepActive, editStepActive, setEditStepActive, addIngredientActive, setAddIngredientActive, editIngredientActive, setEditIngredientActive, action, setAction, items, setItems, time, setTime, description, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, recipeIngredients, setRecipeIngredients, selectedStep, setSelectedStep, selectedItem, setSelectedItem
     }} >
         <div className={className} ref={root} >
-            <CreateRecipeNavbar handleCreateRecipe={handleCreateRecipe} />
+            <CreateRecipeNavbar handleCreateRecipe={handleCreateRecipe} loading={loading} />
             <div className={`${className}_midSection`}>
                 <CreateRecipeVideoSection title={title} setTitle={setTitle} />
-                <CreateRecipeActions handleCreateRecipe={handleCreateRecipe} root={root} />
+                <CreateRecipeActions handleCreateRecipe={handleCreateRecipe} root={root} loading={loading} />
                 <div className={`${className}_main`}>
                     {{
                         [SECTIONS[0]]: <CreateRecipeInstructions />,

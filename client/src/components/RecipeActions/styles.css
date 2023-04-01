@@ -66,3 +66,12 @@
 }
 
 }
+
+@media screen and (max-height: 700px) {
+ 
+.RecipeActions_leftButtonsContainer,
+.RecipeActions_rightButtonsContainer {
+    grid-template-columns: 1fr 1fr;
+}
+
+}
