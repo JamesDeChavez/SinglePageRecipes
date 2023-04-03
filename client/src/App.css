@@ -25,3 +25,9 @@ textarea, textarea::placeholder {
     font-family: 'Poppins', sans-serif;
     color:#FFFFFF;
 }
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}

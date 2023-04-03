@@ -61,3 +61,23 @@
 }
 
 }
+
+@media screen and (max-height: 700px) {
+ 
+.EditRecipeActions_addButtonsContainer {
+    grid-template-columns: 1fr 1fr;
+}
+
+.EditRecipeActions {
+    gap: 0.2rem;
+}
+
+.EditRecipeActions_textContainer {
+    gap: 0.2rem;
+}
+
+.EditRecipeActions_text {
+    font-size: 0.8rem;
+}
+
+}

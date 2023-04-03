@@ -1,4 +1,3 @@
-
 import { useQuery } from '@apollo/client'
 import gsap from 'gsap'
 import { useLayoutEffect } from 'react'

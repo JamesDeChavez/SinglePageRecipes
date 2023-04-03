@@ -74,4 +74,16 @@
     grid-template-columns: 1fr 1fr;
 }
 
+.RecipeActions {
+    gap: 0.2rem;
+}
+
+.RecipeActions_textContainer {
+    gap: 0.2rem;
+}
+
+.RecipeActions_text {
+    font-size: 0.8rem;
+}
+
 }
