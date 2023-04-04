@@ -33,9 +33,15 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient, s
             setGridTemplateRows(`repeat(${numberRows - 1}, 1fr)`)
             setGridTemplateRowsTwo(`auto ${numberRows - 1}fr 1fr auto`)
         }
-        else {
+        else if (windowSize[0] < 1250) {
             setEnd(numberRows)
             setNumberItemsDisplayed(numberRows)
+            setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
+            setGridTemplateRowsTwo(`auto 1fr auto`)
+        } 
+        else {
+            setEnd(numberRows*2)
+            setNumberItemsDisplayed(numberRows*2)
             setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
             setGridTemplateRowsTwo(`auto 1fr auto`)
         }
