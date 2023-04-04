@@ -42,7 +42,7 @@ const VideoSearchForm: React.FC<Props> = ({ setSearchResults, setSearchLoading }
                 const data = await res.json()
                 const newVideoState: Video = {
                     title: data.items[0].snippet.title,
-                    thumbnail: data.items[0].snippet.thumbnails.medium,
+                    thumbnail: data.items[0].snippet.thumbnails.medium.url,
                     channel: data.items[0].snippet.channelTitle,
                     videoId: data.items[0].id
                 };
@@ -68,9 +68,9 @@ const VideoSearchForm: React.FC<Props> = ({ setSearchResults, setSearchLoading }
                     })
                 });            
                 setSearchResults(newSearchResults)
-                setSearchLoading(true)
+                setSearchLoading(false)
             } catch (error) {
-                setSearchLoading(true)
+                setSearchLoading(false)
                 console.log(error)
             }
         }
