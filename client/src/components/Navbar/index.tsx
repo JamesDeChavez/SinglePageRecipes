@@ -11,7 +11,7 @@ const Navbar = () => {
     const [RENDERS_AUTH, setRender_Auth] = useContext(AuthRenderContext)
     const {userLoggedIn, setUserLoggedIn} = useContext(UserLoggedInContext)
 
-    const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, n: number) => {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, n: number) => {
         e.preventDefault()
         if (!userLoggedIn) setRender_Nonauth(RENDERS_NONAUTH[n])
         if (userLoggedIn && n === 0) setRender_Auth(RENDERS_AUTH[n])
@@ -25,22 +25,20 @@ const Navbar = () => {
     const className = 'Navbar'
     return (
         <div className={className}>
-            <div className={`${className}_logo`} onClick={(e) => handleClick(e, 0)}>
+            <button className={`${className}_logo`} onClick={(e) => handleClick(e, 0)}>
                 <img src={logoImage} alt="logoImage" className={`${className}_image`} />
-            </div>
+            </button>
 
             {userLoggedIn ?
                 <div className={`${className}_buttonsContainer`}>
-                    <div className={`${className}_button`} onClick={(e) => handleClick(e, 1)}>Log Out</div>
+                    <button className={`${className}_button`} onClick={(e) => handleClick(e, 1)}>Log Out</button>
                 </div>
             :
                 <div className={`${className}_buttonsContainer`}>
-                    <div className={`${className}_button`} onClick={(e) => handleClick(e, 1)}>Log In</div>
-                    <div className={`${className}_button`} onClick={(e) => handleClick(e, 2)}>Register</div>
+                    <button className={`${className}_button`} onClick={(e) => handleClick(e, 1)}>Log In</button>
+                    <button className={`${className}_button`} onClick={(e) => handleClick(e, 2)}>Register</button>
                 </div>
             }
-
-
         </div>
     )
 }
