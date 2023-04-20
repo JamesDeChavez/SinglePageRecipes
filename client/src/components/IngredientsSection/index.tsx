@@ -73,24 +73,24 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
     }
 
     const selectAll = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault();
-        const newState: Ingredient[] = [];
+        e.preventDefault()
+        const newState: Ingredient[] = []
         shoppingList.forEach(item => {
-            item.include = true;
-            newState.push(item);
-        });
-        setShoppingList(newState);
-    };
+            item.include = true
+            newState.push(item)
+        })
+        setShoppingList(newState)
+    }
 
     const unselectAll = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault();
-        const newState: Ingredient[] = [];
+        e.preventDefault()
+        const newState: Ingredient[] = []
         shoppingList.forEach(item => {
-            item.include = false;
-            newState.push(item);
-        });
-        setShoppingList(newState);
-    };
+            item.include = false
+            newState.push(item)
+        })
+        setShoppingList(newState)
+    }
 
     const url = `https://www.amazon.com/afx/ingredients/landing?tag=${data ? data.amazonTag : ''}`
     const value = JSON.stringify({ 

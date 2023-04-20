@@ -10,7 +10,6 @@ interface Props {
 const VideoSection: React.FC<Props> = ({ title, videoId }) => {
     const root = useRef(null)
 
-
     useLayoutEffect(() => {
         const gsapContext = gsap.context(() => {
             gsap.fromTo(`.${className}_iframe`,{x: -1000 }, { duration: 0.5, x: 0 })
