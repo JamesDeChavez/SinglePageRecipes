@@ -99,4 +99,23 @@ describe('IngredientsSection', () => {
         userEvent.click(cancelButton)
         expect(mockSetOrderActive).toBeCalled()
     })
+    it('should render order button', () => {
+        render(
+            <MockedProvider addTypename={false} mocks={mockData}>
+                <IngredientsSection {...props} />
+            </MockedProvider>
+        )
+        const orderButton = screen.getByRole('button', {name: 'Order Ingredients'})
+        expect(orderButton).toBeInTheDocument()
+    })
+    it('should handle order click when user clicks order button', () => {
+        render(
+            <MockedProvider addTypename={false} mocks={mockData}>
+                <IngredientsSection {...props} />
+            </MockedProvider>
+        )
+        const orderButton = screen.getByRole('button', {name: 'Order Ingredients'})
+        userEvent.click(orderButton)
+        expect(mockSetOrderActive).toBeCalled()
+    })
 })
