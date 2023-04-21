@@ -186,7 +186,7 @@ const EditRecipeForm = () => {
                 <EditRecipeActions handleUpdateRecipe={handleUpdateRecipe} root={root} loading={loading} />
                 <div className={`${className}_main`}>
                     {{
-                        [SECTIONS[0]]: <EditRecipeInstructions />, //test this next
+                        [SECTIONS[0]]: <EditRecipeInstructions />,
                         [SECTIONS[1]]: <EditRecipeIngredients />
                     }[sectionVisible]}
                 </div>

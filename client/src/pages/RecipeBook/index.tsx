@@ -32,7 +32,7 @@ const RecipeBookPage = () => {
             
             : recipeSelected && editRecipeActive ?
                 <div className={`${className}_editRecipeContainer`}>
-                    <EditRecipeForm /> {/*test this next */}
+                    <EditRecipeForm />
                 </div>
             :
                 <div className={`${className}_recipeListContainer`}>
