@@ -164,8 +164,7 @@ const CreateRecipeForm = () => {
                     items={items} setItems={setItems}
                     time={time} setTime={setTime}
                     description={description} setDescription={setDescription}
-                    ingredientName={ingredientName} setIngredientName={setIngredientName}
-                    ingredientAmount={ingredientAmount} setIngredientAmount={setIngredientAmount}
+                    setIngredientName={setIngredientName} setIngredientAmount={setIngredientAmount}
                     recipeIngredients={recipeIngredients} setRecipeIngredients={setRecipeIngredients}
                     setInstructions={setInstructions} setAddStepActive={setAddStepActive}
                 />

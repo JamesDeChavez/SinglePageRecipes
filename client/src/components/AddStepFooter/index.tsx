@@ -6,8 +6,7 @@ interface Props {
     items: string[], setItems: React.Dispatch<React.SetStateAction<string[]>>,
     time: string, setTime: React.Dispatch<React.SetStateAction<string>>,
     description: string, setDescription: React.Dispatch<React.SetStateAction<string>>,
-    ingredientName: string, setIngredientName: React.Dispatch<React.SetStateAction<string>>,
-    ingredientAmount: string, setIngredientAmount: React.Dispatch<React.SetStateAction<string>>,
+    setIngredientName: React.Dispatch<React.SetStateAction<string>>, setIngredientAmount: React.Dispatch<React.SetStateAction<string>>,
     recipeIngredients: Ingredient[], setRecipeIngredients: React.Dispatch<React.SetStateAction<Ingredient[]>>,
     setInstructions: React.Dispatch<React.SetStateAction<Instruction[]>>, setAddStepActive: React.Dispatch<React.SetStateAction<boolean>> 
 
