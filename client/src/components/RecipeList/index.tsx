@@ -9,7 +9,7 @@ import './styles.css'
 
 const RecipeList = () => {
     const { userId } = useContext(UserLoggedInContext)
-    const { recipes } = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment })
+    const { recipes } = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment }) ?? { recipes: [] }
     const [search, setSearch] = useState('')
     const root = useRef(null)
 

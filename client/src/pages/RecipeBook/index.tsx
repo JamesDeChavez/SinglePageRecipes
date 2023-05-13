@@ -38,7 +38,7 @@ const RecipeBookPage = () => {
                 <div className={`${className}_recipeListContainer`}>
                     <div className={`${className}_overlay`}></div>
                     <Navbar/>
-                    <RecipeList/> {/*still need to test this*/}
+                    <RecipeList/>
                     <AuthFooter/>
                 </div>
             }

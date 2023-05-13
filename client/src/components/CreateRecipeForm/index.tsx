@@ -15,9 +15,9 @@ import CreateRecipeNavbar from "../CreateRecipeNavbar"
 import CreateRecipeVideoSection from "../CreateRecipeVideoSection"
 import RecipeFooter from "../RecipeFooter"
 import CreateRecipeActions from "../CreateRecipeActions"
-import './styles.css'
 import EditStepFooter from "../EditStepFooter"
 import EditItemFooter from "../EditItemFooter"
+import './styles.css'
 
 export const CreateRecipeFormContext = React.createContext<{
     instructions: Instruction[], setInstructions: React.Dispatch<React.SetStateAction<Instruction[]>>,
