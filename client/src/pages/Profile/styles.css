@@ -5,7 +5,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     background-color: #070b0b;
-    background-image: url('../../assets/background.jpg');
+    background-image: url('../../assets/background.webp');
     background-size: cover;
     background-position: center;
 }

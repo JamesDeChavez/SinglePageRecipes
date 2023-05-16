@@ -4,7 +4,7 @@
     position: relative;
     max-height: 100vh;
     overflow: hidden;
-    background-image: url('../../assets/background.jpg');
+    background-image: url('../../assets/background.webp');
     background-size: cover;
     background-position: center;
 }
