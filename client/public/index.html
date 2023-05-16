@@ -31,6 +31,15 @@
           background-image: url('./background.webp');
         }
       }
+      @media screen and (max-width: 800px){
+        .Hero, .LoginForm, .RegisterForm, .VideoSearch, 
+        .ProfilePage, .RecipeBookPage_recipeListContainer {
+          background-image: url('./backgroundMobile.jpg');
+          @supports (background-image: url('./backgroundMobile.webp')) {
+            background-image: url('./backgroundMobile.webp');
+          }
+        }
+      }
     </style>
     <title>Single Page Recipes</title>
   </head>
