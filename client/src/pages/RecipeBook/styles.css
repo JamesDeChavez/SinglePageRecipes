@@ -14,12 +14,15 @@
 .RecipeBookPage_recipeListContainer {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    background-image: url('../../assets/background.webp');
+    background-image: url('../../assets/background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     padding-bottom: 8rem;
+    @supports (background-image: url('../../assets/background.webp')) {
+        background-image: url('../../assets/background.webp');
+    }
 }
 
 .RecipeBookPage_overlay{

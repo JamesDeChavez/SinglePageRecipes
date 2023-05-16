@@ -5,9 +5,12 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     background-color: #070b0b;
-    background-image: url('../../assets/background.webp');
+    background-image: url('../../assets/background.jpg');
     background-size: cover;
     background-position: center;
+    @supports (background-image: url('../../assets/background.webp')) {
+        background-image: url('../../assets/background.webp');
+    }
 }
 
 .ProfilePage_overlay{
