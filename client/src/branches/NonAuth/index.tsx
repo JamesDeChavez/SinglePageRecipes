@@ -1,9 +1,6 @@
-import React, { Suspense, lazy, useState } from "react"
+import React, { useState } from "react"
 import LandingPage from "../../pages/Landing"
-import Loading from "../../components/Loading"
-import SuspenseLoad from "../../components/SuspenseLoad"
-
-const Sample = lazy(() => import('../../pages/Sample'))
+import SamplePage from "../../pages/Sample"
 
 export const NonAuthRenderContext = React.createContext<{
     RENDERS: string[],
@@ -22,9 +19,7 @@ const NonAuthBranch = () => {
     return (
     <NonAuthRenderContext.Provider value={{RENDERS, render, setRender}}>
         {render === RENDERS[3] ?
-            <Suspense fallback={<SuspenseLoad/>} >
-                <Sample/>
-            </Suspense>        
+            <SamplePage/> 
         :
             <LandingPage/>
         }
