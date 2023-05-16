@@ -10,6 +10,9 @@
 
 .Navbar_logo {
     display: flex;
+    color: #FFFFFF;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5rem;
 }
 
 .Navbar_logo:hover {

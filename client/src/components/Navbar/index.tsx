@@ -3,7 +3,7 @@ import { client } from '../..'
 import { UserLoggedInContext } from '../../App'
 import { AuthRenderContext } from '../../branches/Auth'
 import { NonAuthRenderContext } from '../../branches/NonAuth'
-import logoImage from '../../assets/logo.png'
+import logoImage from '../../assets/logo.jpg'
 import './styles.css'
 
 const Navbar = () => {
@@ -25,8 +25,8 @@ const Navbar = () => {
     const className = 'Navbar'
     return (
         <div className={className}>
-            <button className={`${className}_logo`} onClick={(e) => handleClick(e, 0)}>
-                <img src={logoImage} alt="logoImage" className={`${className}_image`} />
+            <button className={`${className}_logo`} onClick={(e) => handleClick(e, 0)} >
+                SP Recipes
             </button>
 
             {userLoggedIn ?
