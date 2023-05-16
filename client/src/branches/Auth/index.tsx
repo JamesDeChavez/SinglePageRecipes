@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
-import CreateRecipePage from '../../pages/CreateRecipe'
-import ProfilePage from '../../pages/Profile'
-import RecipeBookPage from '../../pages/RecipeBook'
+import React, { Suspense, lazy, useState } from 'react'
+// import CreateRecipePage from '../../pages/CreateRecipe'
+// import ProfilePage from '../../pages/Profile'
+// import RecipeBookPage from '../../pages/RecipeBook'
+import SuspenseLoad from '../../components/SuspenseLoad'
+
+const ProfilePage = lazy(() => import('../../pages/Profile'))
+const RecipeBookPage = lazy(() => import('../../pages/RecipeBook'))
+const CreateRecipePage = lazy(() => import('../../pages/CreateRecipe'))
 
 export const AuthRenderContext = React.createContext<[string[], React.Dispatch<React.SetStateAction<string>>, string]>([[], () => {}, ''])
 
@@ -11,11 +16,13 @@ const AuthBranch = () => {
 
     return (
     <AuthRenderContext.Provider value={[RENDERS, setRender, render]}>
-        {{
-            [RENDERS[0]]: <RecipeBookPage/>,
-            [RENDERS[1]]: <CreateRecipePage/>,
-            [RENDERS[2]]: <ProfilePage/>
-        }[render]}
+        <Suspense fallback={<SuspenseLoad/>} >
+            {{
+                [RENDERS[0]]: <RecipeBookPage/>,
+                [RENDERS[1]]: <CreateRecipePage/>,
+                [RENDERS[2]]: <ProfilePage/>
+            }[render]}
+        </Suspense>
     </AuthRenderContext.Provider>
     )
 }

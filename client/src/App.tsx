@@ -1,12 +1,9 @@
-import React, { useEffect, useState, useTransition, lazy, Suspense } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 import NonAuthBranch from './branches/NonAuth';
+import AuthBranch from './branches/Auth';
 import { useQuery } from '@apollo/client';
 import { RETURNING_USER } from './graphql/queries';
-import Loading from './components/Loading';
 import './App.css';
-import SuspenseLoad from './components/SuspenseLoad';
-
-const AuthBranch = lazy(() => import('./branches/Auth'))
 
 export const UserLoggedInContext = React.createContext<{
   userLoggedIn: boolean, setUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
@@ -51,9 +48,7 @@ const App = () => {
       {!userLoggedIn ?
         <NonAuthBranch/>
       :
-        <Suspense fallback={<SuspenseLoad/>}>
-          <AuthBranch/>
-        </Suspense>
+        <AuthBranch/>
       }
       </UserLoggedInContext.Provider>
     </div>
