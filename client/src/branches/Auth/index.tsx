@@ -1,7 +1,4 @@
 import React, { Suspense, lazy, useState } from 'react'
-// import CreateRecipePage from '../../pages/CreateRecipe'
-// import ProfilePage from '../../pages/Profile'
-// import RecipeBookPage from '../../pages/RecipeBook'
 import SuspenseLoad from '../../components/SuspenseLoad'
 
 const ProfilePage = lazy(() => import('../../pages/Profile'))
