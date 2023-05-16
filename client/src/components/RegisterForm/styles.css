@@ -4,11 +4,11 @@
     position: relative;
     max-height: 100vh;
     overflow: hidden;
-    background-image: url('../../assets/background.jpg');
+    background-image: url('../../../public/background.jpg');
     background-size: cover;
     background-position: center;
-    @supports (background-image: url('../../assets/background.webp')) {
-        background-image: url('../../assets/background.webp');
+    @supports (background-image: url('../../../public/background.webp')) {
+        background-image: url('../../../public/background.webp');
     }
 }
 
