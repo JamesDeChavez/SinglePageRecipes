@@ -25,6 +25,15 @@
         type="text/css"
       >
     </noscript>
+    <style>
+      .Hero, .LoginForm, .RegisterForm, .VideoSearch, 
+      .ProfilePage, .RecipeBookPage_recipeListContainer {
+        background-image: url('./background.jpg');
+        @supports (background-image: url('./background.webp')) {
+          background-image: url('./background.webp');
+        }
+      }
+    </style>
     <title>Single Page Recipes</title>
   </head>
   <body>

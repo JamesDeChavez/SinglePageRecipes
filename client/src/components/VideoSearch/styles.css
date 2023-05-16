@@ -2,14 +2,10 @@
     display: grid;
     grid-template-rows: auto 1fr;
     overflow: hidden;
-    background-image: url('../../../public/background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    @supports (background-image: url('../../../public/background.webp')) {
-        background-image: url('../../../public/background.webp');
-    }
 }
 
 .VideoSearch_main {
