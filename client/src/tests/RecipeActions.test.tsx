@@ -42,14 +42,14 @@ describe('RecipeActions', () => {
         const orderButton = screen.getByRole('button', { name: /Order Ingredients/i })
         expect(orderButton).toBeInTheDocument()
     })
-    it('should setOrderActive when user clicks Order Ingredients button', () => {
+    it('should setOrderActive when user clicks Order Ingredients button', async () => {
         render(
             <MockedProvider addTypename={false} mocks={mockData} >
                 <RecipeActions orderActive={false} setOrderActive={mockSetOrderActive} shoppingList={[]} setShoppingList={mockSetShoppingList} root={result.current} />
             </MockedProvider>
         )
         const orderButton = screen.getByRole('button', { name: /Order Ingredients/i })
-        userEvent.click(orderButton)
+        await userEvent.click(orderButton)
         expect(mockSetOrderActive).toBeCalled()
     })
     it('should render instructions text and 4 buttons, if orderActive = true', () => {
@@ -63,7 +63,7 @@ describe('RecipeActions', () => {
         expect(instructionsElement).toBeInTheDocument()
         expect(buttonElements).toHaveLength(4)
     })
-    it('should setShoppingList when user clicks select buttons', () => {
+    it('should setShoppingList when user clicks select buttons', async () => {
         render(
             <MockedProvider addTypename={false} mocks={mockData} >
                 <RecipeActions orderActive={true} setOrderActive={mockSetOrderActive} shoppingList={[]} setShoppingList={mockSetShoppingList} root={result.current} />
@@ -71,8 +71,8 @@ describe('RecipeActions', () => {
         )
         const selectButton = screen.getByRole('button', { name: 'Select All'})
         const unselectButton = screen.getByRole('button', { name: 'Unselect All'})
-        userEvent.click(selectButton)
-        userEvent.click(unselectButton)
+        await userEvent.click(selectButton)
+        await userEvent.click(unselectButton)
         expect(mockSetShoppingList).toBeCalledTimes(2)
     })
 })

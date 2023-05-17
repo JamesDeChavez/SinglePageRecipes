@@ -56,10 +56,10 @@ describe('EditStepForm', () => {
         const addButton = screen.getByRole('button', { name: 'Add' })
         expect(addButton).toBeInTheDocument()
     })
-    it('should trigger 4 setState actions when user clicks add button', () => {
+    it('should trigger 4 setState actions when user clicks add button', async () => {
         render(<EditStepForm {...props} />)
         const addButton = screen.getByRole('button', { name: 'Add' })
-        userEvent.click(addButton)
+        await userEvent.click(addButton)
         expect(mockSetItems).toBeCalled()
         expect(mockSetRecipeIngredients).toBeCalled()
         expect(mockSetIngredientName).toBeCalled()

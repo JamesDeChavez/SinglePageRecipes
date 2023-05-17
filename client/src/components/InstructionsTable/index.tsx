@@ -78,7 +78,7 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
                 })}
             </div>
         
-            <button className={`${className}_addStepButton`} onClick={handleAddStepClick}style={{ display: handleAddStepClick ? 'block' : 'none' }} ref={buttonRef} >Add Step</button>
+            <button className={`${className}_addStepButton`} onClick={handleAddStepClick} style={{ display: handleAddStepClick ? 'block' : 'none' }} ref={buttonRef} >Add Step</button>
 
             <div className={`${className}_pageButtonsContainer`}> 
                 <button className={`${className}_pageButton`} onClick={handlePrevClick}>Prev</button>

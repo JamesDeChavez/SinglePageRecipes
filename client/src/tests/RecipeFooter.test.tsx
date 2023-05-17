@@ -13,12 +13,12 @@ describe('RecipeFooter', () => {
         expect(instructionsButton).toBeInTheDocument()
         expect(ingredientsButton).toBeInTheDocument()
     })
-    it('should setSectionVisible when user clicks instructions button', () => {
+    it('should setSectionVisible when user clicks instructions button', async () => {
         render(<RecipeFooter sectionVisible={'INSTRUCTIONS'} setSectionVisible={mockSetSectionVisible} />)
         const instructionsButton = screen.getByRole('button', {name: 'Instructions'})
         const ingredientsButton = screen.getByRole('button', {name: 'Ingredients'})
-        userEvent.click(instructionsButton)
-        userEvent.click(ingredientsButton)
+        await userEvent.click(instructionsButton)
+        await userEvent.click(ingredientsButton)
         expect(mockSetSectionVisible).toBeCalledTimes(2)
     })
 })

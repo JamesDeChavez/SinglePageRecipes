@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar'
 
 
 describe('Navbar', () => {
-    it('should render logo img, and login/register nav buttons if logged out', () => {        
+    it('should render logo, and login/register nav buttons if logged out', () => {        
         render(
             <UserLoggedInContext.Provider value={{
                 userLoggedIn: false, setUserLoggedIn: () => {},
@@ -16,7 +16,7 @@ describe('Navbar', () => {
                 <Navbar/>
             </UserLoggedInContext.Provider>
         )
-        const logoElement = screen.getByRole('img')
+        const logoElement = screen.getByRole('heading')
         const loginButton = screen.getByRole('button', { name: /Log In/i })
         const registerButton = screen.getByRole('button', { name: /Register/i })
 

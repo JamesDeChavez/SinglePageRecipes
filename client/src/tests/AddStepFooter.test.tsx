@@ -30,10 +30,10 @@ describe('AddStepFooter', () => {
         expect(addButton).toBeInTheDocument()
         expect(cancelButton).toBeInTheDocument()
     })
-    it('should trigger 9 setState actions when the user clicks add button', () => {
+    it('should trigger 9 setState actions when the user clicks add button', async () => {
         render(<AddStepFooter {...mockProps} />)
         const addButton = screen.getByRole('button', {name: 'Add Step'})
-        userEvent.click(addButton)
+        await userEvent.click(addButton)
         expect(mockSetInstructions).toBeCalled()
         expect(mockSetAction).toBeCalled()
         expect(mockSetItems).toBeCalled()
@@ -44,10 +44,10 @@ describe('AddStepFooter', () => {
         expect(mockSetIngredientAmount).toBeCalled()
         expect(mockSetAddStepActive).toBeCalled()
     })
-    it('should trigger 8 setState actions when the user clicks cancel button', () => {
+    it('should trigger 8 setState actions when the user clicks cancel button', async () => {
         render(<AddStepFooter {...mockProps} />)
         const cancelButton = screen.getByRole('button', {name: 'Cancel'})
-        userEvent.click(cancelButton)
+        await userEvent.click(cancelButton)
         expect(mockSetAction).toBeCalled()
         expect(mockSetItems).toBeCalled()
         expect(mockSetTime).toBeCalled()

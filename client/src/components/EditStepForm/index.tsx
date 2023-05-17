@@ -51,7 +51,9 @@ const EditStepForm: React.FC<Props> = ({
 
     const handleIngredientNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!ingredientName.length) setIngredientName(e.target.value.toUpperCase())
-        else if (ingredientName.charAt(ingredientName.length - 1) === ' ' && e.target.value.length >= ingredientName.length) setIngredientName(e.target.value.substring(0, e.target.value.length - 1).concat(e.target.value.charAt(e.target.value.length - 1).toUpperCase()))
+        else if (ingredientName.charAt(ingredientName.length - 1) === ' ' && e.target.value.length >= ingredientName.length) { 
+            setIngredientName(e.target.value.substring(0, e.target.value.length - 1).concat(e.target.value.charAt(e.target.value.length - 1).toUpperCase()))
+        }
         else setIngredientName(e.target.value)        
     }
 

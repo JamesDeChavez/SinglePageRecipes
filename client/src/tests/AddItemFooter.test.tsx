@@ -21,19 +21,19 @@ describe('AddItemFooter', () => {
         expect(addButton).toBeInTheDocument()
         expect(cancelButton).toBeInTheDocument()
     })
-    it('should trigger 4 setState actions when user clicks add button', () => {
+    it('should trigger 4 setState actions when user clicks add button', async () => {
         render(<AddItemFooter {...mockProps} />)
         const addButton = screen.getByRole('button', {name: 'Add Step'})
-        userEvent.click(addButton)
+        await userEvent.click(addButton)
         expect(mockSetIngredients).toBeCalled()
         expect(mockSetIngName).toBeCalled()
         expect(mockSetIngAmount).toBeCalled()
         expect(mockSetAddIngredientActive).toBeCalled()
     })
-    it('should trigger 3 setState actions when user clicks cancel button', () => {
+    it('should trigger 3 setState actions when user clicks cancel button', async () => {
         render(<AddItemFooter {...mockProps} />)
         const cancelButton = screen.getByRole('button', {name: 'Cancel'})
-        userEvent.click(cancelButton)
+        await userEvent.click(cancelButton)
         expect(mockSetIngName).toBeCalled()
         expect(mockSetIngAmount).toBeCalled()
         expect(mockSetAddIngredientActive).toBeCalled()

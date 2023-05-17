@@ -63,7 +63,7 @@ describe('RecipeNavbar', () => {
         expect(editButton).toBeInTheDocument()
         expect(deleteButton).toBeInTheDocument()
     })
-    it('should render setRecipeSelected when return button is clicked', () => { 
+    it('should render setRecipeSelected when return button is clicked', async () => { 
         render(
             <MockedProvider addTypename={false} mocks={mockData} >
                 <RecipeBookContext.Provider value={mockContextValues} >
@@ -72,10 +72,10 @@ describe('RecipeNavbar', () => {
             </MockedProvider>
         )
         const returnButton = screen.getByRole('button', {name: '< Return to Recipe Book'})
-        userEvent.click(returnButton)
+        await userEvent.click(returnButton)
         expect(mockSetRecipeSelected).toBeCalled()
     })
-    it('should setEditRecipeActive when user clicks edit button', () => {
+    it('should setEditRecipeActive when user clicks edit button', async () => {
         render(
             <MockedProvider addTypename={false} mocks={mockData} >
                 <RecipeBookContext.Provider value={mockContextValues} >
@@ -84,7 +84,7 @@ describe('RecipeNavbar', () => {
             </MockedProvider>
         )
         const editButton = screen.getByText('Edit Recipe')
-        userEvent.click(editButton)
+        await userEvent.click(editButton)
         expect(mockSetEditRecipeActive).toBeCalled()
     })
 })

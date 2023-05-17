@@ -65,7 +65,7 @@ describe('IngredientsSection', () => {
             </MockedProvider>
         )
         const selectButton = screen.getByRole('button', {name: 'Select All'})
-        userEvent.click(selectButton)
+        selectButton.click()
         expect(mockSetShoppingList).toBeCalled()
     })
     it('should setShoppingList when user clicks unselect button', () => {
@@ -75,7 +75,7 @@ describe('IngredientsSection', () => {
             </MockedProvider>
         )
         const unselectButton = screen.getByRole('button', {name: 'Unselect All'})
-        userEvent.click(unselectButton)
+        unselectButton.click()
         expect(mockSetShoppingList).toBeCalled()
     })
     it('should render submit and cancel buttons', () => {
@@ -96,7 +96,7 @@ describe('IngredientsSection', () => {
             </MockedProvider>
         )
         const cancelButton = screen.getByRole('button', {name: 'Cancel'})
-        userEvent.click(cancelButton)
+        cancelButton.click()
         expect(mockSetOrderActive).toBeCalled()
     })
     it('should render order button', () => {
@@ -115,7 +115,7 @@ describe('IngredientsSection', () => {
             </MockedProvider>
         )
         const orderButton = screen.getByRole('button', {name: 'Order Ingredients'})
-        userEvent.click(orderButton)
+        orderButton.click()
         expect(mockSetOrderActive).toBeCalled()
     })
 })

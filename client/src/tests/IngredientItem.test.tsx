@@ -29,10 +29,10 @@ describe('IngredientItem', () => {
         expect(nameElement).toBeInTheDocument()
         expect(amountElement).toBeInTheDocument()
     })
-    it('should setShoppingList when user clicks on ingredientItem', () => {
+    it('should setShoppingList when user clicks on ingredientItem', async () => {
         render(<IngredientItem {...props} />)
         const itemElement = screen.getByText(mockItem.name).closest('div')!
-        userEvent.click(itemElement)
+        await userEvent.click(itemElement)
         expect(mockSetShoppingList).toBeCalled()
     })
 })

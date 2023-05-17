@@ -3,7 +3,6 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import IngredientsTable from '../components/IngredientsTable'
 
-const mockIngredients = [{name: 'Onion', amount: '1/4 units'}]
 const mockHandleAddIngredient = jest.fn()
 const mockSetIngName = jest.fn()
 const mockSetIngAmount = jest.fn()
@@ -29,7 +28,7 @@ describe('IngredientsTable', () => {
     it('should handleAddIngredient when user clicks add button', () => {
         render(<IngredientsTable {...mockProps} />)
         const addButton = screen.getByRole('button', {name: 'Add Ingredient'})
-        userEvent.click(addButton)
+        addButton.click()
         expect(mockHandleAddIngredient).toBeCalled()
     })
     it('should render page buttons', () => {

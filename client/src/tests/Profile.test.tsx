@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { UserLoggedInContext } from '../App'
-import ProfilePage from '../pages/Profile'
 import { MockedProvider } from '@apollo/client/testing'
 import { DELETE_USER } from '../graphql/mutations'
+import Profile from '../components/Profile'
 
 const mockData = [
     {
@@ -30,12 +30,12 @@ const mockContext = {
     windowSize: []
 }
 
-describe('ProfilePage', () => {
+describe('Profile', () => {
     it('should render header', () => {
         render(
             <MockedProvider mocks={mockData} >
                 <UserLoggedInContext.Provider value={mockContext}>
-                    <ProfilePage />
+                    <Profile />
                 </UserLoggedInContext.Provider>
             </MockedProvider>
         )
@@ -46,7 +46,7 @@ describe('ProfilePage', () => {
         render(
             <MockedProvider mocks={mockData} >
                 <UserLoggedInContext.Provider value={mockContext}>
-                    <ProfilePage />
+                    <Profile />
                 </UserLoggedInContext.Provider>
             </MockedProvider>
         )
@@ -61,7 +61,7 @@ describe('ProfilePage', () => {
         render(
             <MockedProvider mocks={mockData} >
                 <UserLoggedInContext.Provider value={mockContext}>
-                    <ProfilePage />
+                    <Profile />
                 </UserLoggedInContext.Provider>
             </MockedProvider>
         )

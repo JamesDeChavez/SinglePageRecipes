@@ -56,7 +56,7 @@ describe('EditRecipeActions', () => {
         expect(addInstructionButton).toBeInTheDocument()
         expect(addIngredientButton).toBeInTheDocument()
     })
-    it('should handleAddClick when user click add buttons', () => {
+    it('should handleAddClick when user click add buttons', async () => {
         render(
             <EditRecipeFormContext.Provider value={mockValues} >
                 <EditRecipeActions {...mockProps} />
@@ -64,8 +64,8 @@ describe('EditRecipeActions', () => {
         )
         const addInstructionButton = screen.getByRole('button', { name: 'Add Instruction'})
         const addIngredientButton = screen.getByRole('button', { name: 'Add Ingredient'})
-        userEvent.click(addInstructionButton)
-        userEvent.click(addIngredientButton)
+        await userEvent.click(addInstructionButton)
+        await userEvent.click(addIngredientButton)
         expect(mockSetAddIngredientActive).toBeCalled()
         expect(mockSetAddStepActive).toBeCalled()
     })
@@ -78,14 +78,14 @@ describe('EditRecipeActions', () => {
         const updateButton = screen.getByRole('button', { name: 'Update Recipe'})
         expect(updateButton).toBeInTheDocument()
     })
-    it('should handleUpdateRecipe when user clicks update button', () => {
+    it('should handleUpdateRecipe when user clicks update button', async () => {
         render(
             <EditRecipeFormContext.Provider value={mockValues} >
                 <EditRecipeActions {...mockProps} />
             </EditRecipeFormContext.Provider>
         )
         const updateButton = screen.getByRole('button', { name: 'Update Recipe'})
-        userEvent.click(updateButton)
+        await userEvent.click(updateButton)
         expect(mockHandleUpdateRecipe).toBeCalled()
     })
     it('should render addStep and cancelAddStep button', () => {
@@ -99,14 +99,14 @@ describe('EditRecipeActions', () => {
         expect(addStepButton).toBeInTheDocument()
         expect(cancelStepButton).toBeInTheDocument()
     })
-    it('should handleAddStep click when user click add step button', () => {
+    it('should handleAddStep click when user click add step button', async () => {
         render(
             <EditRecipeFormContext.Provider value={{...mockValues, addStepActive: true}} >
                 <EditRecipeActions {...mockProps} />
             </EditRecipeFormContext.Provider>
         )
         const addStepButton = screen.getByRole('button', { name: 'Submit Instruction'})
-        userEvent.click(addStepButton)
+        await userEvent.click(addStepButton)
         expect(mockSetAddStepActive).toBeCalled()
         
     })
@@ -121,14 +121,14 @@ describe('EditRecipeActions', () => {
         expect(editStepButton).toBeInTheDocument()
         expect(cancelStepButton).toBeInTheDocument()
     })
-    it('should handleEditStep click if user click edit step button', () => {
+    it('should handleEditStep click if user click edit step button', async () => {
         render(
             <EditRecipeFormContext.Provider value={{...mockValues, editStepActive: true}} >
                 <EditRecipeActions {...mockProps} />
             </EditRecipeFormContext.Provider>
         )
         const editStepButton = screen.getByRole('button', { name: 'Edit Instruction'})
-        userEvent.click(editStepButton)
+        await userEvent.click(editStepButton)
         expect(mockSetEditStepActive).toBeCalled()
     })
 })

@@ -30,14 +30,14 @@ describe('VideoSearchForm', () => {
         const searchInput = screen.getByPlaceholderText('Youtube Search or URL')
         expect(searchInput).toBeInTheDocument()
     })
-    it('should handle onChange when user types search', () => {
+    it('should handle onChange when user types search', async () => {
         render(
             <MockedProvider mocks={mockData} >
                 <VideoSearchForm setSearchResults={mockSetSearchResults} setSearchLoading={mockSetSearchLoading} />
             </MockedProvider>
         )
         const searchInput = screen.getByPlaceholderText('Youtube Search or URL')
-        userEvent.type(searchInput, 'Test Search')
+        await userEvent.type(searchInput, 'Test Search')
         waitFor(() => expect(searchInput).toHaveDisplayValue('Test Search'))
     })
     it('should render submit button', async () => {
@@ -58,8 +58,8 @@ describe('VideoSearchForm', () => {
         const searchInput = screen.getByPlaceholderText('Youtube Search or URL')
         const submitButton = await screen.findByRole('button')
         
-        userEvent.type(searchInput, 'Test Search')
-        userEvent.click(submitButton)
+        await userEvent.type(searchInput, 'Test Search')
+        await userEvent.click(submitButton)
         
         expect(mockSetSearchLoading).toBeCalled()
     })

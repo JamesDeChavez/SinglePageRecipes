@@ -33,24 +33,24 @@ describe('EditRecipeNavbar', () => {
         const updateButton = screen.getByRole('button', {name: 'Update Recipe'})
         expect(updateButton).toBeInTheDocument()
     })
-    it('should setEditRecipeActive when user clicks return button', () => {
+    it('should setEditRecipeActive when user clicks return button', async () => {
         render(
             <RecipeBookContext.Provider value={mockContextValues} >
                 <EditRecipeNavbar handleUpdateRecipe={mockHandleUpdateRecipe} loading={false} />
             </RecipeBookContext.Provider>
         )
         const returnButton = screen.getByRole('button', {name: '< Return to Recipe'})
-        userEvent.click(returnButton)
+        await userEvent.click(returnButton)
         expect(mockSetEditRecipeSelected).toBeCalled()
     })
-    it('should handleUpdateRecipe when user clicks update button', () => {
+    it('should handleUpdateRecipe when user clicks update button', async () => {
         render(
             <RecipeBookContext.Provider value={mockContextValues} >
                 <EditRecipeNavbar handleUpdateRecipe={mockHandleUpdateRecipe} loading={false} />
             </RecipeBookContext.Provider>
         )
         const updateButton = screen.getByRole('button', {name: 'Update Recipe'})
-        userEvent.click(updateButton)
+        await userEvent.click(updateButton)
         expect(mockHandleUpdateRecipe).toBeCalled()
     })
 })

@@ -22,19 +22,19 @@ describe('EditItemFooter', () => {
         expect(editButton).toBeInTheDocument()
         expect(cancelButton).toBeInTheDocument()
     })
-    it('should trigger 4 setState actions when user clicks edit button', () => {
+    it('should trigger 4 setState actions when user clicks edit button', async () => {
         render(<EditItemFooter {...mockProps} />)
         const editButton = screen.getByRole('button', {name: 'Edit Step'})
-        userEvent.click(editButton)
+        await userEvent.click(editButton)
         expect(mockSetIngredients).toBeCalled()
         expect(mockSetIngName).toBeCalled()
         expect(mockSetIngAmount).toBeCalled()
         expect(mockSetEditIngredientActive).toBeCalled()
     })
-    it('should trigger 3 setState actions when user clicks cancel button', () => {
+    it('should trigger 3 setState actions when user clicks cancel button', async () => {
         render(<EditItemFooter {...mockProps} />)
         const cancelButton = screen.getByRole('button', {name: 'Cancel'})
-        userEvent.click(cancelButton)
+        await userEvent.click(cancelButton)
         expect(mockSetIngName).toBeCalled()
         expect(mockSetIngAmount).toBeCalled()
         expect(mockSetEditIngredientActive).toBeCalled()

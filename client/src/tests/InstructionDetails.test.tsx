@@ -54,10 +54,10 @@ describe('InstructionDetails', () => {
         const returnButton = screen.getByRole('button', {name: '< Return to table'})
         expect(returnButton).toBeInTheDocument()
     })
-    it('should setDetailsActive when user clicks return to table button', () => {
+    it('should setDetailsActive when user clicks return to table button', async () => {
         render(<InstructionDetails {...props}  />)
         const returnButton = screen.getByRole('button', {name: '< Return to table'})
-        userEvent.click(returnButton)
+        await userEvent.click(returnButton)
         expect(mockSetDetailsActive).toBeCalled()
     })
     it('should render edit and delete buttons', () => {
@@ -67,10 +67,10 @@ describe('InstructionDetails', () => {
         expect(editButton).toBeInTheDocument()
         expect(deleteButton).toBeInTheDocument()
     })
-    it('should trigger 6 setState actions when user clicks edit button', () => {
+    it('should trigger 6 setState actions when user clicks edit button', async () => {
         render(<InstructionDetails {...props}  />)
         const editButton = screen.getByRole('button', {name: 'Edit Step'})
-        userEvent.click(editButton)
+        await userEvent.click(editButton)
         expect(mockSetAction).toBeCalled()
         expect(mockSetItems).toBeCalled()
         expect(mockSetDescription).toBeCalled()
@@ -78,10 +78,10 @@ describe('InstructionDetails', () => {
         expect(mockSetRecipeIngredients).toBeCalled()
         expect(mockSetEditStepActive).toBeCalled()
     })
-    it('should setInstructions and setDetailsActive when user clicks delete button', () => {
+    it('should setInstructions and setDetailsActive when user clicks delete button', async () => {
         render(<InstructionDetails {...props}  />)
         const deleteButton = screen.getByRole('button', {name: 'Delete Step'})
-        userEvent.click(deleteButton)
+        await userEvent.click(deleteButton)
         expect(mockSetInstructions).toBeCalled()
         expect(mockSetDetailsActive).toBeCalled()
     })

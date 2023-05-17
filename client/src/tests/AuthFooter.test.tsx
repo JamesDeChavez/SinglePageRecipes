@@ -16,7 +16,7 @@ describe('AuthFooter', () => {
         const buttonElements = screen.getAllByRole('button')
         expect(buttonElements).toHaveLength(3)
     })
-    it('should trigger setRender when user clicks a nav button', () => {
+    it('should trigger setRender when user clicks a nav button', async () => {
         render(
             <AuthRenderContext.Provider value={[[], mockSetRender, '']}>
                 <AuthFooter />
@@ -25,9 +25,9 @@ describe('AuthFooter', () => {
         const newRecipeButton = screen.getByText('New Recipe').closest('button')!
         const profileButton = screen.getByText('Profile').closest('button')!
         const recipeBookButton = screen.getByText('Recipe Book').closest('button')!
-        userEvent.click(newRecipeButton)
-        userEvent.click(profileButton)
-        userEvent.click(recipeBookButton)
+        await userEvent.click(newRecipeButton)
+        await userEvent.click(profileButton)
+        await userEvent.click(recipeBookButton)
         expect(mockSetRender).toHaveBeenCalledTimes(3)
     })
 })
