@@ -24,18 +24,20 @@
       >
     </noscript>
     <style>
-      .Hero, .LoginForm, .RegisterForm, .VideoSearch, 
-      .ProfilePage, .RecipeBookPage_recipeListContainer {
+      .Hero, .LoginForm, .RegisterForm, .VideoSearch, .ProfilePage, .RecipeBookPage_recipeListContainer {
         background-image: url('./background.jpg');
-        @supports (background-image: url('./background.webp')) {
+      }
+      @supports (background-image: url('./background.webp')) {
+        .Hero, .LoginForm, .RegisterForm, .VideoSearch, .ProfilePage, .RecipeBookPage_recipeListContainer {
           background-image: url('./background.webp');
         }
       }
       @media screen and (max-width: 800px){
-        .Hero, .LoginForm, .RegisterForm, .VideoSearch, 
-        .ProfilePage, .RecipeBookPage_recipeListContainer {
+        .Hero, .LoginForm, .RegisterForm, .VideoSearch, .ProfilePage, .RecipeBookPage_recipeListContainer {
           background-image: url('./backgroundMobile.jpg');
-          @supports (background-image: url('./backgroundMobile.webp')) {
+        }
+        @supports (background-image: url('./backgroundMobile.webp')) {
+          .Hero, .LoginForm, .RegisterForm, .VideoSearch, .ProfilePage, .RecipeBookPage_recipeListContainer {
             background-image: url('./backgroundMobile.webp');
           }
         }
