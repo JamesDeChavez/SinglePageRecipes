@@ -5,4 +5,15 @@
     overflow: hidden;
 }
 
+.InstructionsSection_hidden {
+    display: none;
+}
+
+@media screen and (min-width: 850px) {
+
+.InstructionsSection_hidden {
+    display: grid
+}
+    
+}
 

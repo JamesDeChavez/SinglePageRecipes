@@ -4,6 +4,12 @@
     z-index: 2;
 }
 
+.VideoSection_topContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
 .VideoSection_header {
     font-size: 1rem;
     white-space: nowrap;
@@ -11,9 +17,31 @@
     text-overflow: ellipsis;
 }
 
+.VideoSection_buttonsContainer {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.VideoSection_button {
+    color: #FFFFFF;
+    font-size: 1rem;
+}
+
+.VideoSection_button:hover {
+    opacity: 0.5;
+}
+
 iframe {
     width: 100%;
     max-width: 1400px;
     aspect-ratio: 16 / 9;
     border: solid 1px #FFFFFF30;
+}
+
+@media screen and (min-width: 850px) {
+    
+.VideoSection_topContainer {
+    padding: 0 0 0.5rem 0;
+}
+
 }

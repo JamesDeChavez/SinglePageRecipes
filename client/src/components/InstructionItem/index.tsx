@@ -30,7 +30,7 @@ const InstructionItem: React.FC<Props> = ({ setDetailsActive, setSelectedStep, s
     const className = 'InstructionItem'
     return (
         <div className={className} onClick={handleClick} >
-            <p className={`${className}_number`}>{`${index + 1}.`}</p>
+            <p className={`${className}_number`}>{`${index + 1}`}</p>
             <p className={`${className}_action`}>{step.summary.action}</p>
             <p className={`${className}_items`}>
                 {step.summary.items.map((item, i) => {

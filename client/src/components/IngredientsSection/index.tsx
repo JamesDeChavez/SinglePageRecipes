@@ -4,6 +4,9 @@ import { Ingredient } from '../../utils/interfaces'
 import IngredientItem from '../IngredientItem'
 import { useQuery } from '@apollo/client'
 import { GET_AMAZON_TAG } from '../../graphql/queries'
+import classNames from 'classnames'
+import { ReactComponent as ArrowLeft } from '../../assets/arrow-left-solid.svg'
+import { ReactComponent as ArrowRight } from '../../assets/arrow-right-solid.svg'
 import './styles.css'
 
 interface Props {
@@ -11,10 +14,11 @@ interface Props {
     orderActive: boolean, 
     setOrderActive: React.Dispatch<React.SetStateAction<boolean>>,
     shoppingList: Ingredient[],
-    setShoppingList: React.Dispatch<React.SetStateAction<Ingredient[]>>
+    setShoppingList: React.Dispatch<React.SetStateAction<Ingredient[]>>,
+    sectionVisible: string
 }
 
-const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrderActive, shoppingList, setShoppingList }) => {
+const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrderActive, shoppingList, setShoppingList, sectionVisible }) => {
     const { data } = useQuery(GET_AMAZON_TAG)
     const { windowSize } = useContext(UserLoggedInContext)
     const [start, setStart] = useState(0)
@@ -50,7 +54,7 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
         setOrderActive(prevState => !prevState)
     }
     
-    const handleNextClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleNextClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         e.preventDefault()
         if (end >= ingredients.length) return
 
@@ -61,7 +65,7 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
         setStart(newStart)
     }
 
-    const handlePrevClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handlePrevClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         e.preventDefault()
         if (start === 0) return
 
@@ -98,16 +102,21 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
     })
     const className = 'IngredientsSection'
     return (
-        <div className={className} ref={root}>
-            <h2 className={`${className}_header`}>Ingredients:</h2>
+        <div className={classNames(
+                className,
+                {[`${className}_hidden`]: sectionVisible !== 'INGREDIENTS'}
+            )} 
+            ref={root} 
+        >
+            <h2 className={`${className}_header`}>INGREDIENTS</h2>
             <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }} >
                 {ingredients && ingredients.slice(start, end).map((item, i) => {
                     return <IngredientItem item={item} key={i} orderActive={orderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} root={root} start={start} />
                 })}
             </div>            
             <div className={`${className}_pageButtonsContainer`}>
-                    <button className={`${className}_button`} onClick={handlePrevClick}>Prev</button>
-                    <button className={`${className}_button`} onClick={handleNextClick}>Next</button>
+                    <ArrowLeft className={`${className}_pageButton`} onClick={handlePrevClick} />
+                    <ArrowRight className={`${className}_pageButton`} onClick={handleNextClick} />
                     <p className={`${className}_resultsText`}>{`Items ${!ingredients.length ? 0 : start + 1} - ${Math.min(ingredients.length, end)} (Total Items ${ingredients.length})`}</p>
             </div>
             <div className={`${className}_orderButtonsContainer`}>

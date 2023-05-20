@@ -11,11 +11,6 @@
     z-index: 2;
 }
 
-.SampleRecipe_mainWide {
-    display: none;
-    z-index: 2;
-}
-
 @media screen and (min-width: 850px) {
 
 .SampleRecipe {
@@ -25,10 +20,6 @@
 }
 
 .SampleRecipe_main {
-    display: none;
-}
-
-.SampleRecipe_mainWide {
     display: grid;
     grid-template-rows: 1fr 1fr;
     gap: 0.5rem;
@@ -44,7 +35,7 @@
     grid-template-columns: 1fr 800px;
 }
 
-.SampleRecipe_mainWide {
+.SampleRecipe_main {
     display: grid;
     grid-template-rows: 1fr 1fr;
     gap: 0.5rem;
@@ -52,5 +43,11 @@
     grid-column: 2/3;
 }
 
+}
+
+@media screen and (min-width: 1650px) {
+    .SampleRecipe_miniView {
+        grid-template-columns: 1fr 1200px;
+    }
 }
 

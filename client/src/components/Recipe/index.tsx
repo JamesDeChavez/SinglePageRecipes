@@ -18,20 +18,22 @@ const Recipe: React.FC<Props> = ({ recipe }) => {
     const [shoppingList, setShoppingList] = useState<Ingredient[]>([])
     const root = useRef(null)
 
+    const handleMinimizeClick = (e:  React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+    }
+
+    const handleHideClick = (e:  React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+    }
+
     const className = 'Recipe'
     return (
         <div className={className} ref={root} >
-            <VideoSection title={recipe.title} videoId={recipe.video.videoId} />
+            <VideoSection title={recipe.title} videoId={recipe.video.videoId} handleMinimizeClick={handleMinimizeClick} handleHideClick={handleHideClick} />
             <RecipeActions orderActive={orderActive} setOrderActive={setOrderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} root={root} />
             <div className={`${className}_main`}>
-                {{
-                    [RENDERS[0]]: <InstructionsSection instructions={recipe.instructions} />,
-                    [RENDERS[1]]: <IngredientsSection ingredients={recipe.ingredients} orderActive={orderActive} setOrderActive={setOrderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} />
-                }[sectionVisible]}
-            </div>
-            <div className={`${className}_mainWide`}>
-                <InstructionsSection instructions={recipe.instructions} />
-                <IngredientsSection ingredients={recipe.ingredients} orderActive={orderActive} setOrderActive={setOrderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} />
+                <InstructionsSection instructions={recipe.instructions} sectionVisible={sectionVisible} />
+                <IngredientsSection ingredients={recipe.ingredients} orderActive={orderActive} setOrderActive={setOrderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} sectionVisible={sectionVisible} />
             </div>
             <RecipeFooter sectionVisible={sectionVisible} setSectionVisible={setSectionVisible} />
         </div>

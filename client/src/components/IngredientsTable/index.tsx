@@ -2,7 +2,10 @@ import { useState, useRef, useEffect, useContext } from 'react'
 import { UserLoggedInContext } from '../../App'
 import { Ingredient } from '../../utils/interfaces'
 import IngredientItem from '../IngredientItem'
+import { ReactComponent as ArrowLeft } from '../../assets/arrow-left-solid.svg'
+import { ReactComponent as ArrowRight } from '../../assets/arrow-right-solid.svg'
 import './styles.css'
+
 
 interface Props {
     ingredients: Ingredient[],

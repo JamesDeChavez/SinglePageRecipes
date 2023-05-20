@@ -9,9 +9,14 @@
     padding: 0 0.5rem;
 }
 
+.IngredientsSection_hidden {
+    display: none
+}
+
 .IngredientsSection_header {
     font-size: 1rem;
     font-weight: 400;
+    border-bottom: solid 1px #FFFFFF30;
 }
 
 .IngredientsSection_table {
@@ -56,17 +61,32 @@
 
 .IngredientsSection_pageButtonsContainer {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     align-items: center;
+}
+
+.IngredientsSection_pageButton {
+    fill: #FFFFFF;
+    height: 1.5rem;
+    width: auto;
+}
+
+.IngredientsSection_pageButton:hover {
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 @media screen and (min-width: 850px) {
 
-.IngredientsSection_button{
-    font-size: 1rem;
+.IngredientsSection_header {
+    font-size: 1.2rem;
 }
 
-.IngredientsSection_resultsText {
+.IngredientsSection_hidden {
+    display: grid
+}
+
+.IngredientsSection_button{
     font-size: 1rem;
 }
 

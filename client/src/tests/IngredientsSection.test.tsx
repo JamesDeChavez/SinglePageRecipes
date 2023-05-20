@@ -23,7 +23,8 @@ const mockSetShoppingList = jest.fn()
 const props = {
     ingredients: mockIngreidents,
     orderActive: mockOrderActive, setOrderActive: mockSetOrderActive,
-    shoppingList: mockShoppingList, setShoppingList: mockSetShoppingList
+    shoppingList: mockShoppingList, setShoppingList: mockSetShoppingList,
+    sectionVisible: 'INSTRUCTIONS'
 }
 
 describe('IngredientsSection', () => {

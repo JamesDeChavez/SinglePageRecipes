@@ -4,10 +4,12 @@ import './styles.css'
 
 interface Props {
     title: string,
-    videoId: string
+    videoId: string,
+    handleMinimizeClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+    handleHideClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-const VideoSection: React.FC<Props> = ({ title, videoId }) => {
+const VideoSection: React.FC<Props> = ({ title, videoId, handleMinimizeClick, handleHideClick }) => {
     const root = useRef(null)
 
     useLayoutEffect(() => {
@@ -20,7 +22,13 @@ const VideoSection: React.FC<Props> = ({ title, videoId }) => {
     const className = 'VideoSection'
     return (
         <div className={className} ref={root} >
-            <p className={`${className}_header`}>{`Recipe: ${title}`}</p>
+            <div className={`${className}_topContainer`}>
+                <p className={`${className}_header`}>{`Recipe: ${title}`}</p>
+                {/* <div className={`${className}_buttonsContainer`} >
+                    <button className={`${className}_button`} onClick={handleMinimizeClick} >[ - ]</button>
+                    <button className={`${className}_button`} onClick={handleHideClick} >[ x ]</button>
+                </div> */}
+            </div>
             <iframe
                 title='recipeVideo' 
                 src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&version=3&playerapiid=ytplayer`}

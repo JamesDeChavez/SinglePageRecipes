@@ -4,6 +4,7 @@ import EditStepForm from "../EditStepForm"
 import InstructionDetails from "../InstructionDetails"
 import InstructionsTable from "../InstructionsTable"
 import './styles.css'
+import classNames from "classnames"
 
 interface Props {
     instructions: Instruction[],
@@ -14,17 +15,20 @@ interface Props {
     setTime?: React.Dispatch<React.SetStateAction<string>>,
     setDescription?: React.Dispatch<React.SetStateAction<string>>,
     setRecipeIngredients?: React.Dispatch<React.SetStateAction<Ingredient[]>>,
+    sectionVisible: string
 }
 
-const InstructionsSection: React.FC<Props> = ({ instructions, setAction, setItems, setTime, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, setRecipeIngredients  }) => {
+const InstructionsSection: React.FC<Props> = ({ instructions, setAction, setItems, setTime, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, setRecipeIngredients, sectionVisible  }) => {
     const [detailsActive, setDetailsActive] = useState(false)
     const [editStepActive, setEditStepActive] = useState(false)
     const [selectedStep, setSelectedStep] = useState<Instruction>()
 
     const className = 'InstructionsSection'
     return (
-        <div className={className}>
-            
+        <div className={classNames(
+            className,
+            {[`${className}_hidden`]: sectionVisible !== 'INSTRUCTIONS'}
+        )} >            
             {!detailsActive ?
                 <InstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} />
             : selectedStep && !editStepActive ?

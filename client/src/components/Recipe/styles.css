@@ -11,11 +11,6 @@
     z-index: 2;
 }
 
-.Recipe_mainWide {
-    display: none;
-    z-index: 2;
-}
-
 @media screen and (min-width: 850px) {
 
     .Recipe {
@@ -25,7 +20,11 @@
     }
     
     .Recipe_main {
-        display: none;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 0.5rem;
+        grid-row: 1/3;
+        grid-column: 2/3;
     }
     
     .Recipe_mainWide {
@@ -44,7 +43,7 @@
         grid-template-columns: 1fr 800px;
     }
     
-    .Recipe_mainWide {
+    .Recipe_main {
         display: grid;
         grid-template-rows: 1fr 1fr;
         gap: 0.5rem;

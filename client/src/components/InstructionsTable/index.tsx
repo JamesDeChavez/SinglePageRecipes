@@ -2,6 +2,8 @@ import { useState, useRef, useEffect, useContext } from 'react'
 import { UserLoggedInContext } from '../../App'
 import { Instruction } from '../../utils/interfaces'
 import InstructionItem from '../InstructionItem'
+import { ReactComponent as ArrowLeft } from '../../assets/arrow-left-solid.svg'
+import { ReactComponent as ArrowRight } from '../../assets/arrow-right-solid.svg'
 import './styles.css'
 
 interface Props {
@@ -48,7 +50,7 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
         buttonRef.current && buttonRef.current.focus()
     }, [buttonRef])
     
-    const handleNextClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleNextClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         if (end >= instructions.length) return
         e.preventDefault()
         const endCheck = end + numberStepsDisplayed >= instructions.length
@@ -58,7 +60,7 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
         setStart(newStart)
     }
 
-    const handlePrevClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handlePrevClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         if (start === 0) return
         e.preventDefault()
         const begCheck = start - numberStepsDisplayed < 0
@@ -71,7 +73,7 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
     const className = 'InstructionsTable'
     return (
         <div className={className} style={{ gridTemplateRows: gridTemplateRowsTwo }} ref={root} >
-            <h2 className={`${className}_header`}>Instructions (Click step for more details)</h2>    
+            <h2 className={`${className}_header`}>INSTRUCTIONS</h2>    
             <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }}>
                 {instructions && instructions.slice(start, end).map((step, i) => {
                     return <InstructionItem setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} step={step} index={i + start} key={i} root={root} start={start} />
@@ -80,9 +82,9 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
         
             <button className={`${className}_addStepButton`} onClick={handleAddStepClick} style={{ display: handleAddStepClick ? 'block' : 'none' }} ref={buttonRef} >Add Step</button>
 
-            <div className={`${className}_pageButtonsContainer`}> 
-                <button className={`${className}_pageButton`} onClick={handlePrevClick}>Prev</button>
-                <button className={`${className}_pageButton`} onClick={handleNextClick}>Next</button>
+            <div className={`${className}_pageButtonsContainer`}>
+                <ArrowLeft className={`${className}_pageButton`} onClick={handlePrevClick} />
+                <ArrowRight className={`${className}_pageButton`} onClick={handleNextClick} />
                 <p className={`${className}_resultsText`}>
                     {`Steps ${!instructions.length ? 0 : start + 1} - ${Math.min(instructions.length, end)} (Total Steps ${instructions.length})`}
                 </p>
