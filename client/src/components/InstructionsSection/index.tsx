@@ -15,10 +15,10 @@ interface Props {
     setTime?: React.Dispatch<React.SetStateAction<string>>,
     setDescription?: React.Dispatch<React.SetStateAction<string>>,
     setRecipeIngredients?: React.Dispatch<React.SetStateAction<Ingredient[]>>,
-    sectionVisible: string
+    sectionVisible: string, currentView: string
 }
 
-const InstructionsSection: React.FC<Props> = ({ instructions, setAction, setItems, setTime, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, setRecipeIngredients, sectionVisible  }) => {
+const InstructionsSection: React.FC<Props> = ({ instructions, setAction, setItems, setTime, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, setRecipeIngredients, sectionVisible, currentView  }) => {
     const [detailsActive, setDetailsActive] = useState(false)
     const [editStepActive, setEditStepActive] = useState(false)
     const [selectedStep, setSelectedStep] = useState<Instruction>()
@@ -30,7 +30,7 @@ const InstructionsSection: React.FC<Props> = ({ instructions, setAction, setItem
             {[`${className}_hidden`]: sectionVisible !== 'INSTRUCTIONS'}
         )} >            
             {!detailsActive ?
-                <InstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} />
+                <InstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} currentView={currentView} />
             : selectedStep && !editStepActive ?
                 <InstructionDetails setDetailsActive={setDetailsActive} selectedStep={selectedStep} instructions={instructions} setEditStepActive={setEditStepActive} />
             : selectedStep &&

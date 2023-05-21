@@ -19,6 +19,14 @@
     padding: 0.5rem;
 }
 
+.SampleRecipe_hideView {
+    grid-template-columns: auto 1fr !important;
+}
+
+.SampleRecipe_largeView {
+    grid-template-columns: 1fr 400px !important;
+}
+
 .SampleRecipe_main {
     display: grid;
     grid-template-rows: 1fr 1fr;

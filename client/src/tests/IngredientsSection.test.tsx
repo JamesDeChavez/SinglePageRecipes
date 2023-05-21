@@ -17,14 +17,12 @@ const mockData = [{
 }]
 const mockIngreidents = [{ name: 'Onion', amount: '1/4 units' }]
 const mockOrderActive = false
-const mockSetOrderActive = jest.fn()
 const mockShoppingList = [{...mockIngreidents[0], include: true}]
-const mockSetShoppingList = jest.fn()
 const props = {
     ingredients: mockIngreidents,
-    orderActive: mockOrderActive, setOrderActive: mockSetOrderActive,
-    shoppingList: mockShoppingList, setShoppingList: mockSetShoppingList,
-    sectionVisible: 'INSTRUCTIONS'
+    orderActive: mockOrderActive, setOrderActive: jest.fn(),
+    shoppingList: mockShoppingList, setShoppingList: jest.fn(),
+    sectionVisible: 'INSTRUCTIONS', currentView: 'DEFAULT'
 }
 
 describe('IngredientsSection', () => {
@@ -67,7 +65,7 @@ describe('IngredientsSection', () => {
         )
         const selectButton = screen.getByRole('button', {name: 'Select All'})
         selectButton.click()
-        expect(mockSetShoppingList).toBeCalled()
+        expect(props.setShoppingList).toBeCalled()
     })
     it('should setShoppingList when user clicks unselect button', () => {
         render(
@@ -77,7 +75,7 @@ describe('IngredientsSection', () => {
         )
         const unselectButton = screen.getByRole('button', {name: 'Unselect All'})
         unselectButton.click()
-        expect(mockSetShoppingList).toBeCalled()
+        expect(props.setShoppingList).toBeCalled()
     })
     it('should render submit and cancel buttons', () => {
         render(
@@ -98,7 +96,7 @@ describe('IngredientsSection', () => {
         )
         const cancelButton = screen.getByRole('button', {name: 'Cancel'})
         cancelButton.click()
-        expect(mockSetOrderActive).toBeCalled()
+        expect(props.setOrderActive).toBeCalled()
     })
     it('should render order button', () => {
         render(
@@ -117,6 +115,6 @@ describe('IngredientsSection', () => {
         )
         const orderButton = screen.getByRole('button', {name: 'Order Ingredients'})
         orderButton.click()
-        expect(mockSetOrderActive).toBeCalled()
+        expect(props.setOrderActive).toBeCalled()
     })
 })

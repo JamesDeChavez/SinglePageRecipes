@@ -6,15 +6,17 @@ import { ReactComponent as ArrowLeft } from '../../assets/arrow-left-solid.svg'
 import { ReactComponent as ArrowRight } from '../../assets/arrow-right-solid.svg'
 import { determineCols, determineNumItems_Ing } from '../../utils/functions'
 import './styles.css'
+import classNames from 'classnames'
 
 interface Props {
     ingredients: Ingredient[],
     orderActive: boolean, 
     shoppingList: Ingredient[],
     setShoppingList: React.Dispatch<React.SetStateAction<Ingredient[]>>,
+    currentView: string
 }
 
-const IngredientsTable: React.FC<Props> = ({ ingredients, orderActive, shoppingList, setShoppingList }) => {
+const IngredientsTable: React.FC<Props> = ({ ingredients, orderActive, shoppingList, setShoppingList, currentView }) => {
     const { windowSize } = useContext(UserLoggedInContext)
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(Math.min(ingredients.length, 6))
@@ -24,19 +26,31 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, orderActive, shoppingL
 
     useEffect(() => {
         if (!windowSize) return
-        const numCols = determineCols(windowSize[0])
+        const numCols = determineCols(windowSize[0], currentView)
         const numberItems = determineNumItems_Ing(windowSize[0], windowSize[1], numCols)
         const itemsPerCol = numberItems / numCols
         const newTableLayout = `repeat(${itemsPerCol}, 1fr)`
+        setStart(0)
         setEnd(numberItems)
         setNumberItemsDisplayed(numberItems)
         setTableLayout(newTableLayout)
     }, [windowSize])
 
+    useEffect(() => {
+        if (!windowSize) return 
+        const numCols = determineCols(windowSize[0], currentView)
+        const numberItems = determineNumItems_Ing(windowSize[0], windowSize[1], numCols, currentView)
+        const itemsPerCol = numberItems / numCols
+        const newTableLayout = `repeat(${itemsPerCol}, 1fr)`
+        setStart(0)
+        setEnd(numberItems)
+        setNumberItemsDisplayed(numberItems)
+        setTableLayout(newTableLayout)
+    }, [currentView])
+
     const handleNextClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         e.preventDefault()
         if (end >= ingredients.length) return
-        console.log('1', start, end, numberItemsDisplayed)
         const endCheck = end + numberItemsDisplayed >= ingredients.length
         const newStart = start + numberItemsDisplayed
         const newEnd = endCheck ? ingredients.length : end + numberItemsDisplayed
@@ -58,7 +72,11 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, orderActive, shoppingL
     return (
         <div className={className} ref={root} >
             <h2 className={`${className}_header`}>INGREDIENTS</h2>
-            <div className={`${className}_table`} style={{ gridTemplateRows: tableLayout }} >
+            <div className={classNames(
+                `${className}_table`,
+                {[`${className}_table_hideView`]: currentView === 'HIDE'},
+                {[`${className}_table_largeView`]: currentView === 'LARGE'}
+            )} style={{ gridTemplateRows: tableLayout }} >
                 {ingredients && ingredients.slice(start, end).map((item, i) => {
                     return <IngredientItem item={item} key={i} orderActive={orderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} root={root} start={start} />
                 })}

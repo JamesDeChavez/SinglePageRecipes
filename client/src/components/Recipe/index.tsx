@@ -18,22 +18,22 @@ const Recipe: React.FC<Props> = ({ recipe }) => {
     const [shoppingList, setShoppingList] = useState<Ingredient[]>([])
     const root = useRef(null)
 
-    const handleMinimizeClick = (e:  React.MouseEvent<SVGElement, MouseEvent>) => {
+    const handleMinusClick = (e:  React.MouseEvent<SVGElement, MouseEvent>) => {
         e.preventDefault()
     }
 
-    const handleHideClick = (e:  React.MouseEvent<SVGElement, MouseEvent>) => {
+    const handlePlusClick = (e:  React.MouseEvent<SVGElement, MouseEvent>) => {
         e.preventDefault()
     }
 
     const className = 'Recipe'
     return (
         <div className={className} ref={root} >
-            <VideoSection title={recipe.title} videoId={recipe.video.videoId} handleMinimizeClick={handleMinimizeClick} handleHideClick={handleHideClick} />
-            <RecipeActions orderActive={orderActive} setOrderActive={setOrderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} root={root} />
+            <VideoSection title={recipe.title} videoId={recipe.video.videoId} handleMinusClick={handleMinusClick} handlePlusClick={handlePlusClick} currentView='DEFAULT' />
+            <RecipeActions orderActive={orderActive} setOrderActive={setOrderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} root={root} currentView='DEFAULT' />
             <div className={`${className}_main`}>
-                <InstructionsSection instructions={recipe.instructions} sectionVisible={sectionVisible} />
-                <IngredientsSection ingredients={recipe.ingredients} orderActive={orderActive} setOrderActive={setOrderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} sectionVisible={sectionVisible} />
+                <InstructionsSection instructions={recipe.instructions} sectionVisible={sectionVisible} currentView='DEFAULT' />
+                <IngredientsSection ingredients={recipe.ingredients} orderActive={orderActive} setOrderActive={setOrderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} sectionVisible={sectionVisible} currentView='DEFAULT'/>
             </div>
             <RecipeFooter sectionVisible={sectionVisible} setSectionVisible={setSectionVisible} />
         </div>

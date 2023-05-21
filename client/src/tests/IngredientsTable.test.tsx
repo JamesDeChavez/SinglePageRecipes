@@ -10,7 +10,8 @@ const mockProps = {
     setEditIngredientActive: jest.fn(), 
     setSelectedItem: jest.fn(),
     orderActive: false,
-    shoppingList: [], setShoppingList: jest.fn()
+    shoppingList: [], setShoppingList: jest.fn(),
+    currentView: 'DEFAULT'
 }
 
 describe('IngredientsTable', () => {

@@ -5,8 +5,9 @@ import VideoSection from '../components/VideoSection'
 const mockProps = {
     title: 'Sample Title',
     videoId: 'testId',
-    handleMinimizeClick: jest.fn(),
-    handleHideClick: jest.fn()
+    handleMinusClick: jest.fn(),
+    handlePlusClick: jest.fn(),
+    currentView: 'DEFAULT'
 }
 
 describe('VideoSection', () => {

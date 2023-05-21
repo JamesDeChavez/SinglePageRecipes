@@ -8,14 +8,12 @@ import './styles.css'
 
 interface Props {
     ingredients: Ingredient[],
-    orderActive: boolean, 
-    setOrderActive: React.Dispatch<React.SetStateAction<boolean>>,
-    shoppingList: Ingredient[],
-    setShoppingList: React.Dispatch<React.SetStateAction<Ingredient[]>>,
-    sectionVisible: string
+    orderActive: boolean, setOrderActive: React.Dispatch<React.SetStateAction<boolean>>,
+    shoppingList: Ingredient[], setShoppingList: React.Dispatch<React.SetStateAction<Ingredient[]>>,
+    sectionVisible: string, currentView: string
 }
 
-const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrderActive, shoppingList, setShoppingList, sectionVisible }) => {
+const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrderActive, shoppingList, setShoppingList, sectionVisible, currentView }) => {
     const { data } = useQuery(GET_AMAZON_TAG)
 
     useEffect(() => {
@@ -66,6 +64,7 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
                 orderActive={orderActive}
                 shoppingList={shoppingList} 
                 setShoppingList={setShoppingList}
+                currentView={currentView}
             />  
             <div className={`${className}_orderButtonsContainer`}>
             {orderActive ?

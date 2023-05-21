@@ -6,35 +6,48 @@ import { ReactComponent as ArrowLeft } from '../../assets/arrow-left-solid.svg'
 import { ReactComponent as ArrowRight } from '../../assets/arrow-right-solid.svg'
 import { determineCols, determineNumItems_Inst } from '../../utils/functions'
 import './styles.css'
+import classNames from 'classnames'
 
 interface Props {
     setDetailsActive: React.Dispatch<React.SetStateAction<boolean>>,
     setSelectedStep: React.Dispatch<React.SetStateAction<Instruction | undefined>>
-    instructions: Instruction[]
+    instructions: Instruction[],
+    currentView: string
 }
 
-const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep, instructions }) => {
+const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep, instructions, currentView }) => {
     const { windowSize } = useContext(UserLoggedInContext)
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(5)
     const [numberStepsDisplayed, setNumberStepsDisplayed] = useState(5)
     const [tableLayout, setTableLayout] = useState('repeat(5, 1fr)')
-    const [componentLayout, setComponentLayout] = useState('auto 1fr auto')
     const buttonRef = useRef<HTMLButtonElement | null>(null)
     const root = useRef(null)
 
     useEffect(() => {
         if (!windowSize) return
-        const numCols = determineCols(windowSize[0])
-        const numberItems = determineNumItems_Inst(windowSize[0], windowSize[1], numCols)
+        const numCols = determineCols(windowSize[0], currentView)
+        const numberItems = determineNumItems_Inst(windowSize[0], windowSize[1], numCols, currentView)
         const itemsPerCol = numberItems / numCols
         const newTableLayout = `repeat(${itemsPerCol}, 1fr)`
-        const newComponentLayout = `auto 1fr auto`
+        setStart(0)
         setEnd(numberItems)
         setNumberStepsDisplayed(numberItems)
-        setComponentLayout(newComponentLayout)
         setTableLayout(newTableLayout)
     }, [windowSize])
+
+    useEffect(() => {
+        if (!windowSize) return
+        const numCols = determineCols(windowSize[0], currentView)
+        const numberItems = determineNumItems_Inst(windowSize[0], windowSize[1], numCols, currentView)
+        const itemsPerCol = numberItems / numCols
+        const newTableLayout = `repeat(${itemsPerCol}, 1fr)`
+        console.log(numCols, numberItems, itemsPerCol, numberStepsDisplayed, start, end)
+        setStart(0)
+        setEnd(numberItems)
+        setNumberStepsDisplayed(numberItems)
+        setTableLayout(newTableLayout)
+    }, [currentView])
 
     useEffect(() => {
         buttonRef.current && buttonRef.current.focus()
@@ -46,6 +59,7 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
         const endCheck = end + numberStepsDisplayed >= instructions.length
         const newStart = start + numberStepsDisplayed
         const newEnd = endCheck ? instructions.length : end + numberStepsDisplayed
+        console.log(start, end, numberStepsDisplayed, endCheck, newStart, newEnd)
         setEnd(newEnd)
         setStart(newStart)
     }
@@ -62,9 +76,13 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
 
     const className = 'InstructionsTable'
     return (
-        <div className={className} style={{ gridTemplateRows: componentLayout }} ref={root} >
+        <div className={className} ref={root} >
             <h2 className={`${className}_header`}>INSTRUCTIONS</h2>    
-            <div className={`${className}_table`} style={{ gridTemplateRows: tableLayout }}>
+            <div className={classNames(
+                `${className}_table`,
+                {[`${className}_table_hideView`]: currentView === 'HIDE'},
+                {[`${className}_table_largeView`]: currentView === 'LARGE'},
+            )} style={{ gridTemplateRows: tableLayout }}>
                 {instructions && instructions.slice(start, end).map((step, i) => {
                     return <InstructionItem setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} step={step} index={i + start} key={i} root={root} start={start} />
                 })}

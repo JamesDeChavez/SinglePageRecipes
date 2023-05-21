@@ -4,9 +4,6 @@ import InstructionsTable from '../components/InstructionsTable'
 import { Instruction } from '../utils/interfaces'
 import { UserLoggedInContext } from '../App'
 
-const mockSetDetailsActive = jest.fn()
-const mockSetSelectedStep = jest.fn()
-const mockhandleAddStepClick = jest.fn()
 const mockInstructions: Instruction[] = [{
     summary: {
         action: 'COOK',
@@ -19,10 +16,11 @@ const mockInstructions: Instruction[] = [{
     ]
 }]
 const mockProps = {
-    setDetailsActive: mockSetDetailsActive,
-    setSelectedStep: mockSetSelectedStep,
+    setDetailsActive: jest.fn(),
+    setSelectedStep: jest.fn(),
     instructions: mockInstructions,
-    handleAddStepClick: mockhandleAddStepClick,
+    handleAddStepClick: jest.fn(),
+    currentView: 'DEFAULT'
 }
 
 describe('InstructionsTable', () => {
@@ -49,7 +47,7 @@ describe('InstructionsTable', () => {
         )
         const addStepButton = screen.getByRole('button', {name: 'Add Step'})
         addStepButton.click()
-        expect(mockhandleAddStepClick).toBeCalled()
+        expect(mockProps.handleAddStepClick).toBeCalled()
     })    
     it('should render 2 page buttons', () => {
         render(<InstructionsTable {...mockProps} />)

@@ -6,28 +6,35 @@ import RecipeActions from '../components/RecipeActions'
 import { useRef } from 'react'
 import userEvent from '@testing-library/user-event'
 
-const mockData = [
-    {
-        request: {
-            query: GET_AMAZON_TAG
-        },
-        result: {
-            data: {
-                amazonTag: 'testId'
-            }
+const mockData = [{
+    request: {
+        query: GET_AMAZON_TAG
+    },
+    result: {
+        data: {
+            amazonTag: 'testId'
         }
     }
-]
+}]
+
+const { result } = renderHook(() => useRef(null))
+const mockProps = {
+    orderActive: false,
+    setOrderActive: jest.fn(),
+    shoppingList: [],
+    setShoppingList: jest.fn(),
+    root: result.current,
+    currentView:'DEFAULT'
+}
 
 const mockSetOrderActive = jest.fn()
 const mockSetShoppingList = jest.fn()
-const { result } = renderHook(() => useRef(null))
 
 describe('RecipeActions', () => {
     it('should render header', () => {
         render(
             <MockedProvider addTypename={false} mocks={mockData} >
-                <RecipeActions orderActive={false} setOrderActive={mockSetOrderActive} shoppingList={[]} setShoppingList={mockSetShoppingList} root={result.current} />
+                <RecipeActions {...mockProps} />
             </MockedProvider>
         )
         const headerElement = screen.getByRole('heading')
@@ -36,7 +43,7 @@ describe('RecipeActions', () => {
     it('should render orderIngredients button, if orderActive = false', () => {
         render(
             <MockedProvider addTypename={false} mocks={mockData} >
-                <RecipeActions orderActive={false} setOrderActive={mockSetOrderActive} shoppingList={[]} setShoppingList={mockSetShoppingList} root={result.current} />
+                <RecipeActions {...mockProps} />
             </MockedProvider>
         )
         const orderButton = screen.getByRole('button', { name: /Order Ingredients/i })
@@ -45,7 +52,7 @@ describe('RecipeActions', () => {
     it('should setOrderActive when user clicks Order Ingredients button', async () => {
         render(
             <MockedProvider addTypename={false} mocks={mockData} >
-                <RecipeActions orderActive={false} setOrderActive={mockSetOrderActive} shoppingList={[]} setShoppingList={mockSetShoppingList} root={result.current} />
+                <RecipeActions {...mockProps} />
             </MockedProvider>
         )
         const orderButton = screen.getByRole('button', { name: /Order Ingredients/i })
@@ -55,7 +62,7 @@ describe('RecipeActions', () => {
     it('should render instructions text and 4 buttons, if orderActive = true', () => {
         render(
             <MockedProvider addTypename={false} mocks={mockData} >
-                <RecipeActions orderActive={true} setOrderActive={mockSetOrderActive} shoppingList={[]} setShoppingList={mockSetShoppingList} root={result.current} />
+                <RecipeActions  {...mockProps} />
             </MockedProvider>
         )
         const instructionsElement = screen.getByText('Amazon Fresh Shopping Cart', {exact: false})
@@ -66,7 +73,7 @@ describe('RecipeActions', () => {
     it('should setShoppingList when user clicks select buttons', async () => {
         render(
             <MockedProvider addTypename={false} mocks={mockData} >
-                <RecipeActions orderActive={true} setOrderActive={mockSetOrderActive} shoppingList={[]} setShoppingList={mockSetShoppingList} root={result.current} />
+                <RecipeActions  {...mockProps} />
             </MockedProvider>
         )
         const selectButton = screen.getByRole('button', { name: 'Select All'})

@@ -4,6 +4,7 @@ import { useLayoutEffect } from 'react'
 import { GET_AMAZON_TAG } from '../../graphql/queries'
 import { Ingredient } from '../../utils/interfaces'
 import './styles.css'
+import classNames from 'classnames'
 
 interface Props {
     orderActive: boolean, 
@@ -11,9 +12,10 @@ interface Props {
     shoppingList: Ingredient[],
     setShoppingList: React.Dispatch<React.SetStateAction<Ingredient[]>>,
     root: React.MutableRefObject<null>,
+    currentView: string
 }
 
-const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingList, setShoppingList, root }) => {
+const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingList, setShoppingList, root, currentView }) => {
     const { data } = useQuery(GET_AMAZON_TAG)
 
     useLayoutEffect(() => {
@@ -55,7 +57,10 @@ const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingL
 
     const className = 'RecipeActions'
     return (
-        <div className={className}>
+        <div className={classNames(
+            className,
+            {[`${className}_hideView`]: currentView === 'HIDE'}
+        )}>
             <div className={`${className}_container`}>
                 <div className={`${className}_buttonsContainer`}>
                     {orderActive ?
