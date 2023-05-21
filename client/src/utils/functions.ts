@@ -1,9 +1,6 @@
 export const determineCols = (width: number) => {
-            return width < 1250 ? 1
-                : width < 1650 ? 2
-                : width < 2050 ? 3
-                : 4
-        }
+    return width < 1250 ? 1 : 2
+}
         
 export const determineNumItems_Ing = (width: number, height: number, numCols: number) => {
     return width < 850
