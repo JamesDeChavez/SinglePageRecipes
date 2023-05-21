@@ -6,7 +6,21 @@
 }
 
 .CreateRecipeNavbar_returnButton {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
     color: #FFFFFF;
+}
+
+.CreateRecipeNavbar_returnButton:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.CreateRecipeNavbar_svg {
+    fill: #FFFFFF;
+    height: 1rem;
+    width: auto;
 }
 
 .CreateRecipeNavbar_createButton {

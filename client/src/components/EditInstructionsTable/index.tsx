@@ -33,7 +33,6 @@ const EditInstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedS
         const newComponentLayout = windowSize[0] < 850 
             ? `auto ${itemsPerCol}fr 1fr auto`
             : `auto 1fr auto`
-        console.log(numCols, numberItems, itemsPerCol)
         setEnd(numberItems)
         setNumberStepsDisplayed(numberItems)
         setTableLayout(newTableLayout)
@@ -72,10 +71,8 @@ const EditInstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedS
                 {instructions && instructions.slice(start, end).map((step, i) => {
                     return <InstructionItem setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} step={step} index={i + start} key={i} root={root} start={start} />
                 })}
-            </div>
-        
+            </div>        
             <button className={`${className}_addStepButton`} onClick={handleEditStepClick} ref={buttonRef} >Add Step</button>
-
             <div className={`${className}_pageButtonsContainer`}>
                 <ArrowLeft className={`${className}_pageButton`} onClick={handlePrevClick} />
                 <ArrowRight className={`${className}_pageButton`} onClick={handleNextClick} />

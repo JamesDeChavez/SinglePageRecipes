@@ -6,7 +6,21 @@
 }
 
 .EditRecipeNavbar_returnButton {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
     color: #FFFFFF;
+}
+
+.EditRecipeNavbar_returnButton:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.EditRecipeNavbar_svg {
+    fill: #FFFFFF;
+    height: 1rem;
+    width: auto;
 }
 
 .EditRecipeNavbar_createButton {
@@ -27,6 +41,6 @@
 
 @media screen and (min-width: 850px) {
     .EditRecipeNavbar_createButton {
-        display: none;
+        display: none !important;
     }
 }

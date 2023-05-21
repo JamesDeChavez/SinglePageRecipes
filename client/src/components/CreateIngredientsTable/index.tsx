@@ -30,9 +30,10 @@ const CreateIngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredi
         if (!windowSize) return        
         const numCols = determineCols(windowSize[0])
         const numItems = determineNumItems_Ing(windowSize[0], windowSize[1], numCols)
-        const pageLayout = `repeat(${numItems}, 1fr)`
+        const itemsPerCol = windowSize[0] < 850 ? numItems / numCols - 1 : numItems / numCols 
+        const pageLayout = `repeat(${itemsPerCol}, 1fr)`
         const tableLayout = windowSize[0] < 850 
-            ? `auto ${numItems}fr 1fr auto`
+            ? `auto ${itemsPerCol}fr 1fr auto`
             : `auto 1fr auto`
         setEnd(numItems)
         setNumberItemsDisplayed(numItems)
@@ -74,7 +75,7 @@ const CreateIngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredi
     const className = 'CreateIngredientsTable'
     return (
         <div className={className} style={{ gridTemplateRows: gridTemplateRowsTwo}} >
-            <h2 className={`${className}_header`}>Ingredients:</h2>
+            <h2 className={`${className}_header`}>INGREDIENTS</h2>
             
             <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }} ref={root} >
                 {ingredients && ingredients.slice(start, end).map((item, i) => {

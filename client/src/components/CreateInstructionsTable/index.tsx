@@ -4,8 +4,8 @@ import { Instruction } from '../../utils/interfaces'
 import InstructionItem from '../InstructionItem'
 import { ReactComponent as ArrowLeft } from '../../assets/arrow-left-solid.svg'
 import { ReactComponent as ArrowRight } from '../../assets/arrow-right-solid.svg'
-import './styles.css'
 import { determineCols, determineNumItems_Inst } from '../../utils/functions'
+import './styles.css'
 
 interface Props {
     setDetailsActive: React.Dispatch<React.SetStateAction<boolean>>,
@@ -28,12 +28,11 @@ const CreateInstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelecte
         if (!windowSize) return
         const numCols = determineCols(windowSize[0])
         const numberItems = determineNumItems_Inst(windowSize[0], windowSize[1], numCols)
-        const newTableLayout = windowSize[0] < 850 
-            ? `repeat(${numberItems - 1}, 1fr)`
-            : `repeat(${numberItems}, 1fr)`
+        const itemsPerCol = windowSize[0] < 850 ? numberItems / numCols - 1 : numberItems / numCols 
+        const newTableLayout = `repeat(${itemsPerCol}, 1fr)`
         const newComponentLayout = windowSize[0] < 850
-            ? `auto ${numberItems - 1}fr 1fr auto`
-            : `auto ${numberItems}fr 1fr auto`
+            ? `auto ${itemsPerCol - 1}fr 1fr auto`
+            : `auto 1fr auto`
         setEnd(numberItems)
         setNumberStepsDisplayed(numberItems)
         setTableLayout(newTableLayout)
@@ -72,10 +71,8 @@ const CreateInstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelecte
                 {instructions && instructions.slice(start, end).map((step, i) => {
                     return <InstructionItem setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} step={step} index={i + start} key={i} root={root} start={start} />
                 })}
-            </div>
-        
+            </div>        
             <button className={`${className}_addStepButton`} onClick={handleAddStepClick} ref={buttonRef} >Add Step</button>
-
             <div className={`${className}_pageButtonsContainer`}>
                 <ArrowLeft className={`${className}_pageButton`} onClick={handlePrevClick} />
                 <ArrowRight className={`${className}_pageButton`} onClick={handleNextClick} />

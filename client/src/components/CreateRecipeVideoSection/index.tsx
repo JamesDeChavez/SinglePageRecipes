@@ -23,7 +23,7 @@ const CreateRecipeVideoSection: React.FC<Props> = ({ title, setTitle }) => {
     return (
         <div className={className} ref={root} >
             <div className={`${className}_titleInputContainer`}>
-                <p className={`${className}_text`}>Recipe:</p>
+                <p className={`${className}_header`}>RECIPE:</p>
                 <input type="text" name="title" id="title" value={title} placeholder='Input Recipe Title Here' onChange={e => setTitle(e.target.value)} className={`${className}_titleInput`}/>
             </div>
             {videoSelected ?

@@ -28,7 +28,6 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, orderActive, shoppingL
         const numberItems = determineNumItems_Ing(windowSize[0], windowSize[1], numCols)
         const itemsPerCol = numberItems / numCols
         const newTableLayout = `repeat(${itemsPerCol}, 1fr)`
-        console.log(windowSize[0], numCols, numberItems, itemsPerCol, newTableLayout)
         setEnd(numberItems)
         setNumberItemsDisplayed(numberItems)
         setTableLayout(newTableLayout)

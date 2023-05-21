@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { CreateRecipeRenderContext } from '../../branches/CreateRecipe'
+import { ReactComponent as BackSvg } from '../../assets/backward-step-solid.svg'
 import Loading from '../Loading'
 import './styles.css'
 
@@ -19,7 +20,10 @@ const CreateRecipeNavbar: React.FC<Props> = ({ handleCreateRecipe, loading }) =>
     const className = 'CreateRecipeNavbar'
     return (
         <div className={className}>
-            <button className={`${className}_returnButton`} onClick={(e) => handleReturnClick(e, 0)}>{`< Return to Video Search`}</button>
+            <button className={`${className}_returnButton`} onClick={(e) => handleReturnClick(e, 0)}>
+                <BackSvg className={`${className}_svg`} />                
+                {`Return to Video Search`}
+            </button>
             <button className={`${className}_createButton`} onClick={handleCreateRecipe} style={{ display: loading ? 'none' : 'block'}} >Create Recipe</button>
             <Loading loading={loading} />
         </div>

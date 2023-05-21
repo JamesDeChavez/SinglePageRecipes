@@ -173,39 +173,36 @@ const CreateRecipeActions: React.FC<Props> = ({ handleCreateRecipe, root, loadin
     const className = 'CreateRecipeActions'
     return (
         <div className={className}>
-            <div className={`${className}_textContainer`}>
-                <h3 className={`${className}_header`}>Recipe Actions</h3>
-            </div>
             <div className={`${className}_buttonsContainer`}>
-                {addStepActive || addIngredientActive ?
-                    <div className={`${className}_addButtonsContainer`}>
-                        <button className={`${className}_addButton`} onClick={handleAddClick} >
-                            {addStepActive ? 'Submit Instruction' : 'Submit Ingredient'}
-                        </button>
-                        <button className={`${className}_addButton`} onClick={handleCancelAddClick}>Cancel</button>
-                    </div>
-                : editStepActive || editIngredientActive ?
-                    <div className={`${className}_addButtonsContainer`}>
-                        <button className={`${className}_addButton`} onClick={handleEditClick} >
-                            {editStepActive ? 'Edit Instruction' : 'Edit Ingredient'}
-                        </button>
-                        {editIngredientActive &&
-                            <button className={`${className}_addButton`} onClick={handleDeleteClick}>Delete</button>
-                        }
-                        <button className={`${className}_addButton`} onClick={handleCancelEditClick}>Cancel</button>
-                    </div>
-                :
-                <>
-                    <div className={`${className}_addButtonsContainer`}>
-                        <button className={`${className}_addButton`} onClick={handleStepActiveClick}>Add Instruction</button>
-                        <button className={`${className}_addButton`} onClick={handleItemActiveClick}>Add Ingredient</button>
-                    </div>
-                    <div className={`${className}_createContainer`}>
-                        <button className={`${className}_createButton`} onClick={handleCreateRecipe} style={{display: loading ? 'none' : 'block'}} >Create Recipe</button>
-                        <Loading loading={loading} />
-                    </div>
-                </>
-                }
+            {addStepActive || addIngredientActive ?
+                <div className={`${className}_addButtonsContainer`}>
+                    <button className={`${className}_addButton`} onClick={handleCancelAddClick}>Cancel</button>
+                    <button className={`${className}_addButton`} onClick={handleAddClick} >
+                        {addStepActive ? 'Add Instruction' : 'Add Ingredient'}
+                    </button>
+                </div>
+            : editStepActive || editIngredientActive ?
+                <div className={`${className}_editButtonsContainer`}>
+                    <button className={`${className}_addButton`} onClick={handleCancelEditClick}>Cancel</button>
+                    {editIngredientActive &&
+                        <button className={`${className}_addButton`} onClick={handleDeleteClick}>Delete</button>
+                    }
+                    <button className={`${className}_addButton`} onClick={handleEditClick} >
+                        Save Edit
+                    </button>
+                </div>
+            :
+            <>
+                <div className={`${className}_addButtonsContainer`}>
+                    <button className={`${className}_addButton`} onClick={handleStepActiveClick}>New Instruction</button>
+                    <button className={`${className}_addButton`} onClick={handleItemActiveClick}>New Ingredient</button>
+                </div>
+                <div className={`${className}_createContainer`}>
+                    <button className={`${className}_createButton`} onClick={handleCreateRecipe} style={{display: loading ? 'none' : 'block'}} >Save Recipe</button>
+                    <Loading loading={loading} />
+                </div>
+            </>
+            }
             </div>
         </div>
     )

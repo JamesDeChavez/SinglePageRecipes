@@ -1,20 +1,17 @@
 .CreateRecipeActions {
     display: none;
+}
+
+.CreateRecipeActions_buttonsContainer {
+    display: flex;
+    gap: 2rem;
+    place-content: center;
+    width: 100%;
     text-align: center;
-    border: solid 1px #FFFFFF30;
-    background-color: #112728;
     backdrop-filter: blur(10px);
-    padding: 1rem;
-}
-
-.CreateRecipeActions_textContainer {
-    display: grid;
-    gap: 1rem;
-}
-
-.CreateRecipeActions_header {
-    font-size: 1.3rem;
-    font-weight: 400;
+    padding: 1rem 0;
+    border-top: solid 1px #FFFFFF30;
+    border-bottom: solid 1px #FFFFFF30;
 }
 
 .CreateRecipeActions_addButton,
@@ -33,39 +30,23 @@
     border: solid 1px #FFFFFF;
 }
 
-.CreateRecipeActions_buttonsContainer {
-    display: grid;
-    gap: 1rem;
-}
-
 .CreateRecipeActions_addButtonsContainer {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
+}
+
+.CreateRecipeActions_editButtonsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem
 }
 
 
 @media screen and (min-width: 850px) {
     
 .CreateRecipeActions {
-    display: grid;
-    gap: 1rem;
-    place-content: center;
+    display: block;
 }
 
-}
-
-@media screen and (min-width: 1650px) {
- 
-.CreateRecipeActions_addButtonsContainer {
-    grid-template-columns: 1fr 1fr;
-}
-
-}
-
-@media screen and (max-height: 700px) {
- 
-    .CreateRecipeActions_addButtonsContainer {
-        grid-template-columns: 1fr 1fr;
-    }
-    
 }

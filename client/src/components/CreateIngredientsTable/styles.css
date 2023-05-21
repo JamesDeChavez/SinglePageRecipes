@@ -7,6 +7,7 @@
 .CreateIngredientsTable_header {
     font-size: 1rem;
     font-weight: 400;
+    border-bottom: solid 1px #FFFFFF30;
 }
 
 .CreateIngredientsTable_table {
@@ -64,13 +65,13 @@
 
 @media screen and (min-width: 850px) {
 
+.CreateIngredientsTable_header {
+    font-size: 1.2rem;
+}
+
 .CreateIngredientsTable_addButton {
     font-size: 1rem;
     display: none !important;
-}
-
-.CreateIngredientsTable_resultsText {
-    font-size: 1rem;
 }
 
 }

@@ -30,7 +30,6 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
         const itemsPerCol = numberItems / numCols
         const newTableLayout = `repeat(${itemsPerCol}, 1fr)`
         const newComponentLayout = `auto 1fr auto`
-        console.log('inst', numCols, numberItems, itemsPerCol)
         setEnd(numberItems)
         setNumberStepsDisplayed(numberItems)
         setComponentLayout(newComponentLayout)
