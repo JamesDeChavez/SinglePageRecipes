@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import classNames from 'classnames'
 import { AuthRenderContext } from '../../branches/Auth'
 import { ReactComponent as BookSVG } from '../../assets/book-solid.svg'
-import { ReactComponent as PlusSVG } from '../../assets/square-plus-solid.svg'
+import { ReactComponent as PlusSVG } from '../../assets/square-plus-regular.svg'
 import { ReactComponent as UserSVG } from '../../assets/user-solid.svg'
 import './styles.css'
 

@@ -56,31 +56,30 @@ const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingL
     const className = 'RecipeActions'
     return (
         <div className={className}>
-            <div className={`${className}_textContainer`}>
-                <h3 className={`${className}_header`}>Recipe Actions</h3>
+            <div className={`${className}_container`}>
+                <div className={`${className}_buttonsContainer`}>
+                    {orderActive ?
+                    <>
+                        <div className={`${className}_leftButtonsContainer`}>
+                            <button className={`${className}_button`} onClick={selectAll}>Select All</button>
+                            <button className={`${className}_button`} onClick={unselectAll}>Unselect All</button>
+                        </div>
+                        <div className={`${className}_rightButtonsContainer`}>
+                            <form method='POST' action={url} target='_blank' rel='noreferrer'>
+                                <input type="submit" name='submit' value="Submit Order" className={`${className}_button`}  />
+                                <input type="hidden" name='ingredients' value={value} />
+                            </form>
+                
+                            <button className={`${className}_button`} onClick={handleOrderIngredientsClick}>Cancel</button>
+                        </div>
+                    </>
+                    :
+                        <button className={`${className}_button`} onClick={handleOrderIngredientsClick}>Order Ingredients</button>
+                    }
+                </div>
                 <p className={`${className}_text`} style={{ display: orderActive ? 'block' : 'none' }}>
                     <span className={`${className}_orange`}>SELECT</span> all the ingredients you would like to add to your Amazon Fresh Shopping Cart
                 </p>
-            </div>
-            <div className={`${className}_buttonsContainer`}>
-                {orderActive ?
-                <>
-                    <div className={`${className}_leftButtonsContainer`}>
-                        <button className={`${className}_button`} onClick={selectAll}>Select All</button>
-                        <button className={`${className}_button`} onClick={unselectAll}>Unselect All</button>
-                    </div>
-                    <div className={`${className}_rightButtonsContainer`}>
-                        <form method='POST' action={url} target='_blank' rel='noreferrer'>
-                            <input type="submit" name='submit' value="Submit Order" className={`${className}_button`}  />
-                            <input type="hidden" name='ingredients' value={value} />
-                        </form>
-                        
-                        <button className={`${className}_button`} onClick={handleOrderIngredientsClick}>Cancel</button>
-                    </div>
-                </>
-                :
-                    <button className={`${className}_button`} onClick={handleOrderIngredientsClick}>Order Ingredients</button>
-                }
             </div>
         </div>
     )

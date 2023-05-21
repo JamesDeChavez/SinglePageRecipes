@@ -1,21 +1,21 @@
-.InstructionsTable {
+.CreateInstructionsTable {
     display: grid;
     gap: 0.5rem;
     padding: 0 0.5rem;
 }
 
-.InstructionsTable_header {
+.CreateInstructionsTable_header {
     font-size: 1rem;
     font-weight: 400;
     border-bottom: solid 1px #FFFFFF30;
 }
 
-.InstructionsTable_table {
+.CreateInstructionsTable_table {
     display: grid;
     gap: .5rem;
 }
 
-.InstructionsTable_addStepButton {
+.CreateInstructionsTable_addStepButton {
     font-size: 1rem;
     border: solid 1px #FFFFFF30;
     background-color: #9f5922;
@@ -23,30 +23,30 @@
     width: 100%;
 }
 
-.InstructionsTable_addStepButton:hover {
+.CreateInstructionsTable_addStepButton:hover {
     cursor: pointer;
     border: solid 1px #FFFFFF;
 }
 
-.InstructionsTable_pageButtonsContainer {
+.CreateInstructionsTable_pageButtonsContainer {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.InstructionsTable_pageButton {
+.CreateInstructionsTable_pageButton {
     fill: #FFFFFF;
     height: 1.5rem;
     width: auto;
 }
 
-.InstructionsTable_pageButton:hover {
+.CreateInstructionsTable_pageButton:hover {
     cursor: pointer;
     opacity: 0.5;
 
 }
 
-.InstructionsTable_resultsText {
+.CreateInstructionsTable_resultsText {
     font-size: 0.8rem;
     color:#FFFFFF;
 }
@@ -54,11 +54,11 @@
 
 @media screen and (min-width: 850px) {
 
-.InstructionsTable_header {
+.CreateInstructionsTable_header {
     font-size: 1.2rem;
 }
 
-.InstructionsTable_addStepButton {
+.CreateInstructionsTable_addStepButton {
     display: none !important;
 }
     
@@ -66,7 +66,7 @@
 
 @media screen and (min-width: 1250px) { 
 
-.InstructionsTable_table {
+.CreateInstructionsTable_table {
     grid-template-columns: 1fr 1fr;
     grid-auto-flow: column;
 }

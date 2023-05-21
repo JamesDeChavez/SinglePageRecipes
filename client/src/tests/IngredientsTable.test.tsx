@@ -1,17 +1,16 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
 import IngredientsTable from '../components/IngredientsTable'
 
-const mockHandleAddIngredient = jest.fn()
-const mockSetIngName = jest.fn()
-const mockSetIngAmount = jest.fn()
-const mockSetEditIngredientActive = jest.fn()
-const mockSetSelectedItem = jest.fn()
 const mockProps = {
-    ingredients: [], handleAddIngredient: mockHandleAddIngredient, 
-    setIngName: mockSetIngName, setIngAmount: mockSetIngAmount, 
-    setEditIngredientActive: mockSetEditIngredientActive, setSelectedItem: mockSetSelectedItem
+    ingredients: [], 
+    handleAddIngredient: jest.fn(), 
+    setIngName: jest.fn(), 
+    setIngAmount: jest.fn(), 
+    setEditIngredientActive: jest.fn(), 
+    setSelectedItem: jest.fn(),
+    orderActive: false,
+    shoppingList: [], setShoppingList: jest.fn()
 }
 
 describe('IngredientsTable', () => {
@@ -29,7 +28,7 @@ describe('IngredientsTable', () => {
         render(<IngredientsTable {...mockProps} />)
         const addButton = screen.getByRole('button', {name: 'Add Ingredient'})
         addButton.click()
-        expect(mockHandleAddIngredient).toBeCalled()
+        expect(mockProps.handleAddIngredient).toBeCalled()
     })
     it('should render page buttons', () => {
         render(<IngredientsTable {...mockProps} />)

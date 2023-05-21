@@ -1,12 +1,9 @@
-import { useState, useEffect, useContext, useRef } from 'react'
-import { UserLoggedInContext } from '../../App'
+import { useEffect } from 'react'
 import { Ingredient } from '../../utils/interfaces'
-import IngredientItem from '../IngredientItem'
 import { useQuery } from '@apollo/client'
 import { GET_AMAZON_TAG } from '../../graphql/queries'
 import classNames from 'classnames'
-import { ReactComponent as ArrowLeft } from '../../assets/arrow-left-solid.svg'
-import { ReactComponent as ArrowRight } from '../../assets/arrow-right-solid.svg'
+import IngredientsTable from '../IngredientsTable'
 import './styles.css'
 
 interface Props {
@@ -20,12 +17,6 @@ interface Props {
 
 const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrderActive, shoppingList, setShoppingList, sectionVisible }) => {
     const { data } = useQuery(GET_AMAZON_TAG)
-    const { windowSize } = useContext(UserLoggedInContext)
-    const [start, setStart] = useState(0)
-    const [end, setEnd] = useState(Math.min(ingredients.length, 6))
-    const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(Math.min(ingredients.length, 6))
-    const [gridTemplateRows, setGridTemplateRows] = useState(`repeat(6, 1fr)`)
-    const root = useRef(null)
 
     useEffect(() => {
         const newShoppingList = ingredients.map(item => {
@@ -34,46 +25,9 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
         setShoppingList(newShoppingList)
     }, [ingredients, setShoppingList])
 
-    
-    useEffect(() => {
-        if (!windowSize) return
-        const numberRows = windowSize[0] < 850 ? Math.floor((windowSize[1] - (windowSize[0] / 1.8) - 135) / 50) : Math.floor((((windowSize[1] - 30) / 2) - 25) / 50)
-        if (windowSize[0] < 1250) {
-            setEnd(numberRows)
-            setNumberItemsDisplayed(numberRows)
-        } else {
-            setEnd(numberRows * 2)
-            setNumberItemsDisplayed(numberRows * 2)
-
-        }
-        setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
-    }, [windowSize])
-
     const handleOrderIngredientsClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         setOrderActive(prevState => !prevState)
-    }
-    
-    const handleNextClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
-        e.preventDefault()
-        if (end >= ingredients.length) return
-
-        const endCheck = end + numberItemsDisplayed >= ingredients.length
-        const newStart = start + numberItemsDisplayed
-        const newEnd = endCheck ? ingredients.length : end + numberItemsDisplayed
-        setEnd(newEnd)
-        setStart(newStart)
-    }
-
-    const handlePrevClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
-        e.preventDefault()
-        if (start === 0) return
-
-        const begCheck = start - numberItemsDisplayed < 0
-        const newStart = begCheck ? 0 : start - numberItemsDisplayed
-        const newEnd = newStart + numberItemsDisplayed
-        setEnd(newEnd)
-        setStart(newStart)
     }
 
     const selectAll = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -106,38 +60,32 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
                 className,
                 {[`${className}_hidden`]: sectionVisible !== 'INGREDIENTS'}
             )} 
-            ref={root} 
         >
-            <h2 className={`${className}_header`}>INGREDIENTS</h2>
-            <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }} >
-                {ingredients && ingredients.slice(start, end).map((item, i) => {
-                    return <IngredientItem item={item} key={i} orderActive={orderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} root={root} start={start} />
-                })}
-            </div>            
-            <div className={`${className}_pageButtonsContainer`}>
-                    <ArrowLeft className={`${className}_pageButton`} onClick={handlePrevClick} />
-                    <ArrowRight className={`${className}_pageButton`} onClick={handleNextClick} />
-                    <p className={`${className}_resultsText`}>{`Items ${!ingredients.length ? 0 : start + 1} - ${Math.min(ingredients.length, end)} (Total Items ${ingredients.length})`}</p>
-            </div>
+            <IngredientsTable 
+                ingredients={ingredients}
+                orderActive={orderActive}
+                shoppingList={shoppingList} 
+                setShoppingList={setShoppingList}
+            />  
             <div className={`${className}_orderButtonsContainer`}>
-                {orderActive ?
-                <>
-                    <div className={`${className}_leftButtonsContainer`}>
-                        <button className={`${className}_button`} onClick={selectAll}>Select All</button>
-                        <button className={`${className}_button`} onClick={unselectAll}>Unselect All</button>
-                    </div>
-                    <div className={`${className}_rightButtonsContainer`}>
-                        <form method='POST' action={url} target='_blank' rel='noreferrer'>
-                            <input type="submit" name='submit' value="Submit Order" className={`${className}_button`}  />
-                            <input type="hidden" name='ingredients' value={value} />
-                        </form>
-                        
-                        <button className={`${className}_button`} onClick={handleOrderIngredientsClick}>Cancel</button>
-                    </div>
-                </>
-                :
-                    <button className={`${className}_button`} onClick={handleOrderIngredientsClick}>Order Ingredients</button>
-                }
+            {orderActive ?
+            <>
+                <div className={`${className}_leftButtonsContainer`}>
+                    <button className={`${className}_button`} onClick={selectAll}>Select All</button>
+                    <button className={`${className}_button`} onClick={unselectAll}>Unselect All</button>
+                </div>
+                <div className={`${className}_rightButtonsContainer`}>
+                    <form method='POST' action={url} target='_blank' rel='noreferrer'>
+                        <input type="submit" name='submit' value="Submit Order" className={`${className}_button`}  />
+                        <input type="hidden" name='ingredients' value={value} />
+                    </form>
+                    
+                    <button className={`${className}_button`} onClick={handleOrderIngredientsClick}>Cancel</button>
+                </div>
+            </>
+            :
+                <button className={`${className}_button`} onClick={handleOrderIngredientsClick}>Order Ingredients</button>
+            }
             </div>
         </div>
     )

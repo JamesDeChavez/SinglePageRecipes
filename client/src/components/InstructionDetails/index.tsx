@@ -4,6 +4,7 @@ import { ReactComponent as StickNoteSVG } from '../../assets/note-sticky-regular
 import { ReactComponent as ClockSVG } from '../../assets/clock-regular.svg'
 import { ReactComponent as FileLinesSVG } from '../../assets/file-lines-regular.svg'
 import { ReactComponent as CarrotSVG } from '../../assets/carrot-solid.svg'
+import { ReactComponent as BackSvg } from '../../assets/backward-step-solid.svg'
 import gsap from "gsap"
 import './styles.css'
 
@@ -71,23 +72,27 @@ const InstructionDetails: React.FC<Props> = ({
                 <div className={`${className}_topRow`}>
                     
                     <div className={`${className}_summaryContainer`}>
-                        <StickNoteSVG className={`${className}_svgIcon`} />
                         <p className={`${className}_summary`}>
+                            <StickNoteSVG className={`${className}_svgIcon`} />
                             {`${selectedStep.summary.action}: ${selectedStep.summary.items.map(item => item).join(', ')}`}
                         </p>
                     </div>
                     <div className={`${className}_timeContainer`}>
-                        <ClockSVG className={`${className}_svgIcon`} />
-                        <p className={`${className}_time`}>{`${selectedStep.time}`}</p>
+                        <p className={`${className}_time`}>
+                            <ClockSVG className={`${className}_svgIcon`} />
+                            {`${selectedStep.time}`}
+                        </p>
                     </div>
                 </div>
                 <div className={`${className}_descriptionContainer`}>
-                    <FileLinesSVG className={`${className}_svgIcon`} />
-                    <p className={`${className}_description`}>{selectedStep.description}</p>
+                    <p className={`${className}_description`}>
+                        <FileLinesSVG className={`${className}_svgIcon`} />
+                        {selectedStep.description}
+                    </p>
                 </div>
                 <div className={`${className}_ingredientsContainer`}>
-                    <CarrotSVG className={`${className}_svgIcon`} />
                     <div className={`${className}_itemsContainer`}>
+                        <CarrotSVG className={`${className}_svgIcon ${className}_carrot`} />
                         {selectedStep.ingredients.map((item, i) => 
                             <p className={`${className}_item`} key={i} >
                                 {`${item.name} - ${item.amount}`}
@@ -101,7 +106,8 @@ const InstructionDetails: React.FC<Props> = ({
             }
             <div className={`${className}_pageButtonsContainer`}>
                 <button className={`${className}_pageButton`} onClick={handleReturnToTableClick}>
-                    {`< `}<span style={{textDecoration: 'underline'}}>Return to table</span>
+                    <BackSvg className={`${className}_returnIcon`} />
+                    <span style={{textDecoration: 'underline'}}>Return to table</span>
                 </button>
                 <div className={`${className}_editDeleteContainer`} style={{ display: setInstructions ? 'flex' : 'none'}}>
                     <button className={`${className}_editButton`} onClick={handleEditClick} >Edit Step</button>

@@ -3,7 +3,7 @@ import AddStepForm from '../AddStepForm'
 import { CreateRecipeFormContext } from '../CreateRecipeForm'
 import EditStepForm from '../EditStepForm'
 import InstructionDetails from '../InstructionDetails'
-import InstructionsTable from '../InstructionsTable'
+import CreateInstructionsTable from '../CreateInstructionsTable'
 import './styles.css'
 
 const CreateRecipeInstructions = () => {
@@ -60,7 +60,7 @@ const CreateRecipeInstructions = () => {
                         setDetailsActive={setDetailsActive} selectedStep={selectedStep} 
                     />
             :
-                <InstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} handleAddStepClick={handleAddStepClick}  />
+                <CreateInstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} handleAddStepClick={handleAddStepClick}  />
             }
         </div>
     )

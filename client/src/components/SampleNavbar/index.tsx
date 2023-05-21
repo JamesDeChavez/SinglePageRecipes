@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { NonAuthRenderContext } from '../../branches/NonAuth'
+import { ReactComponent as BackSvg } from '../../assets/backward-step-solid.svg'
 import './styles.css'
 
 const SampleNavbar = () => {
@@ -13,7 +14,10 @@ const SampleNavbar = () => {
     const className = 'SampleNavbar'
     return (
         <div className={className}>
-            <button className={`${className}_return`} onClick={(e) => handleClick(e, 0)}>{`< Return Home`}</button>
+            <button className={`${className}_return`} onClick={(e) => handleClick(e, 0)}>
+                <BackSvg className={`${className}_svg`} />
+                {`Return Home`}
+            </button>
             <button className={`${className}_register`} onClick={(e) => handleClick(e, 2)}>Create an Account</button>
         </div>
     )

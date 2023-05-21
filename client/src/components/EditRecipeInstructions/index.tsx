@@ -3,7 +3,7 @@ import AddStepForm from '../AddStepForm'
 import { EditRecipeFormContext } from '../EditRecipeForm'
 import EditStepForm from '../EditStepForm'
 import InstructionDetails from '../InstructionDetails'
-import InstructionsTable from '../InstructionsTable'
+import EditInstructionsTable from '../EditInstructionsTable'
 import './styles.css'
 
 const EditRecipeInstructions = () => {
@@ -22,7 +22,7 @@ const EditRecipeInstructions = () => {
     } = useContext(EditRecipeFormContext)
     const [detailsActive, setDetailsActive] = useState(false)
 
-    const handleAddStepClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleEditStepClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         setAddStepActive(true)
     }
@@ -60,7 +60,7 @@ const EditRecipeInstructions = () => {
                         setDetailsActive={setDetailsActive} selectedStep={selectedStep} 
                     />
             :
-                <InstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} handleAddStepClick={handleAddStepClick}  />
+                <EditInstructionsTable setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} instructions={instructions} handleEditStepClick={handleEditStepClick}  />
             }
         </div>
     )

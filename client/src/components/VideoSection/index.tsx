@@ -1,12 +1,14 @@
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { ReactComponent as PlusSVG  } from '../../assets/square-plus-regular.svg'
+import { ReactComponent as MinusSVG  } from '../../assets/square-minus-regular.svg'
 import './styles.css'
 
 interface Props {
     title: string,
     videoId: string,
-    handleMinimizeClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-    handleHideClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+    handleMinimizeClick: (e: React.MouseEvent<SVGElement, MouseEvent>) => void,
+    handleHideClick: (e: React.MouseEvent<SVGElement, MouseEvent>) => void
 }
 
 const VideoSection: React.FC<Props> = ({ title, videoId, handleMinimizeClick, handleHideClick }) => {
@@ -23,10 +25,10 @@ const VideoSection: React.FC<Props> = ({ title, videoId, handleMinimizeClick, ha
     return (
         <div className={className} ref={root} >
             <div className={`${className}_topContainer`}>
-                <p className={`${className}_header`}>{`Recipe: ${title}`}</p>
+                <p className={`${className}_header`}>{`RECIPE: ${title}`}</p>
                 {/* <div className={`${className}_buttonsContainer`} >
-                    <button className={`${className}_button`} onClick={handleMinimizeClick} >[ - ]</button>
-                    <button className={`${className}_button`} onClick={handleHideClick} >[ x ]</button>
+                    <MinusSVG  className={`${className}_svgIcon`} onClick={handleMinimizeClick} />
+                    <PlusSVG  className={`${className}_svgIcon`} onClick={handleHideClick} />                    
                 </div> */}
             </div>
             <iframe

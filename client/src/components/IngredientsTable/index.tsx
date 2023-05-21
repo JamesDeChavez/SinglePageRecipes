@@ -4,59 +4,39 @@ import { Ingredient } from '../../utils/interfaces'
 import IngredientItem from '../IngredientItem'
 import { ReactComponent as ArrowLeft } from '../../assets/arrow-left-solid.svg'
 import { ReactComponent as ArrowRight } from '../../assets/arrow-right-solid.svg'
+import { determineCols, determineNumItems_Ing } from '../../utils/functions'
 import './styles.css'
-
 
 interface Props {
     ingredients: Ingredient[],
-    handleAddIngredient?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-    setEditIngredientActive: React.Dispatch<React.SetStateAction<boolean>>,
-    setIngName: React.Dispatch<React.SetStateAction<string>>,
-    setIngAmount: React.Dispatch<React.SetStateAction<string>>,
-    setSelectedItem: React.Dispatch<React.SetStateAction<Ingredient | undefined>>
+    orderActive: boolean, 
+    shoppingList: Ingredient[],
+    setShoppingList: React.Dispatch<React.SetStateAction<Ingredient[]>>,
 }
 
-const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient, setEditIngredientActive, setIngName, setIngAmount, setSelectedItem }) => { 
-    const { windowSize } = useContext(UserLoggedInContext) 
+const IngredientsTable: React.FC<Props> = ({ ingredients, orderActive, shoppingList, setShoppingList }) => {
+    const { windowSize } = useContext(UserLoggedInContext)
     const [start, setStart] = useState(0)
-    const [end, setEnd] = useState(6)
-    const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(6)
-    const [gridTemplateRows, setGridTemplateRows] = useState(`repeat(6, 1fr)`)
-    const [gridTemplateRowsTwo, setGridTemplateRowsTwo] = useState(`auto 6fr 1fr auto`)
-    const buttonRef = useRef<HTMLButtonElement | null>(null)
+    const [end, setEnd] = useState(Math.min(ingredients.length, 6))
+    const [numberItemsDisplayed, setNumberItemsDisplayed] = useState(Math.min(ingredients.length, 6))
+    const [tableLayout, setTableLayout] = useState(`repeat(6, 1fr)`)
     const root = useRef(null)
 
     useEffect(() => {
         if (!windowSize) return
-        const numberRows = windowSize[0] < 850 ? Math.floor((windowSize[1] - (windowSize[0] / 1.8) - 135) / 50) : Math.floor((((windowSize[1] - 30) / 2) - 25) / 50)
-        
-        if (windowSize[0] < 850) {
-            setEnd(numberRows - 1)
-            setNumberItemsDisplayed(numberRows - 1)
-            setGridTemplateRows(`repeat(${numberRows - 1}, 1fr)`)
-            setGridTemplateRowsTwo(`auto ${numberRows - 1}fr 1fr auto`)
-        }
-        else if (windowSize[0] < 1250) {
-            setEnd(numberRows)
-            setNumberItemsDisplayed(numberRows)
-            setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
-            setGridTemplateRowsTwo(`auto 1fr auto`)
-        } 
-        else {
-            setEnd(numberRows*2)
-            setNumberItemsDisplayed(numberRows*2)
-            setGridTemplateRows(`repeat(${numberRows}, 1fr)`)
-            setGridTemplateRowsTwo(`auto 1fr auto`)
-        }
+        const numCols = determineCols(windowSize[0])
+        const numberItems = determineNumItems_Ing(windowSize[0], windowSize[1], numCols)
+        const itemsPerCol = numberItems / numCols
+        const newTableLayout = `repeat(${itemsPerCol}, 1fr)`
+        setEnd(numberItems)
+        setNumberItemsDisplayed(numberItems)
+        setTableLayout(newTableLayout)
     }, [windowSize])
-    
-    useEffect(() => {
-        buttonRef.current && buttonRef.current.focus()
-    }, [buttonRef])
 
-    const handleNextClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleNextClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+        e.preventDefault()
         if (end >= ingredients.length) return
-
+        console.log('1', start, end, numberItemsDisplayed)
         const endCheck = end + numberItemsDisplayed >= ingredients.length
         const newStart = start + numberItemsDisplayed
         const newEnd = endCheck ? ingredients.length : end + numberItemsDisplayed
@@ -64,10 +44,9 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient, s
         setStart(newStart)
     }
 
-    const handlePrevClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handlePrevClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         e.preventDefault()
         if (start === 0) return
-
         const begCheck = start - numberItemsDisplayed < 0
         const newStart = begCheck ? 0 : start - numberItemsDisplayed
         const newEnd = newStart + numberItemsDisplayed
@@ -75,30 +54,21 @@ const IngredientsTable: React.FC<Props> = ({ ingredients, handleAddIngredient, s
         setStart(newStart)
     }
 
-    const handleEditClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: Ingredient) => {
-        e.preventDefault()
-        setIngName(item.name)
-        setIngAmount(item.amount)
-        setSelectedItem(item)
-        setEditIngredientActive(true)
-    }
-
     const className = 'IngredientsTable'
     return (
-        <div className={className} style={{ gridTemplateRows: gridTemplateRowsTwo}} >
-            <h2 className={`${className}_header`}>Ingredients:</h2>
-            <div className={`${className}_table`} style={{ gridTemplateRows: gridTemplateRows }} ref={root} >
+        <div className={className} ref={root} >
+            <h2 className={`${className}_header`}>INGREDIENTS</h2>
+            <div className={`${className}_table`} style={{ gridTemplateRows: tableLayout }} >
                 {ingredients && ingredients.slice(start, end).map((item, i) => {
-                    return <div className={`${className}_itemContainer`} onClick={e => handleEditClick(e, item)}><IngredientItem item={item} key={i} root={root} start={start} /></div>
+                    return <IngredientItem item={item} key={i} orderActive={orderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} root={root} start={start} />
                 })}
-            </div>
-
-            <button className={`${className}_button ${className}_addButton`} onClick={handleAddIngredient} style={{ display: handleAddIngredient ? 'block' : 'none' }} ref={buttonRef}>Add Ingredient</button>
-
+            </div>            
             <div className={`${className}_pageButtonsContainer`}>
-                    <button className={`${className}_button`} onClick={handlePrevClick}>Prev</button>
-                    <button className={`${className}_button`} onClick={handleNextClick}>Next</button>
-                    <p className={`${className}_resultsText`}>{`Items ${!ingredients.length ? 0 : start + 1} - ${Math.min(ingredients.length, end)} (Total Items ${ingredients.length})`}</p>
+                    <ArrowLeft className={`${className}_pageButton`} onClick={handlePrevClick} />
+                    <ArrowRight className={`${className}_pageButton`} onClick={handleNextClick} />
+                    <p className={`${className}_resultsText`}>
+                        {`Items ${!ingredients.length ? 0 : start + 1} - ${Math.min(ingredients.length, end)} (Total Items ${ingredients.length})`}
+                    </p>
             </div>
         </div>
     )

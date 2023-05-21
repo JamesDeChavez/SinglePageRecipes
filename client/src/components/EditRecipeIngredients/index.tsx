@@ -1,30 +1,31 @@
 import { useContext } from 'react'
-import AddItemForm from '../AddItemForm'
 import EditItemForm from '../EditItemForm'
 import { EditRecipeFormContext } from '../EditRecipeForm'
-import IngredientsTable from '../IngredientsTable'
+import EditIngredientsTable from '../EditIngredientsTable'
 import './styles.css'
 
 const EditRecipeIngredients = () => {
-    const { ingredients, addIngredientActive, setAddIngredientActive, editIngredientActive, setEditIngredientActive, ingName, setIngName, ingAmount, setIngAmount, setSelectedItem } = useContext(EditRecipeFormContext)
+    const { 
+        ingredients, 
+        setSelectedItem, 
+        editIngredientActive, setEditIngredientActive, 
+        ingName, setIngName, 
+        ingAmount, setIngAmount
+    } = useContext(EditRecipeFormContext)
 
-    const handleAddIngredient = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleEditIngredient = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        setAddIngredientActive(true)
+        setEditIngredientActive(true)
     }
 
     const className = 'EditRecipeIngredients'
     return (
         <div className={className} >
-
-            { addIngredientActive ?
-                <AddItemForm ingName={ingName} setIngName={setIngName} ingAmount={ingAmount} setIngAmount={setIngAmount} />
-            : editIngredientActive ?
+            { editIngredientActive ?
                 <EditItemForm ingName={ingName} setIngName={setIngName} ingAmount={ingAmount} setIngAmount={setIngAmount} />
             :
-                <IngredientsTable ingredients={ingredients} handleAddIngredient={handleAddIngredient} setEditIngredientActive={setEditIngredientActive} setIngName={setIngName} setIngAmount={setIngAmount} setSelectedItem={setSelectedItem} />
-            }            
-
+                <EditIngredientsTable ingredients={ingredients} handleEditIngredient={handleEditIngredient} setEditIngredientActive={setEditIngredientActive} setIngName={setIngName} setIngAmount={setIngAmount} setSelectedItem={setSelectedItem} />
+            }
         </div>
     )
 }

@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import AddItemForm from '../AddItemForm'
 import { CreateRecipeFormContext } from '../CreateRecipeForm'
 import EditItemForm from '../EditItemForm'
-import IngredientsTable from '../IngredientsTable'
+import CreateIngredientsTable from '../CreateIngredientsTable'
 import './styles.css'
 
 const CreateRecipeIngredients = () => {
@@ -18,11 +18,21 @@ const CreateRecipeIngredients = () => {
         <div className={className} >
 
             { addIngredientActive ?
-                <AddItemForm ingName={ingName} setIngName={setIngName} ingAmount={ingAmount} setIngAmount={setIngAmount}  />
+                <AddItemForm 
+                    ingName={ingName} setIngName={setIngName} 
+                    ingAmount={ingAmount} setIngAmount={setIngAmount}  
+                />
             : editIngredientActive ?
-                <EditItemForm ingName={ingName} setIngName={setIngName} ingAmount={ingAmount} setIngAmount={setIngAmount} />
+                <EditItemForm 
+                    ingName={ingName} setIngName={setIngName} 
+                    ingAmount={ingAmount} setIngAmount={setIngAmount} 
+                />
             :
-                <IngredientsTable ingredients={ingredients} handleAddIngredient={handleAddIngredient} setEditIngredientActive={setEditIngredientActive} setIngName={setIngName} setIngAmount={setIngAmount} setSelectedItem={setSelectedItem} />
+                <CreateIngredientsTable 
+                    ingredients={ingredients} handleAddIngredient={handleAddIngredient} 
+                    setEditIngredientActive={setEditIngredientActive} setIngName={setIngName} 
+                    setIngAmount={setIngAmount} setSelectedItem={setSelectedItem} 
+                />
             }            
 
         </div>

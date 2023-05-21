@@ -4,22 +4,23 @@ import { Instruction } from '../../utils/interfaces'
 import InstructionItem from '../InstructionItem'
 import { ReactComponent as ArrowLeft } from '../../assets/arrow-left-solid.svg'
 import { ReactComponent as ArrowRight } from '../../assets/arrow-right-solid.svg'
-import { determineCols, determineNumItems_Inst } from '../../utils/functions'
 import './styles.css'
+import { determineCols, determineNumItems_Inst } from '../../utils/functions'
 
 interface Props {
     setDetailsActive: React.Dispatch<React.SetStateAction<boolean>>,
     setSelectedStep: React.Dispatch<React.SetStateAction<Instruction | undefined>>
-    instructions: Instruction[]
+    instructions: Instruction[],
+    handleEditStepClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep, instructions }) => {
+const EditInstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep, instructions, handleEditStepClick }) => {
     const { windowSize } = useContext(UserLoggedInContext)
     const [start, setStart] = useState(0)
-    const [end, setEnd] = useState(5)
-    const [numberStepsDisplayed, setNumberStepsDisplayed] = useState(5)
-    const [tableLayout, setTableLayout] = useState('repeat(5, 1fr)')
-    const [componentLayout, setComponentLayout] = useState('auto 1fr auto')
+    const [end, setEnd] = useState(4 )
+    const [numberStepsDisplayed, setNumberStepsDisplayed] = useState(4)
+    const [tableLayout, setTableLayout] = useState('repeat(4, 1fr)')
+    const [componentLayout, setComponentLayout] = useState('auto 5fr 1fr auto')
     const buttonRef = useRef<HTMLButtonElement | null>(null)
     const root = useRef(null)
 
@@ -27,13 +28,16 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
         if (!windowSize) return
         const numCols = determineCols(windowSize[0])
         const numberItems = determineNumItems_Inst(windowSize[0], windowSize[1], numCols)
-        const itemsPerCol = numberItems / numCols
+        const itemsPerCol = windowSize[0] < 850 ? numberItems / numCols - 1 : numberItems / numCols        
         const newTableLayout = `repeat(${itemsPerCol}, 1fr)`
-        const newComponentLayout = `auto 1fr auto`
+        const newComponentLayout = windowSize[0] < 850 
+            ? `auto ${itemsPerCol}fr 1fr auto`
+            : `auto 1fr auto`
+        console.log(numCols, numberItems, itemsPerCol)
         setEnd(numberItems)
         setNumberStepsDisplayed(numberItems)
-        setComponentLayout(newComponentLayout)
         setTableLayout(newTableLayout)
+        setComponentLayout(newComponentLayout)
     }, [windowSize])
 
     useEffect(() => {
@@ -60,7 +64,7 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
         setStart(newStart)
     }
 
-    const className = 'InstructionsTable'
+    const className = 'EditInstructionsTable'
     return (
         <div className={className} style={{ gridTemplateRows: componentLayout }} ref={root} >
             <h2 className={`${className}_header`}>INSTRUCTIONS</h2>    
@@ -69,6 +73,9 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
                     return <InstructionItem setDetailsActive={setDetailsActive} setSelectedStep={setSelectedStep} step={step} index={i + start} key={i} root={root} start={start} />
                 })}
             </div>
+        
+            <button className={`${className}_addStepButton`} onClick={handleEditStepClick} ref={buttonRef} >Add Step</button>
+
             <div className={`${className}_pageButtonsContainer`}>
                 <ArrowLeft className={`${className}_pageButton`} onClick={handlePrevClick} />
                 <ArrowRight className={`${className}_pageButton`} onClick={handleNextClick} />
@@ -80,4 +87,4 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
     )
 }
 
-export default InstructionsTable
+export default EditInstructionsTable

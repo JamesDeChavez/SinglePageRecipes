@@ -1,16 +1,18 @@
 .IngredientsTable {
     display: grid;
+    grid-template-rows: auto 1fr auto;
     gap: 0.5rem;
-    padding: 0 0.5rem;
 }
 
 .IngredientsTable_header {
     font-size: 1rem;
     font-weight: 400;
+    border-bottom: solid 1px #FFFFFF30;
 }
 
 .IngredientsTable_table {
     display: grid;
+    grid-template-columns: 1fr;
     gap: .5rem;
     height: 100%;
     max-height: 100%;
@@ -52,27 +54,26 @@
 
 .IngredientsTable_pageButtonsContainer {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     align-items: center;
 }
 
-@media screen and (min-width: 850px) {
-    
-.IngredientsTable_button {
-    font-size: 1rem;
+.IngredientsTable_pageButton {
+    fill: #FFFFFF;
+    height: 1.5rem;
+    width: auto;
 }
 
-.IngredientsTable_addButton {
-    display: none !important;
-}
-
-.IngredientsTable_resultsText {
-    font-size: 1rem;
-}
-
+.IngredientsTable_pageButton:hover {
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 @media screen and (min-width: 1250px) { 
+
+.IngredientsTable_header {
+    font-size: 1.2rem;
+}
 
 .IngredientsTable_table {
     grid-template-columns: 1fr 1fr;

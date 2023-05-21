@@ -24,7 +24,7 @@ const RecipeNavbar: React.FC<Props> = ({ selectedRecipe }) => {
 
     useLayoutEffect(() => {
         const gsapContext = gsap.context(() => {
-            gsap.fromTo(`.${className}_option`, { y: -500 }, { duration: 0.5, y: 0 })
+            gsap.fromTo(`.${className}_option`, { y: -500 }, { duration: 0.2, y: 0 })
             return () => gsapContext.revert()
         }, root)
     }, [optionsVisible])

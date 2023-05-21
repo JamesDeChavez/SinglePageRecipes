@@ -18,12 +18,12 @@ const SampleRecipe = () => {
     const [shoppingList, setShoppingList] = useState<Ingredient[]>([])
     const root = useRef(null)
 
-    const handleMinimizeClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleMinimizeClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         e.preventDefault()
         setCurrentView(VIEWS[1])
     }
 
-    const handleHideClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleHideClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         e.preventDefault()
         console.log('test2')
     }
