@@ -18,7 +18,7 @@ const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingL
 
     useLayoutEffect(() => {
         const gsapContext = gsap.context(() => {
-            gsap.fromTo(`.${className}`, { x: -1000 }, { duration: 0.5, x: 0 })
+            gsap.fromTo(`.${className}_buttonsContainer`, { x: -1000 }, { duration: 0.5, x: 0 })
             return () => gsapContext.revert()
         }, root)
     }, [root])
