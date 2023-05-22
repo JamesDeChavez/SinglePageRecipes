@@ -5,6 +5,7 @@
     max-height: 100%;
     overflow: hidden;
     gap: 0.5rem;
+    transition: 0.5s;
 }
 
 .Recipe_main {
@@ -21,10 +22,12 @@
 
     .Recipe_hideView {
         grid-template-columns: auto 1fr !important;
-    }
+    transition: 0.5s;
+}
     
     .Recipe_largeView {
         grid-template-columns: 1fr 400px !important;
+        transition: 0.5s;
     }
     
     .Recipe_main {

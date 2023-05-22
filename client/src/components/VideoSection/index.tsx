@@ -48,7 +48,7 @@ const VideoSection: React.FC<Props> = ({ title, videoId, handleMinusClick, handl
                 src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&version=3&playerapiid=ytplayer`}
                 className={classNames(
                     `${className}_iframe`,
-                    {[`${className}_hideView`]: currentView === 'HIDE'}
+                    {[`${className}_iframe_hideView`]: currentView === 'HIDE'}
                 )}
             />
         </div>
