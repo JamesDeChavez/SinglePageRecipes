@@ -25,7 +25,12 @@
 }
 
 .CreateRecipeVideoSection_iframe {
+    width: 100%;
+    height: auto;
+    max-width: 1300px;
+    aspect-ratio: 16 / 9;
     border: solid 1px #FFFFFF30;
+    margin: auto;
 }
 
 @media screen and (min-width: 850px) {
