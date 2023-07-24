@@ -41,17 +41,21 @@
 
 .Navbar_button:hover {
     cursor: pointer;
-    border: solid 1px #FFFFFF;
+    opacity: 0.5;
 }
 
 @media screen and (min-width: 850px) {
+
+.Navbar_logo {
+    font-size: 2rem;
+}
 
 .Navbar_image {
     width: 10rem;
 }
 
 .Navbar_button {
-font-size: 1rem
+    font-size: 1rem
 }
 
 }

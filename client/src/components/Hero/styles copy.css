@@ -1,0 +1,49 @@
+.Hero {
+    display: grid;
+    place-content: center;
+    position: relative;
+    max-height: 100vh;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.Hero_overlayContainer {
+    display: grid;
+    width: clamp(354px, 50vw, 60rem);
+    gap: 1rem;
+    text-align: center;
+    background-color: #070b0b90;
+    backdrop-filter: blur(10px);
+    padding: 2rem 0;
+    color: #FFFFFF;
+    z-index: 2;
+    border: solid 1px #FFFFFF30;
+}
+
+.Hero_header {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #FFFFFF;
+}
+
+.Hero_text {
+    font-size: 1rem;
+}
+
+.Hero_button {
+    font-size: 1rem;
+    border: solid 1px #FFFFFF30;
+    padding: 0.5rem 2rem;
+    background-color: #9f5922;
+    color: #FFFFFF;
+}
+
+.Hero_button:hover {
+    border: solid 1px #FFFFFF;
+}
+
+@media screen and (min-width: 850px) {
+    .Hero_text {
+        font-size: 1.3rem;
+    }
+}

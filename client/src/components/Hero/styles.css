@@ -1,49 +1,232 @@
 .Hero {
     display: grid;
-    place-content: center;
-    position: relative;
-    max-height: 100vh;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
+    margin: 2rem 1rem;
+    gap: 4rem;
 }
 
-.Hero_overlayContainer {
+.Hero_textSection {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.Hero_headerContainer {
     display: grid;
-    width: clamp(354px, 50vw, 60rem);
-    gap: 1rem;
-    text-align: center;
-    background-color: #070b0b90;
-    backdrop-filter: blur(10px);
-    padding: 2rem 0;
-    color: #FFFFFF;
-    z-index: 2;
-    border: solid 1px #FFFFFF30;
+    gap: 2rem;
 }
 
-.Hero_header {
-    font-size: clamp(2rem, 5vw, 3rem);
-    color: #FFFFFF;
+.Hero_headerSmall {
+    color: #635bff;
+    font-size: 1.2rem;
+}
+
+.Hero_headerLarge {
+    font-size: 3rem;
+    line-height: 3.5rem;
+    letter-spacing: -0.2rem;
+    color: #FFFFFF
 }
 
 .Hero_text {
-    font-size: 1rem;
+    letter-spacing: 0.2px;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    color: #FFFFFF
+}
+
+.Hero_visualSection {
+    display: grid;
+    width: 100%;
+    height: min-content;
+    align-items: center;
+    place-self: center;
+}
+
+.Hero_rowContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.Hero_visualContainer {
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: auto;
+    border: solid 1px #FFFFFF30;
+    border-radius: 5px;
+    display: grid;
+    place-content: center;
+    place-items: center;
+    padding: 1rem 0.5rem;
+    display: grid;
+    gap: 0.5rem;
+    z-index: 2;
+}
+
+.Hero_kitchenSVG,
+.Hero_recipeSVG,
+.Hero_youtubeSVG,
+.Hero_amazonSVG {
+    aspect-ratio: 1/1;
+    width: 90%;
+    height: auto;
+    fill: none;
+    stroke: #FFFFFF30;
+}
+
+.Hero_amazonSVG {
+    width: 200%;
+    height: auto;
+    stroke: #FFFFFF;
+}
+
+.Hero_svgText {
+    color: #FFFFFF;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 0.8rem;
+    user-select: none;
+    opacity: 0;
+}
+
+.Hero_svgVisible {
+    border-color: #FFFFFF;
+    background-color: #112728;
+}
+
+.Hero_svgVisible > p {
+    opacity: 1;
+}
+
+.Hero_svgVisible > .Hero_youtubeSVG {
+    fill: #ff0000;
+    stroke: #FFFFFF;
+}
+
+.Hero_svgVisible > .Hero_recipeSVG {
+    fill: #00dce3;
+    stroke: #FFFFFF;
+}
+
+.Hero_svgVisible > .Hero_amazonSVG {
+    fill: #ffd748;
+    stroke: #FFFFFF;
+}
+
+.Hero_svgVisible > .Hero_kitchenSVG {
+    fill: #0073e6;
+    stroke: #FFFFFF;
+}
+
+.Hero_borderAnimationContainer {
+    position: relative;
+    grid-column: span 2;
+}
+
+.Hero_borderAnimationRight {
+    position: absolute;
+    height: 50%;
+    width: 75%;
+    left: 0;
+    bottom: 0;
+}
+
+.Hero_borderAnimationLeft {
+    position: absolute;
+    height: 50%;
+    width: 75%;
+    right: 0;
+    bottom: 0;
+}
+
+.Hero_firstTop {
+    position: absolute;
+    border-radius: 100vmax;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 5px;
+    background: linear-gradient(45deg, #ff0000, #806E72);
+}
+
+.Hero_firstRight {
+    position: absolute;
+    border-radius: 100vmax;
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 0;
+    background: linear-gradient(45deg, #00dce3, #806E72);
+}
+
+.Hero_secondTop {
+    position: absolute;
+    border-radius: 100vmax;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 5px;
+    background: linear-gradient(45deg, #80DA96, #00dce3);
+}
+
+.Hero_secondLeft {
+    position: absolute;
+    border-radius: 100vmax;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 0;
+    background: linear-gradient(45deg, #ffd748, #80DA96);
+}
+
+.Hero_thirdTop {
+    position: absolute;
+    border-radius: 100vmax;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 5px;
+    background: linear-gradient(45deg, #ffd748, #80A597);
+}
+
+.Hero_thirdRight {
+    position: absolute;
+    border-radius: 100vmax;
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 0;
+    background: linear-gradient(45deg, #0073E6, #80A597);
 }
 
 .Hero_button {
-    font-size: 1rem;
-    border: solid 1px #FFFFFF30;
-    padding: 0.5rem 2rem;
     background-color: #9f5922;
     color: #FFFFFF;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
 }
 
 .Hero_button:hover {
-    border: solid 1px #FFFFFF;
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 @media screen and (min-width: 850px) {
-    .Hero_text {
-        font-size: 1.3rem;
+    .Hero {
+        grid-template-columns: 1fr 1fr;
+        max-width: 1080px;
+        justify-self: center;
+    }
+    .Hero_textSection {
+        align-self: center;
+    }
+    .Hero_svgText {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-height: 700px) and (min-width: 800px) {
+    .Hero {
+        grid-template-columns: auto;
+        max-width: 720px;
     }
 }
