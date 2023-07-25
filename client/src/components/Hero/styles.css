@@ -6,6 +6,8 @@
     background-color: #070b0b90;
     backdrop-filter: blur(10px);
     padding: 2rem 1rem;
+    box-shadow: 0 7px 14px 0 #00000030, 0 3px 6px 0 #00000080;
+    border-radius: 5px;
 }
 
 .Hero_textSection {

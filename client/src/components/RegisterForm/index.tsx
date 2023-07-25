@@ -68,16 +68,20 @@ const RegisterForm = () => {
             <form className={`${className}_form`} onSubmit={handleSubmit}>
                 <h1 className={`${className}_header`}>Register</h1>
                 <div className={`${className}_inputContainer`}>
-                    <input required className={`${className}_input`} type="text" name="username" id="username" placeholder='Username' value={username} autoComplete='off' onChange={e => setUsername(e.target.value)} />
+                    <label className={`${className}_inputLabel`} htmlFor="username">Username</label>
+                    <input required className={`${className}_input`} type="text" name="username" id="username" value={username} autoComplete='off' onChange={e => setUsername(e.target.value)} />
                 </div>
                 <div className={`${className}_inputContainer`}>
-                    <input required className={`${className}_input`} type="email" name="email" id="email" placeholder='Email' value={email} autoComplete='off' onChange={e => setEmail(e.target.value)} />
+                    <label className={`${className}_inputLabel`} htmlFor="email">Email</label>
+                    <input required className={`${className}_input`} type="email" name="email" id="email" value={email} autoComplete='off' onChange={e => setEmail(e.target.value)} />
                 </div>
                 <div className={`${className}_inputContainer`}>
-                    <input required className={`${className}_input`} type="password" name="password" id="password" placeholder='Password' value={password} autoComplete='off' onChange={e => setPassword(e.target.value)} />
+                    <label className={`${className}_inputLabel`} htmlFor="password">Password</label>
+                    <input required className={`${className}_input`} type="password" name="password" id="password" value={password} autoComplete='off' onChange={e => setPassword(e.target.value)} />
                 </div>
                 <div className={`${className}_inputContainer`}>
-                    <input required className={`${className}_input`} type="password" name="repeatpw" id="repeatpw" placeholder='Repeat Password' value={repeatPW} autoComplete='off' onChange={e => setRepeatPW(e.target.value)} />
+                    <label className={`${className}_inputLabel`} htmlFor="repeatpw">Repeat Password</label>
+                    <input required className={`${className}_input`} type="password" name="repeatpw" id="repeatpw" value={repeatPW} autoComplete='off' onChange={e => setRepeatPW(e.target.value)} />
                 </div>
                 <div className={`${className}_buttonsContainer`}>
                     <input className={`${className}_button`} type="submit" value="Create Account" />

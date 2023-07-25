@@ -1,23 +1,25 @@
 .RegisterForm {
     display: grid;
-    place-content: center;
-    position: relative;
-    max-height: 100vh;
+    justify-content: center;
     overflow: hidden;
     background-size: cover;
     background-position: center;
+    padding: 4rem 1rem;
 }
 
 .RegisterForm_form {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
     row-gap: 1rem;
     color: #FFFFFF;
     z-index: 2;
     border: solid 1px #FFFFFF30;
+    border-radius: 5px;
     background-color: #070b0b90;
     backdrop-filter: blur(10px);
-    padding: 1rem 3rem;
+    box-shadow: 0 7px 14px 0 #00000030, 0 3px 6px 0 #00000080;
+    height: min-content;
 }
 
 .RegisterForm_header {
@@ -26,27 +28,32 @@
 
 .RegisterForm_inputContainer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 0.5rem;
+}
+.RegisterForm_buttonsContainer {
+    padding-top: 1rem;
+    display: flex;
 }
 
 .RegisterForm_input {
     border: solid 1px #FFFFFF30;
+    border-radius: 5px;
     background-color: #112728;
     color: #FFFFFF;
     font-size: 1rem;
-    padding: 1rem;
-    max-width: 200px;
-}
-
-.RegisterForm_inputContainer {
-    display: flex;
-    justify-content: space-between;
+    line-height: 1.5rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
 }
 
 .RegisterForm_button {
     font-size: 1rem;
+    line-height: 1.5rem;
     border: solid 1px #FFFFFF30;
-    padding: 0.5rem;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
     background-color: #9f5922;
     color: #FFFFFF;
     width: 100%;
@@ -72,6 +79,14 @@
 .RegisterForm_loadingSvg {
     width: 2rem;
     height: 100%;
+}
+
+
+@media screen and (min-width: 800px) {
+    .RegisterForm_form {
+        width: 540px;
+        padding: 3rem;
+    }
 }
 
 @media screen and (min-width: 500px) {
