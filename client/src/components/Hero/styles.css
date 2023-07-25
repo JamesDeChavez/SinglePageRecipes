@@ -216,6 +216,10 @@
         grid-template-columns: 1fr 1fr;
         max-width: 1080px;
         justify-self: center;
+        border: solid 1px #FFFFFF30;
+        background-color: #070b0b90;
+        backdrop-filter: blur(10px);
+        padding: 2rem 4rem;
     }
     .Hero_textSection {
         align-self: center;
