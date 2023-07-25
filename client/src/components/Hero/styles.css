@@ -251,7 +251,18 @@
 
 @media screen and (max-height: 700px) and (min-width: 800px) {
     .Hero {
-        grid-template-columns: auto;
-        max-width: 720px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .Hero_headerLarge {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        letter-spacing: -0.1rem;
+    }
+    
+    .Hero_text {
+        letter-spacing: 0.1px;
+        font-size: 1.1rem;
+        line-height: 1.4rem;
     }
 }
