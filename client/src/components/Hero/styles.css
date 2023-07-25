@@ -2,17 +2,21 @@
     display: grid;
     margin: 2rem 1rem;
     gap: 4rem;
+    border: solid 1px #FFFFFF30;
+    background-color: #070b0b90;
+    backdrop-filter: blur(10px);
+    padding: 2rem 1rem;
 }
 
 .Hero_textSection {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .Hero_headerContainer {
     display: grid;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .Hero_headerSmall {
@@ -21,16 +25,16 @@
 }
 
 .Hero_headerLarge {
-    font-size: 3rem;
-    line-height: 3.5rem;
-    letter-spacing: -0.2rem;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    letter-spacing: -0.1rem;
     color: #FFFFFF
 }
 
 .Hero_text {
-    letter-spacing: 0.2px;
-    font-size: 1.2rem;
-    line-height: 1.6rem;
+    letter-spacing: 0.1px;
+    font-size: 1.1rem;
+    line-height: 1.4rem;
     color: #FFFFFF
 }
 
@@ -40,7 +44,6 @@
     height: min-content;
     align-items: center;
     place-self: center;
-    padding: 2rem;
 }
 
 .Hero_rowContainer {
@@ -216,13 +219,27 @@
         grid-template-columns: 1fr 1fr;
         max-width: 1080px;
         justify-self: center;
-        border: solid 1px #FFFFFF30;
-        background-color: #070b0b90;
-        backdrop-filter: blur(10px);
         padding: 2rem 4rem;
+    }
+    .Hero_headerContainer {
+        gap: 2rem;
+    }
+    .Hero_headerLarge {
+        font-size: 3rem;
+        line-height: 3.5rem;
+        letter-spacing: -0.2rem;
+    }
+    .Hero_text {    
+        letter-spacing: 0.2px;
+        font-size: 1.2rem;
+        line-height: 1.6rem;
     }
     .Hero_textSection {
         align-self: center;
+        gap: 2rem;
+    }
+    .Hero_visualSection {
+        padding: 2rem;
     }
     .Hero_svgText {
         font-size: 1rem;
