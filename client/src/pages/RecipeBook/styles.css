@@ -30,3 +30,9 @@
     background-color: #070b0b;
     opacity: 0.5;
 }
+
+@media screen and (min-width: 850px) {
+    .RecipeBookPage_recipeListContainer {
+        padding-bottom: 1rem;
+    }
+}

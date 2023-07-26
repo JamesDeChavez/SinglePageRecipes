@@ -9,6 +9,10 @@
     border: solid 2px #FFFFFF;
 }
 
+.RecipeOption_thumbnail {
+    width: 100%;
+}
+
 .RecipeOption_textOverlay {
     display: grid;
     gap: 0.2rem;

@@ -35,9 +35,10 @@
 
 @media screen and (min-width: 850px) {
     .AuthFooter {
-        width: 600px;
+        /* width: 600px;
         margin: 0 auto;
         place-self: center;
-        padding: 1rem;
+        padding: 1rem; */
+        display: none;
     }
 }

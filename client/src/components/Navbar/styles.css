@@ -25,6 +25,43 @@
     height: auto;
 }
 
+.Navbar_navLinks {
+    list-style: none;
+    display: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.Navbar_navButton {
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.Navbar_navButton:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.Navbar_active {
+    background-color: #3D5455;
+}
+
+.Navbar_active:hover {
+    cursor: default !important;
+    opacity: 1 !important;
+}
+
+.Navbar_svgIcon {
+    fill: #FFFFFF;
+    width: 1rem;
+    height: auto;
+}
+
 .Navbar_buttonsContainer {
     display: flex;
     justify-content: flex-end;
@@ -57,6 +94,10 @@
 
 .Navbar_button {
     font-size: 1rem
+}
+
+.Navbar_navLinks {
+    display: flex;
 }
 
 }
