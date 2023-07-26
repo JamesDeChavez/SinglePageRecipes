@@ -4,12 +4,15 @@ import RecipeFooter from '../RecipeFooter'
 import VideoSection from '../VideoSection'
 import IngredientsSection from '../IngredientsSection'
 import RecipeActions from '../RecipeActions'
-import { Ingredient } from '../../utils/interfaces'
-import sampleRecipe from '../../utils/sampleRecipe'
+import { Ingredient, Recipe } from '../../utils/interfaces'
 import classNames from 'classnames'
 import './styles.css'
 
-const SampleRecipe = () => {
+interface Props {
+    recipeSelected: Recipe
+}
+
+const SampleRecipe: React.FC<Props> = ({recipeSelected}) => {
     const RENDERS = ['INSTRUCTIONS', 'INGREDIENTS']
     const VIEWS = ['DEFAULT', 'HIDE', 'LARGE']
     const [sectionVisible, setSectionVisible] = useState(RENDERS[0])
@@ -53,11 +56,11 @@ const SampleRecipe = () => {
             {[`${className}_hideView`]: currentView === VIEWS[1]},
             {[`${className}_largeView`]: currentView === VIEWS[2]},
         )} ref={root} >
-            <VideoSection title={sampleRecipe.title} videoId={sampleRecipe.video.videoId} handleMinusClick={handleMinusClick} handlePlusClick={handlePlusClick} currentView={currentView} />
+            <VideoSection title={recipeSelected.title} videoId={recipeSelected.video.videoId} handleMinusClick={handleMinusClick} handlePlusClick={handlePlusClick} currentView={currentView} />
             <RecipeActions orderActive={orderActive} setOrderActive={setOrderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} root={root} currentView={currentView} />
             <div className={`${className}_main`}>
-                <InstructionsSection instructions={sampleRecipe.instructions} sectionVisible={sectionVisible} currentView={currentView} />
-                <IngredientsSection ingredients={sampleRecipe.ingredients} orderActive={orderActive} setOrderActive={setOrderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} sectionVisible={sectionVisible} currentView={currentView} />
+                <InstructionsSection instructions={recipeSelected.instructions} sectionVisible={sectionVisible} currentView={currentView} />
+                <IngredientsSection ingredients={recipeSelected.ingredients} orderActive={orderActive} setOrderActive={setOrderActive} shoppingList={shoppingList} setShoppingList={setShoppingList} sectionVisible={sectionVisible} currentView={currentView} />
             </div>
             <RecipeFooter sectionVisible={sectionVisible} setSectionVisible={setSectionVisible} />
         </div>

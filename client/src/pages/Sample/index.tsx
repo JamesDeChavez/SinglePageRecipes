@@ -15,7 +15,7 @@ const SamplePage = () => {
             {recipeSelected ?
             <>
                 <SampleNavbar setRecipeSelected={setRecipeSelected}/>
-                <SampleRecipe/>
+                <SampleRecipe recipeSelected={recipeSelected}/>
             </>
             :
             <>
