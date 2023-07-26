@@ -1,16 +1,17 @@
-import { useState, useContext, useRef, useEffect, useLayoutEffect } from 'react'
-import { client } from '../../index'
-import { UserLoggedInContext } from '../../App'
-import { RecipesFragment } from '../../graphql/fragments'
+import { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { Recipe } from '../../utils/interfaces'
 import { ReactComponent as SearchSVG } from '../../assets/search-solid.svg'
-import RecipeOption from '../RecipeOption'
 import gsap from 'gsap'
 import './styles.css'
+import SampleRecipeOption from '../SampleRecipeOption'
+import sampleRecipeBook from '../../utils/sampleRecipeBook'
 
-const RecipeList = () => {
-    const { userId } = useContext(UserLoggedInContext)
-    const { recipes } = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment }) ?? { recipes: [] }
+interface Props {
+    setRecipeSelected: React.Dispatch<React.SetStateAction<Recipe | null>>
+}
+
+const SampleRecipeList: React.FC<Props> = ({ setRecipeSelected }) => {
+    const recipes = sampleRecipeBook
     const [recipesToRender, setRecipesToRender] = useState<Recipe[]>(recipes)
     const [search, setSearch] = useState('')
     const [proteinFilter, setProteinFilter] = useState('')
@@ -61,7 +62,7 @@ const RecipeList = () => {
         }, root)
     }, [])
 
-    const className = 'RecipeList'
+    const className = 'SampleRecipeList'
     return (
         <div className={className} ref={root} >
             <div className={`${className}_searchContainer`}>
@@ -98,7 +99,7 @@ const RecipeList = () => {
             <div className={`${className}_recipesContainer`}>
                 {recipesToRender.length ?
                     recipesToRender.map((recipe: Recipe, i: number) => {
-                        return <RecipeOption key={i} recipe={recipe} />
+                        return <SampleRecipeOption key={i} recipe={recipe} setRecipeSelected={setRecipeSelected} />
                     })                
                 : <p className={`${className}_text`}>No Recipes Created</p> }
             </div>
@@ -106,4 +107,4 @@ const RecipeList = () => {
     )
 }
 
-export default RecipeList
+export default SampleRecipeList

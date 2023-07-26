@@ -5,6 +5,7 @@ import App from './App';
 
 export const client = new ApolloClient({
   uri: "https://singlepagerecipes.onrender.com/",
+  // uri: "http://localhost:3001/",
   cache: new InMemoryCache(),
   headers: {
     authorization: localStorage.getItem('sprToken') || ''

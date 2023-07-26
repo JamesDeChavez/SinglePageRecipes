@@ -1,9 +1,28 @@
 .SamplePage {
     display: grid;
     grid-template-rows: auto 1fr;
-    height: 100vh;
-    height: 100svh;
+    min-height: 100dvh;
     overflow: hidden;
     background-color: #070b0b;
     color: #FFFFFF;
+}
+
+.SamplePage_overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100dvw;
+    min-height: 100dvh;
+    background-color: #070b0b;
+    opacity: 0.5;
+}
+
+.SamplePage_sampleRecipeListContainer {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }

@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import controllers from "../controllers"
 import { Context, LoginInputs, RecipeInputs, RegisterInputs } from '../utils/interfaces'
 import dotenv from 'dotenv'
+import fs from 'fs'
 
 dotenv.config()
 const JWT_SECRET = process.env.JWT_SECRET || 'JWT_SECRET'
@@ -42,7 +43,10 @@ const resolvers = {
                         recipes: user.recipes,
                         token: token 
                     }
-                    return userWithToken
+                    //temporary
+                    // let json = JSON.stringify(userWithToken.recipes)
+                    // fs.writeFile('recipes.json', json, 'utf8', () => console.log('done'))
+                    // return userWithToken
                 }
             } catch (error) {
                 console.log(error)

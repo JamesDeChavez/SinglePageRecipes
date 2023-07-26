@@ -238,7 +238,7 @@ const Hero = () => {
                     <p className={`${className}_text`}>Simplify the process of learning to cook by easily adding Youtube recipes to your online recipe book and integrating Amazon Fresh to automate recipe ingredient ordering</p>
                 </div>
                 <div className={`${className}_buttonContainer`}>
-                    <button className={`${className}_button`} onClick={() => setRender(RENDERS[3])}>View Sample Recipe</button>
+                    <button className={`${className}_button`} onClick={() => setRender(RENDERS[3])}>View Sample Recipe Book</button>
                 </div>
             </div>
             <div className={`${className}_visualSection`}>

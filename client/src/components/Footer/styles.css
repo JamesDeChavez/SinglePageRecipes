@@ -5,6 +5,7 @@
     border-top: solid 1px #FFFFFF30;
     padding: 1rem 0.5rem;
     background-color: #070b0b;
+    z-index: 2;
 }
 
 .Footer_text {

@@ -1,4 +1,4 @@
-.RecipeOption {
+.SampleRecipeOption {
     position: relative;
     border: solid 2px #FFFFFF30;
     border-radius: 5px;
@@ -6,17 +6,17 @@
     box-shadow: 0 7px 14px 0 #00000030, 0 3px 6px 0 #00000080;
 }
 
-.RecipeOption:hover {
+.SampleRecipeOption:hover {
     cursor: pointer;
     border: solid 2px #FFFFFF;
 }
 
-.RecipeOption_thumbnail {
+.SampleRecipeOption_thumbnail {
     width: 100%;
     border-radius: 5px;
 }
 
-.RecipeOption_textOverlay {
+.SampleRecipeOption_textOverlay {
     display: grid;
     gap: 0.2rem;
     padding: 0.5rem 1rem;
@@ -29,20 +29,20 @@
     border-radius: 5px;
 }
 
-.RecipeOption_title,
-.RecipeOption_text {
+.SampleRecipeOption_title,
+.SampleRecipeOption_text {
     color: #FFFFFF;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.RecipeOption_title {
+.SampleRecipeOption_title {
     font-size: 1rem;
     border-bottom: solid 1px #FFFFFF30;
     padding-bottom: 0.5rem;
 }
 
-.RecipeOption_text {
+.SampleRecipeOption_text {
     font-size: 0.8rem;
 }
