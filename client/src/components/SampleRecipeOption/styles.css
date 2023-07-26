@@ -26,7 +26,8 @@
     left: 0;
     background-color: #112728;
     border-top: solid 1px #FFFFFF30;
-    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .SampleRecipeOption_title,
