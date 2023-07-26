@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import InstructionsSection from '../InstructionsSection'
 import RecipeFooter from '../RecipeFooter'
 import VideoSection from '../VideoSection'

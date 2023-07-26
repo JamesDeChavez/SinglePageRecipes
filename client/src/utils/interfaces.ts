@@ -11,6 +11,7 @@ export interface Instruction {
 export interface Ingredient {
     name: string,
     amount: string,
+    brand?: string,
     include?: boolean
 }
 

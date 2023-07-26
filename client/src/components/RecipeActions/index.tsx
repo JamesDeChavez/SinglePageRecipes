@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import gsap from 'gsap'
 import { useLayoutEffect } from 'react'
@@ -17,6 +18,13 @@ interface Props {
 
 const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingList, setShoppingList, root, currentView }) => {
     const { data } = useQuery(GET_AMAZON_TAG)
+    const [value, setValue] = useState('')
+
+    useEffect(() => {
+        setValue(JSON.stringify({ 
+            ingredients: shoppingList.filter(ingredient => ingredient.include !== false).map(ing => {return { name: ing.name, brand: ing.brand || '', amount: ing.amount }} )
+        }))
+    }, [shoppingList])
 
     useLayoutEffect(() => {
         const gsapContext = gsap.context(() => {
@@ -51,10 +59,6 @@ const RecipeActions: React.FC<Props> = ({ orderActive, setOrderActive, shoppingL
     };
 
     const url = `https://www.amazon.com/afx/ingredients/landing?tag=${data ? data.amazonTag : ''}`
-    const value = JSON.stringify({ 
-        ingredients: shoppingList.filter(ingredient => ingredient.include !== false).map(ing => {return { name: ing.name, amount: ing.amount }} )
-    })
-
     const className = 'RecipeActions'
     return (
         <div className={classNames(

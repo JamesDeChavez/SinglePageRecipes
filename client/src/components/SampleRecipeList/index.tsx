@@ -77,7 +77,11 @@ const SampleRecipeList: React.FC<Props> = ({ setRecipeSelected }) => {
                     <label htmlFor="protein" className={`${className}_filterText`}>Protein Filter</label>
                     <select name="protein" id="protein" className={`${className}_proteinSelect`} onChange={(e) => setProteinFilter(e.target.value)}>
                         <option className={`${className}_option`} value=""></option>
+                        <option className={`${className}_option`} value="Cheese">Cheese</option>
                         <option className={`${className}_option`} value="Chicken">Chicken</option>
+                        <option className={`${className}_option`} value="Egg">Egg</option>
+                        <option className={`${className}_option`} value="Pork">Pork</option>
+                        <option className={`${className}_option`} value="Tofu">Tofu</option>
                     </select>
                 </div>
                 <div className={`${className}_filterContainer`}>
@@ -85,6 +89,12 @@ const SampleRecipeList: React.FC<Props> = ({ setRecipeSelected }) => {
                     <select name="vegetable" id="vegetable" className={`${className}_vegetableSelect`} onChange={(e) => setVegetableFilter(e.target.value)}>
                         <option className={`${className}_option`} value=""></option>
                         <option className={`${className}_option`} value="Broccoli">Broccoli</option>
+                        <option className={`${className}_option`} value="Carrot">Carrot</option>
+                        <option className={`${className}_option`} value="Garlic">Garlic</option>
+                        <option className={`${className}_option`} value="Green Bean">Green Bean</option>
+                        <option className={`${className}_option`} value="Green Pepper">Green Pepper</option>
+                        <option className={`${className}_option`} value="Onion">Onion</option>
+                        <option className={`${className}_option`} value="Tomato">Tomato</option>
                     </select>
                 </div>
                 <div className={`${className}_filterContainer`}>
@@ -92,6 +102,8 @@ const SampleRecipeList: React.FC<Props> = ({ setRecipeSelected }) => {
                     <select name="carb" id="carb" className={`${className}_carbSelect`} onChange={(e) => setCarbFilter(e.target.value)}>
                         <option className={`${className}_option`} value=""></option>
                         <option className={`${className}_option`} value="Pasta">Pasta</option>
+                        <option className={`${className}_option`} value="Potato">Potato</option>
+                        <option className={`${className}_option`} value="Rice">Rice</option>
                     </select>
                 </div>
 

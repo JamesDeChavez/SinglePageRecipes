@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useState } from 'react'
 import { Ingredient } from '../../utils/interfaces'
 import { useQuery } from '@apollo/client'
 import { GET_AMAZON_TAG } from '../../graphql/queries'
@@ -15,6 +16,7 @@ interface Props {
 
 const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrderActive, shoppingList, setShoppingList, sectionVisible, currentView }) => {
     const { data } = useQuery(GET_AMAZON_TAG)
+    const [value, setValue] = useState('')
 
     useEffect(() => {
         const newShoppingList = ingredients.map(item => {
@@ -22,6 +24,12 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
         })
         setShoppingList(newShoppingList)
     }, [ingredients, setShoppingList])
+
+    useEffect(() => {
+        setValue(JSON.stringify({ 
+            ingredients: shoppingList.filter(ingredient => ingredient.include !== false).map(ing => {return { name: ing.name, brand: ing.brand || '', amount: ing.amount }} )
+        }))
+    }, [shoppingList])
 
     const handleOrderIngredientsClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
@@ -49,9 +57,6 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
     }
 
     const url = `https://www.amazon.com/afx/ingredients/landing?tag=${data ? data.amazonTag : ''}`
-    const value = JSON.stringify({ 
-        ingredients: shoppingList.filter(ingredient => ingredient.include !== false).map(ing => {return { name: ing.name, amount: ing.amount }} )
-    })
     const className = 'IngredientsSection'
     return (
         <div className={classNames(
@@ -75,7 +80,7 @@ const IngredientsSection: React.FC<Props> = ({ ingredients, orderActive, setOrde
                 </div>
                 <div className={`${className}_rightButtonsContainer`}>
                     <form method='POST' action={url} target='_blank' rel='noreferrer'>
-                        <input type="submit" name='submit' value="Submit Order" className={`${className}_button`}  />
+                        <input type="submit" name='submit' value="Submit Order" className={`${className}_button`} />
                         <input type="hidden" name='ingredients' value={value} />
                     </form>
                     

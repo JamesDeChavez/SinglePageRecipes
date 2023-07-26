@@ -42,7 +42,6 @@ const InstructionsTable: React.FC<Props> = ({ setDetailsActive, setSelectedStep,
         const numberItems = determineNumItems_Inst(windowSize[0], windowSize[1], numCols, currentView)
         const itemsPerCol = numberItems / numCols
         const newTableLayout = `repeat(${itemsPerCol}, 1fr)`
-        console.log(numCols, numberItems, itemsPerCol, numberStepsDisplayed, start, end)
         setStart(0)
         setEnd(numberItems)
         setNumberStepsDisplayed(numberItems)

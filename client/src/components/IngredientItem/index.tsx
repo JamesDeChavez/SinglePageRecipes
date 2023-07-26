@@ -27,7 +27,7 @@ const IngredientItem: React.FC<Props> = ({ item, orderActive, shoppingList, setS
         if (!setShoppingList || !shoppingList) return
         const newShoppingList = [...shoppingList]
         const index = shoppingList.findIndex(ingredient => ingredient.name === item.name)
-        newShoppingList[index] = { name: item.name, amount: item.amount, 
+        newShoppingList[index] = { name: item.name, amount: item.amount, brand: item.brand || '',
             include: !newShoppingList[index].include }
         setShoppingList(newShoppingList)
     }
