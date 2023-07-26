@@ -6,6 +6,7 @@
     padding: 0.5rem;
     z-index: 2;
     background-color: #070b0b;
+    box-shadow: 0 7px 14px 0 #00000030, 0 3px 6px 0 #00000080;
 }
 
 .Navbar_logo {
