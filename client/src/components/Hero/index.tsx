@@ -231,7 +231,7 @@ const Hero = () => {
         <div className={className} ref={root}>
             <div className={`${className}_textSection`}>
                 <div className={`${className}_headerContainer`}>
-                    <h2 className={`${className}_headerSmall`}>Simplify Learning Recipes</h2>
+                    <h2 className={`${className}_headerSmall`}>Single Page Recipes</h2>
                     <h1 className={`${className}_headerLarge`}>An integrated solution for learning recipes and ordering ingredients</h1>
                 </div>
                 <div className={`${className}_detailsContainer`}>
