@@ -46,7 +46,7 @@ const resolvers = {
                     //temporary
                     // let json = JSON.stringify(userWithToken.recipes)
                     // fs.writeFile('recipes.json', json, 'utf8', () => console.log('done'))
-                    // return userWithToken
+                    return userWithToken
                 }
             } catch (error) {
                 console.log(error)
