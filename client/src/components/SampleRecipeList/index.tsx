@@ -88,7 +88,6 @@ const SampleRecipeList: React.FC<Props> = ({ setRecipeSelected }) => {
                     <label htmlFor="vegetable" className={`${className}_filterText`}>Vegetable Filter</label>
                     <select name="vegetable" id="vegetable" className={`${className}_vegetableSelect`} onChange={(e) => setVegetableFilter(e.target.value)}>
                         <option className={`${className}_option`} value=""></option>
-                        <option className={`${className}_option`} value="Broccoli">Broccoli</option>
                         <option className={`${className}_option`} value="Carrot">Carrot</option>
                         <option className={`${className}_option`} value="Garlic">Garlic</option>
                         <option className={`${className}_option`} value="Green Bean">Green Bean</option>
