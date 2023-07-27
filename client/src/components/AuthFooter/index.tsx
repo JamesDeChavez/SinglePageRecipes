@@ -1,46 +1,37 @@
-import { useContext } from 'react'
-import classNames from 'classnames'
-import { AuthRenderContext } from '../../branches/Auth'
 import { ReactComponent as BookSVG } from '../../assets/book-solid.svg'
 import { ReactComponent as PlusSVG } from '../../assets/square-plus-regular.svg'
 import { ReactComponent as UserSVG } from '../../assets/user-solid.svg'
+import classNames from 'classnames'
 import './styles.css'
+import { NavLink, useLocation } from 'react-router-dom'
 
 const AuthFooter = () => {
-    const [RENDERS, setRender, render] = useContext(AuthRenderContext)
-
-    const navButtonClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, n: number) => {
-        e.preventDefault()
-        setRender(RENDERS[n])
-    }
+    const location = useLocation()
 
     const className = 'AuthFooter'
     return (
         <div className={className} >
-            <button className={classNames(
+            <NavLink to='/recipebook' className={classNames(
                 `${className}_button`,
-                {[`${className}_active`]: render === RENDERS[0]}
-                )} onClick={(e) => navButtonClick(e, 0)}
-            >
+                {[`${className}_active`]: location.pathname === '/recipebook'}
+            )}>
                 <BookSVG className={`${className}_svgIcon`} />
                 <p>Recipe Book</p>
-            </button>
-            <button className={classNames(
+            </NavLink>
+            <NavLink to='/newrecipe' className={classNames(
                 `${className}_button`,
-                {[`${className}_active`]: render === RENDERS[1]}
-                )} onClick={(e) => navButtonClick(e, 1)}
-            >
+                {[`${className}_active`]: location.pathname === '/newrecipe'}
+            )} >
                 <PlusSVG className={`${className}_svgIcon`} />
                 <p>New Recipe</p>
-            </button>
-            <button className={classNames(
+            </NavLink>
+            <NavLink to='/profile' className={classNames(
                 `${className}_button`,
-                {[`${className}_active`]: render === RENDERS[2]}
-                )} onClick={(e) => navButtonClick(e, 2)}
-            >
+                {[`${className}_active`]: location.pathname === '/profile'}
+            )}>
                 <UserSVG className={`${className}_svgIcon`} />
                 <p>Profile</p>
-            </button>
+            </NavLink>
         </div>
     )
 }

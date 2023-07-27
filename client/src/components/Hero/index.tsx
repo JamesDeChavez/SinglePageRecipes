@@ -1,11 +1,10 @@
-import { useContext, useLayoutEffect, useRef, useState } from 'react'
-import { NonAuthRenderContext } from '../../branches/NonAuth'
+import { useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import './styles.css'
 import classNames from 'classnames'
+import { NavLink } from 'react-router-dom'
 
 const Hero = () => {
-    const {RENDERS, setRender} = useContext(NonAuthRenderContext)
     const [youtubeVisible, setYoutubeVisible] = useState(false)
     const [amazonVisible, setAmazonVisible] = useState(false)
     const [recipeVisible, setRecipeVisible] = useState(false)
@@ -238,7 +237,9 @@ const Hero = () => {
                     <p className={`${className}_text`}>Simplify the process of learning to cook by easily adding Youtube recipes to your online recipe book and integrating Amazon Fresh to automate recipe ingredient ordering</p>
                 </div>
                 <div className={`${className}_buttonContainer`}>
-                    <button className={`${className}_button`} onClick={() => setRender(RENDERS[3])}>View Sample Recipe Book</button>
+                    <NavLink to='/samplerecipebook' className={`${className}_button`}>
+                        View Sample Recipe Book
+                    </NavLink>
                 </div>
             </div>
             <div className={`${className}_visualSection`}>

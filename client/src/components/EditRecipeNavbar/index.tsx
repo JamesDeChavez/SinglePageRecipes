@@ -1,20 +1,20 @@
-import { useContext } from 'react'
-import { RecipeBookContext } from '../../pages/RecipeBook'
+import { useNavigate } from 'react-router-dom'
 import { ReactComponent as BackSvg } from '../../assets/backward-step-solid.svg'
 import Loading from '../Loading'
 import './styles.css'
 
 interface Props {
     handleUpdateRecipe: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-    loading: boolean
+    loading: boolean,
+    setEditRecipeActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const EditRecipeNavbar: React.FC<Props> = ({ handleUpdateRecipe, loading }) => {
-    const { setEditRecipeActive } = useContext(RecipeBookContext)
-
+const EditRecipeNavbar: React.FC<Props> = ({ handleUpdateRecipe, loading, setEditRecipeActive }) => {
+    const navigate = useNavigate()
     const handleReturnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         setEditRecipeActive(false)
+        navigate('/recipe')
     } 
 
     const className = 'EditRecipeNavbar'

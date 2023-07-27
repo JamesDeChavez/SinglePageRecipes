@@ -8,7 +8,6 @@ import AddStepFooter from "../AddStepFooter"
 import RecipeFooter from "../RecipeFooter"
 import EditStepFooter from "../EditStepFooter"
 import EditItemFooter from "../EditItemFooter"
-import { RecipeBookContext } from "../../pages/RecipeBook"
 import EditRecipeNavbar from "../EditRecipeNavbar"
 import EditRecipeActions from "../EditRecipeActions"
 import EditRecipeVideoSection from "../EditRecipeVideoSection"
@@ -17,6 +16,7 @@ import EditRecipeIngredients from "../EditRecipeIngredients"
 import { useMutation } from "@apollo/client"
 import { EDIT_RECIPE } from "../../graphql/mutations"
 import './styles.css'
+import { useNavigate } from "react-router-dom"
 
 export const EditRecipeFormContext = React.createContext<{
     instructions: Instruction[], setInstructions: React.Dispatch<React.SetStateAction<Instruction[]>>,
@@ -56,10 +56,13 @@ export const EditRecipeFormContext = React.createContext<{
     selectedItem: undefined, setSelectedItem: () => {}
 })
 
+interface Props {
+    recipeSelected: Recipe | null,
+    setRecipeSelected: React.Dispatch<React.SetStateAction<Recipe | null>>,
+    setEditRecipeActive: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-
-const EditRecipeForm = () => {
-    const { recipeSelected, setRecipeSelected, setEditRecipeActive } = useContext(RecipeBookContext)
+const EditRecipeForm: React.FC<Props> = ({ recipeSelected, setRecipeSelected, setEditRecipeActive }) => {
     const { userId } = useContext(UserLoggedInContext)
     const [editRecipe, { loading }] = useMutation(EDIT_RECIPE)
     const currentRecipes = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment })
@@ -110,6 +113,7 @@ const EditRecipeForm = () => {
     const [selectedStep, setSelectedStep] = useState<Instruction>()
     const [selectedItem, setSelectedItem] = useState<Ingredient>()
     const root = useRef(null)
+    const navigate = useNavigate()
 
     const handleUpdateRecipe = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
@@ -167,6 +171,7 @@ const EditRecipeForm = () => {
             if (updatedRecipes) {
                 setRecipeSelected(updatedRecipe)
                 setEditRecipeActive(false)
+                navigate('/recipe')
             }
 
         } catch (error) {
@@ -180,9 +185,9 @@ const EditRecipeForm = () => {
         ingredients, setIngredients, ingName, setIngName, ingAmount, setIngAmount, instructions, setInstructions, addStepActive, setAddStepActive, editStepActive, setEditStepActive, addIngredientActive, setAddIngredientActive, editIngredientActive, setEditIngredientActive, action, setAction, items, setItems, time, setTime, description, setDescription, ingredientName, setIngredientName, ingredientAmount, setIngredientAmount, recipeIngredients, setRecipeIngredients, selectedStep, setSelectedStep, selectedItem, setSelectedItem
     }} >
         <div className={className} ref={root} >
-            <EditRecipeNavbar handleUpdateRecipe={handleUpdateRecipe} loading={loading} />
+            <EditRecipeNavbar handleUpdateRecipe={handleUpdateRecipe} loading={loading} setEditRecipeActive={setEditRecipeActive} />
             <div className={`${className}_midSection`}>
-                <EditRecipeVideoSection title={title} setTitle={setTitle} />
+                <EditRecipeVideoSection title={title} setTitle={setTitle} recipeSelected={recipeSelected} />
                 <EditRecipeActions handleUpdateRecipe={handleUpdateRecipe} root={root} loading={loading} />
                 <div className={`${className}_main`}>
                     {{

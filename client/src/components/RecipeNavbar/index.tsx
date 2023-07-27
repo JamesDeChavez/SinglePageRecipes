@@ -1,5 +1,4 @@
 import { useContext, useState, useRef, useLayoutEffect } from 'react'
-import { RecipeBookContext } from '../../pages/RecipeBook'
 import gsap from 'gsap'
 import { UserLoggedInContext } from '../../App'
 import { client } from '../..'
@@ -9,18 +8,21 @@ import { useMutation } from '@apollo/client'
 import { Recipe } from '../../utils/interfaces'
 import './styles.css'
 import Loading from '../Loading'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
-    selectedRecipe: Recipe
+    recipeSelected: Recipe
+    setRecipeSelected: React.Dispatch<React.SetStateAction<Recipe | null>>,
+    setEditRecipeActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const RecipeNavbar: React.FC<Props> = ({ selectedRecipe }) => {
-    const { setRecipeSelected, setEditRecipeActive } = useContext(RecipeBookContext)
+const RecipeNavbar: React.FC<Props> = ({ recipeSelected, setRecipeSelected, setEditRecipeActive }) => {
     const { userId } = useContext(UserLoggedInContext)
     const currentRecipes = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment })
     const [deleteRecipe, { loading }] = useMutation(DELETE_RECIPE)
     const [optionsVisible, setOptionsVisible] = useState(false)
     const root = useRef(null)
+    const navigate = useNavigate()  
 
     useLayoutEffect(() => {
         const gsapContext = gsap.context(() => {
@@ -31,7 +33,8 @@ const RecipeNavbar: React.FC<Props> = ({ selectedRecipe }) => {
 
     const handleReturnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        setRecipeSelected(undefined)
+        setRecipeSelected(null)
+        navigate('/recipebook')
     } 
     
     const handleOptionClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -42,11 +45,12 @@ const RecipeNavbar: React.FC<Props> = ({ selectedRecipe }) => {
     const handleEditClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         setEditRecipeActive(true)
+        navigate('/editrecipe')
     }
 
     const handleDeleteClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        const updatedRecipesFormatted = currentRecipes.recipes.filter((recipe: any) => recipe.title !== selectedRecipe.title).map((recipe: any) => {
+        const updatedRecipesFormatted = currentRecipes.recipes.filter((recipe: any) => recipe.title !== recipeSelected.title).map((recipe: any) => {
             return {
                 title: recipe.title,
                 video: {
@@ -82,7 +86,8 @@ const RecipeNavbar: React.FC<Props> = ({ selectedRecipe }) => {
         try {
             const updatedRecipes = await deleteRecipe({ variables: { userId, recipes: updatedRecipesFormatted }})
             if (updatedRecipes) {
-                setRecipeSelected(undefined)
+                setRecipeSelected(null)
+                navigate('/recipebook')
             }
         } catch (error) {
             console.log(error)

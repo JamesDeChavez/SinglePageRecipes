@@ -1,18 +1,19 @@
 import { useContext } from 'react'
-import { RecipeBookContext } from '../../pages/RecipeBook'
 import { Recipe } from '../../utils/interfaces'
 import './styles.css'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
-    recipe: Recipe 
+    recipe: Recipe,
+    setRecipeSelected: React.Dispatch<React.SetStateAction<Recipe | null>>
 }
 
-const RecipeOption: React.FC<Props> = ({ recipe }) => {
-    const { setRecipeSelected } = useContext(RecipeBookContext)
-
+const RecipeOption: React.FC<Props> = ({ recipe, setRecipeSelected }) => {
+    const navigate = useNavigate()
     const handleRecipeClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault()
         setRecipeSelected(recipe)
+        navigate('/recipe')
     }
 
     const className = 'RecipeOption'

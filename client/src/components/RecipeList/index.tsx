@@ -8,7 +8,11 @@ import RecipeOption from '../RecipeOption'
 import gsap from 'gsap'
 import './styles.css'
 
-const RecipeList = () => {
+interface Props {
+    setRecipeSelected: React.Dispatch<React.SetStateAction<Recipe | null>>
+}
+
+const RecipeList: React.FC<Props> = ({ setRecipeSelected }) => {
     const { userId } = useContext(UserLoggedInContext)
     const { recipes } = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment }) ?? { recipes: [] }
     const [recipesToRender, setRecipesToRender] = useState<Recipe[]>(recipes)
@@ -110,7 +114,7 @@ const RecipeList = () => {
             <div className={`${className}_recipesContainer`}>
                 {recipesToRender.length ?
                     recipesToRender.map((recipe: Recipe, i: number) => {
-                        return <RecipeOption key={i} recipe={recipe} />
+                        return <RecipeOption key={i} recipe={recipe} setRecipeSelected={setRecipeSelected} />
                     })                
                 : <p className={`${className}_text`}>No Recipes Created</p> }
             </div>

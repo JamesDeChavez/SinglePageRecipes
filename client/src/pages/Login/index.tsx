@@ -1,27 +1,25 @@
-import Navbar from "../../components/Navbar"
-import Hero from "../../components/Hero"
-import Footer from "../../components/Footer"
-import './styles.css'
 import { useContext, useEffect } from "react"
+import Footer from "../../components/Footer"
+import LoginForm from "../../components/LoginForm"
+import Navbar from "../../components/Navbar"
 import { UserLoggedInContext } from "../../App"
 import { useNavigate } from "react-router-dom"
+import './styles.css'
 
-const LandingPage = () => {
+const LoginPage = () => {
     const { userLoggedIn } = useContext(UserLoggedInContext)
     const navigate = useNavigate()
-    
     useEffect(() => {
         if (userLoggedIn) navigate('/recipebook')
-    })
-
-    const className = 'LandingPage'
+    }, [userLoggedIn, navigate])
+    const className = 'LoginPage'
     return (
         <div className={className}>
             <Navbar/>
-            <Hero/>
+            <LoginForm/>
             <Footer/>
         </div>
     )
 }
 
-export default LandingPage
+export default LoginPage

@@ -2,7 +2,6 @@ import React, { useState, useContext, useRef } from "react"
 import { useMutation } from "@apollo/client"
 import { client } from "../../index"
 import { UserLoggedInContext } from "../../App"
-import { AuthRenderContext } from "../../branches/Auth"
 import { CreateRecipeRenderContext } from "../../branches/CreateRecipe"
 import { RecipesFragment } from "../../graphql/fragments"
 import { CREATE_RECIPE } from "../../graphql/mutations"
@@ -18,6 +17,7 @@ import CreateRecipeActions from "../CreateRecipeActions"
 import EditStepFooter from "../EditStepFooter"
 import EditItemFooter from "../EditItemFooter"
 import './styles.css'
+import { useNavigate } from "react-router-dom"
 
 export const CreateRecipeFormContext = React.createContext<{
     instructions: Instruction[], setInstructions: React.Dispatch<React.SetStateAction<Instruction[]>>,
@@ -60,9 +60,9 @@ export const CreateRecipeFormContext = React.createContext<{
 const CreateRecipeForm = () => {
     const { videoSelected } = useContext(CreateRecipeRenderContext)
     const { userId } = useContext(UserLoggedInContext)
-    const [RENDERS, setRender] = useContext(AuthRenderContext)
     const [createRecipe, { loading }] = useMutation(CREATE_RECIPE)
     const currentRecipes = client.readFragment({ id: `User:${userId}`, fragment: RecipesFragment })
+    const navigate = useNavigate()
 
     const SECTIONS = ['INSTRUCTIONS', 'INGREDIENTS']
     const [sectionVisible, setSectionVisible] = useState(SECTIONS[0])
@@ -130,7 +130,7 @@ const CreateRecipeForm = () => {
                 }
             })
             const newRecipes = await createRecipe({ variables: { userId, recipes: [...currRecipesFormatted, newRecipe] }})
-            if (newRecipes) setRender(RENDERS[0])
+            if (newRecipes) navigate('/recipebook')
 
         } catch (error) {
             console.log(error)

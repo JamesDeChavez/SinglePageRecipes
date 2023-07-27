@@ -91,7 +91,7 @@ describe('RecipeList', () => {
         render(
             <MockedProvider addTypename={false} mocks={mockData} defaultOptions={fragmentDefaultOptions} >
                  <UserLoggedInContext.Provider value={mockContext} >
-                    <RecipeList />
+                    <RecipeList setRecipeSelected={jest.fn()} />
                  </UserLoggedInContext.Provider>
             </MockedProvider>
         )
@@ -104,7 +104,7 @@ describe('RecipeList', () => {
         render(
             <MockedProvider addTypename={false} mocks={mockData} defaultOptions={fragmentDefaultOptions} >
                  <UserLoggedInContext.Provider value={mockContext} >
-                    <RecipeList />
+                    <RecipeList setRecipeSelected={jest.fn()} />
                  </UserLoggedInContext.Provider>
             </MockedProvider>
         )

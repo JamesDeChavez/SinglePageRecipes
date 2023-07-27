@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { Recipe } from '../../utils/interfaces'
 import './styles.css'
 
@@ -7,10 +8,11 @@ interface Props {
 }
 
 const SampleRecipeOption: React.FC<Props> = ({ recipe, setRecipeSelected }) => {
-
+    const navigate = useNavigate()
     const handleRecipeClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault()
         setRecipeSelected(recipe)
+        navigate('/samplerecipe')
     }
 
     const className = 'SampleRecipeOption'

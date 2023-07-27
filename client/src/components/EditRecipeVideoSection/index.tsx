@@ -1,15 +1,15 @@
-import { useContext, useRef, useLayoutEffect } from 'react'
-import { RecipeBookContext } from '../../pages/RecipeBook'
+import { useRef, useLayoutEffect } from 'react'
+import { Recipe } from '../../utils/interfaces'
 import gsap from 'gsap'
 import './styles.css'
 
 interface Props {
     title: string,
-    setTitle: React.Dispatch<React.SetStateAction<string>>
+    setTitle: React.Dispatch<React.SetStateAction<string>>,
+    recipeSelected: Recipe | null
 }
 
-const EditRecipeVideoSection: React.FC<Props> = ({ title, setTitle }) => {
-    const { recipeSelected } = useContext(RecipeBookContext)
+const EditRecipeVideoSection: React.FC<Props> = ({ title, setTitle, recipeSelected }) => {
     const root = useRef(null)
 
     useLayoutEffect(() => {

@@ -6,7 +6,6 @@ import RecipeNavbar from '../components/RecipeNavbar'
 import sampleRecipe from '../utils/sampleRecipe'
 import { MockedProvider } from '@apollo/client/testing'
 import { DELETE_RECIPE } from '../graphql/mutations'
-import { RecipeBookContext } from '../pages/RecipeBook'
 
 const mockRecipe = sampleRecipe
 const mockData = [{
@@ -29,60 +28,32 @@ const mockData = [{
 }]
 const mockSetRecipeSelected = jest.fn()
 const mockSetEditRecipeActive = jest.fn()
-const mockContextValues = {
-    recipeSelected: mockRecipe, setRecipeSelected: mockSetRecipeSelected,
-    editRecipeActive: false, setEditRecipeActive: mockSetEditRecipeActive
-}
 describe('RecipeNavbar', () => {
     it('should render return button', () => {
-        render(
-            <MockedProvider addTypename={false} mocks={mockData} >
-                <RecipeNavbar selectedRecipe={mockRecipe}/>
-            </MockedProvider>
-        )
+        render(<RecipeNavbar recipeSelected={mockRecipe} setRecipeSelected={mockSetRecipeSelected} setEditRecipeActive={mockSetEditRecipeActive}/>)
         const returnButton = screen.getByRole('button', {name: '< Return to Recipe Book'})
         expect(returnButton).toBeInTheDocument()
     })
     it('should render options button', () => {
-        render(
-            <MockedProvider addTypename={false} mocks={mockData} >
-                <RecipeNavbar selectedRecipe={mockRecipe}/>
-            </MockedProvider>
-        )
+        render(<RecipeNavbar recipeSelected={mockRecipe} setRecipeSelected={mockSetRecipeSelected} setEditRecipeActive={mockSetEditRecipeActive}/>)
         const optionsButton = screen.getByText('Options')
         expect(optionsButton).toBeInTheDocument()
     })
     it('should render editRecipe and deleteRecipe buttons', () => {
-        render(
-            <MockedProvider addTypename={false} mocks={mockData} >
-                <RecipeNavbar selectedRecipe={mockRecipe}/>
-            </MockedProvider>
-        )
+        render(<RecipeNavbar recipeSelected={mockRecipe} setRecipeSelected={mockSetRecipeSelected} setEditRecipeActive={mockSetEditRecipeActive}/>)
         const editButton = screen.getByText('Edit Recipe')
         const deleteButton = screen.getByText('Delete Recipe')
         expect(editButton).toBeInTheDocument()
         expect(deleteButton).toBeInTheDocument()
     })
     it('should render setRecipeSelected when return button is clicked', async () => { 
-        render(
-            <MockedProvider addTypename={false} mocks={mockData} >
-                <RecipeBookContext.Provider value={mockContextValues} >
-                    <RecipeNavbar selectedRecipe={mockRecipe}/>
-                </RecipeBookContext.Provider>
-            </MockedProvider>
-        )
+        render(<RecipeNavbar recipeSelected={mockRecipe} setRecipeSelected={mockSetRecipeSelected} setEditRecipeActive={mockSetEditRecipeActive}/>)
         const returnButton = screen.getByRole('button', {name: '< Return to Recipe Book'})
         await userEvent.click(returnButton)
         expect(mockSetRecipeSelected).toBeCalled()
     })
     it('should setEditRecipeActive when user clicks edit button', async () => {
-        render(
-            <MockedProvider addTypename={false} mocks={mockData} >
-                <RecipeBookContext.Provider value={mockContextValues} >
-                    <RecipeNavbar selectedRecipe={mockRecipe}/>
-                </RecipeBookContext.Provider>
-            </MockedProvider>
-        )
+        render(<RecipeNavbar recipeSelected={mockRecipe} setRecipeSelected={mockSetRecipeSelected} setEditRecipeActive={mockSetEditRecipeActive}/>)
         const editButton = screen.getByText('Edit Recipe')
         await userEvent.click(editButton)
         expect(mockSetEditRecipeActive).toBeCalled()

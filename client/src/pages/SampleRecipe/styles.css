@@ -1,0 +1,8 @@
+.SampleRecipePage {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 100dvh;
+    overflow: hidden;
+    background-color: #070b0b;
+    color: #FFFFFF;
+}

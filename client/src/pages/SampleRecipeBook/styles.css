@@ -1,4 +1,4 @@
-.SamplePage {
+.SampleRecipeBookPage {
     display: grid;
     grid-template-rows: auto 1fr;
     min-height: 100dvh;
@@ -7,7 +7,7 @@
     color: #FFFFFF;
 }
 
-.SamplePage_overlay{
+.SampleRecipeBookPage_overlay{
     position: fixed;
     top: 0;
     left: 0;
@@ -17,7 +17,7 @@
     opacity: 0.5;
 }
 
-.SamplePage_sampleRecipeListContainer {
+.SampleRecipeBookPage_sampleRecipeListContainer {
     min-height: 100dvh;
     display: grid;
     grid-template-rows: auto 1fr auto;

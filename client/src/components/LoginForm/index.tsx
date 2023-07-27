@@ -1,5 +1,6 @@
 import { useLazyQuery } from '@apollo/client'
 import { useContext, useEffect, useState, useLayoutEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { UserLoggedInContext } from '../../App'
 import { LOGIN } from '../../graphql/queries'
 import gsap from 'gsap'
@@ -13,6 +14,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState<string | undefined>()
     const root = useRef(null)
+    const navigate = useNavigate()
     
     useEffect(() => {
         if (error) setErrorMessage(error.message)
@@ -41,6 +43,7 @@ const LoginForm = () => {
                 localStorage.setItem('sprToken', `Bearer ${token}`)
                 setUserId(user.data.login._id)
                 setUserLoggedIn(true)
+                navigate('/recipebook')
             }
         } catch (err) {
             console.log(err)

@@ -6,6 +6,7 @@ import { CREATE_USER } from '../../graphql/mutations'
 import gsap from 'gsap'
 import './styles.css'
 import Loading from '../Loading'
+import { useNavigate } from 'react-router-dom'
 
 const RegisterForm = () => {
     const { setUserLoggedIn, setUserId } = useContext(UserLoggedInContext)
@@ -16,6 +17,7 @@ const RegisterForm = () => {
     const [repeatPW, setRepeatPW] = useState('')
     const [errorMessage, setErrorMessage] = useState<string | undefined>()
     const root = useRef(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (error) setErrorMessage(error.message)
@@ -56,6 +58,7 @@ const RegisterForm = () => {
                 localStorage.setItem('sprToken', `Bearer ${token}`)
                 setUserId(newUser.data.createUser._id)
                 setUserLoggedIn(true)
+                navigate('/recipebook')
             }
         } catch (error) {
             console.log(error)
