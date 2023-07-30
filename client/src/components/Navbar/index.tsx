@@ -35,7 +35,7 @@ const Navbar = () => {
                     </NavLink>
                 </li>
                 <li className={`${className}_navLink`}>
-                    <NavLink to='/newrecipe' className={classNames(`${className}_navButton`, location.pathname === '/newerecipe' && `${className}_active`)}>
+                    <NavLink to='/newrecipe' className={classNames(`${className}_navButton`, location.pathname === '/newrecipe' && `${className}_active`)}>
                         <PlusSVG className={`${className}_svgIcon`} />
                         <p>New Recipe</p>
                     </NavLink>
